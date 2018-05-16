@@ -16,6 +16,8 @@
 }
 
 - (void)cellDidLoad {
+    [super cellDidLoad];
+    
     [self.contentView addSubview:self.toDayButton];
     [self.contentView addSubview:self.firstButton];
     [self.contentView addSubview:self.secondButton];

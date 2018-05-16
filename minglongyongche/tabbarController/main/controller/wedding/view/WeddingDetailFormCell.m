@@ -63,17 +63,9 @@
     static NSString *identifier = @"cell";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
-//    if (!cell) {
-//        cell = [[DetailCollectionViewCell alloc] init];
-//    }
-    
     cell.backgroundColor = MLWhiteColor;
-//    cell.textLabel.text = @"品牌";
-    return cell;
-}
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%ld",(long)indexPath.item);
+    return cell;
 }
 
 - (void)cellWillAppear {

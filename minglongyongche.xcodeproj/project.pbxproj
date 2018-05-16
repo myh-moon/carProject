@@ -120,8 +120,6 @@
 		1104B9FC208DDB6D00AABF6F /* airbag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1104B9DB208DDB6B00AABF6F /* airbag@2x.png */; };
 		1104B9FD208DDB6D00AABF6F /* collected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1104B9DC208DDB6B00AABF6F /* collected@2x.png */; };
 		1104BA00208DDB6D00AABF6F /* collectlion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1104B9DF208DDB6D00AABF6F /* collectlion@2x.png */; };
-		11055CDF20A923FB001563A3 /* UIViewController+CountDownTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 11055CDE20A923FB001563A3 /* UIViewController+CountDownTime.m */; };
-		11055CE220A931C2001563A3 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 11055CE120A931C2001563A3 /* NSTimer+Block.m */; };
 		11055CE720A93990001563A3 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11055CE620A93990001563A3 /* SesameCreditViewController.m */; };
 		11059A16209ECF9C00E837D1 /* MyNewOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11059A15209ECF9C00E837D1 /* MyNewOrderCell.m */; };
 		110633E2208EBEA2004CAF7D /* DetailOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110633E1208EBEA2004CAF7D /* DetailOrderView.m */; };
@@ -265,6 +263,9 @@
 		111280B72084A77F00868AAA /* MainSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 111280B62084A77F00868AAA /* MainSingleCell.m */; };
 		111280BA2084A93D00868AAA /* MainMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 111280B92084A93D00868AAA /* MainMoreCell.m */; };
 		111280BD2084AC6600868AAA /* MainListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 111280BC2084AC6600868AAA /* MainListCell.m */; };
+		11137FCC20AC1BD00084B007 /* comeing_soon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11137FC920AC1BCF0084B007 /* comeing_soon@2x.png */; };
+		11137FCD20AC1BD00084B007 /* comeing_soon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11137FCA20AC1BCF0084B007 /* comeing_soon@3x.png */; };
+		11137FCE20AC1BD00084B007 /* comeing_soon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11137FCB20AC1BD00084B007 /* comeing_soon.png */; };
 		1113B70920A2877900E81EB2 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1113B70820A2877900E81EB2 /* MySettingViewController.m */; };
 		1113B70C20A292B200E81EB2 /* AuthCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1113B70B20A292B200E81EB2 /* AuthCompleteViewController.m */; };
 		1113FAB120A158980082977E /* AddressResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1113FAB020A158980082977E /* AddressResponse.m */; };
@@ -610,10 +611,6 @@
 		1104B9DB208DDB6B00AABF6F /* airbag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airbag@2x.png"; sourceTree = "<group>"; };
 		1104B9DC208DDB6B00AABF6F /* collected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collected@2x.png"; sourceTree = "<group>"; };
 		1104B9DF208DDB6D00AABF6F /* collectlion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collectlion@2x.png"; sourceTree = "<group>"; };
-		11055CDD20A923FB001563A3 /* UIViewController+CountDownTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CountDownTime.h"; sourceTree = "<group>"; };
-		11055CDE20A923FB001563A3 /* UIViewController+CountDownTime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CountDownTime.m"; sourceTree = "<group>"; };
-		11055CE020A931C2001563A3 /* NSTimer+Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
-		11055CE120A931C2001563A3 /* NSTimer+Block.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
 		11055CE520A93990001563A3 /* SesameCreditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		11055CE620A93990001563A3 /* SesameCreditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		11059A14209ECF9C00E837D1 /* MyNewOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNewOrderCell.h; sourceTree = "<group>"; };
@@ -826,6 +823,9 @@
 		111280B92084A93D00868AAA /* MainMoreCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMoreCell.m; sourceTree = "<group>"; };
 		111280BB2084AC6600868AAA /* MainListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainListCell.h; sourceTree = "<group>"; };
 		111280BC2084AC6600868AAA /* MainListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainListCell.m; sourceTree = "<group>"; };
+		11137FC920AC1BCF0084B007 /* comeing_soon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comeing_soon@2x.png"; sourceTree = "<group>"; };
+		11137FCA20AC1BCF0084B007 /* comeing_soon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comeing_soon@3x.png"; sourceTree = "<group>"; };
+		11137FCB20AC1BD00084B007 /* comeing_soon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comeing_soon.png; sourceTree = "<group>"; };
 		1113B70720A2877900E81EB2 /* MySettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySettingViewController.h; sourceTree = "<group>"; };
 		1113B70820A2877900E81EB2 /* MySettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySettingViewController.m; sourceTree = "<group>"; };
 		1113B70A20A292B200E81EB2 /* AuthCompleteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthCompleteViewController.h; sourceTree = "<group>"; };
@@ -1808,6 +1808,9 @@
 		11CFBF552085BCF8002AADA7 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				11137FCB20AC1BD00084B007 /* comeing_soon.png */,
+				11137FC920AC1BCF0084B007 /* comeing_soon@2x.png */,
+				11137FCA20AC1BCF0084B007 /* comeing_soon@3x.png */,
 				111583D220A572DE006EAA89 /* card_01.png */,
 				111583D120A572DE006EAA89 /* card_01@2x.png */,
 				111583D320A572DF006EAA89 /* card_01@3x.png */,
@@ -2639,12 +2642,8 @@
 				11FC9B89206CE17E004498B2 /* UIButton+Block.m */,
 				111D60A6207B387400AF96D4 /* UIButton+Addition.h */,
 				111D60A7207B387400AF96D4 /* UIButton+Addition.m */,
-				11055CE020A931C2001563A3 /* NSTimer+Block.h */,
-				11055CE120A931C2001563A3 /* NSTimer+Block.m */,
 				111D60AC207B4B1700AF96D4 /* NSString+Attribute.h */,
 				111D60AD207B4B1700AF96D4 /* NSString+Attribute.m */,
-				11055CDD20A923FB001563A3 /* UIViewController+CountDownTime.h */,
-				11055CDE20A923FB001563A3 /* UIViewController+CountDownTime.m */,
 				111583DD20A878BD006EAA89 /* UIViewController+ImagePicker.h */,
 				111583DE20A878BD006EAA89 /* UIViewController+ImagePicker.m */,
 				1101ABF7207F2A60004044AC /* UIViewController+Blur.h */,
@@ -2800,16 +2799,16 @@
 				TargetAttributes = {
 					11FC9B14206CBEE8004498B2 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					11FC9B2C206CBEE8004498B2 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 11FC9B14206CBEE8004498B2;
 					};
 					11FC9B37206CBEE8004498B2 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -2902,6 +2901,7 @@
 				110C9E4920919913007E1159 /* banner_01@2x.png in Resources */,
 				1104B998208DC30100AABF6F /* arrow_right.png in Resources */,
 				1104B9FB208DDB6D00AABF6F /* gas-station@3x.png in Resources */,
+				11137FCC20AC1BD00084B007 /* comeing_soon@2x.png in Resources */,
 				114FC128209076DB0050784A /* chenggong.png in Resources */,
 				110C9E4720919913007E1159 /* banner_01@3x.png in Resources */,
 				1104B999208DC30100AABF6F /* arrow_right@2x.png in Resources */,
@@ -2973,6 +2973,7 @@
 				1104B9E4208DDB6D00AABF6F /* collectlion.png in Resources */,
 				114FC121209076DB0050784A /* chenggong@3x.png in Resources */,
 				1107D4A720A3EFC10047FA22 /* no_collection@2x.png in Resources */,
+				11137FCE20AC1BD00084B007 /* comeing_soon.png in Resources */,
 				1104B9BA208DD86000AABF6F /* xiala@3x.png in Resources */,
 				1104B984208DBFEB00AABF6F /* mine_setting@2x.png in Resources */,
 				1104B97E208DBFEB00AABF6F /* mine_wallet@2x.png in Resources */,
@@ -3050,6 +3051,7 @@
 				110D4E9A209ABFC800B9659D /* order_will.png in Resources */,
 				1106340B208EE1F3004CAF7D /* checked_circle_bg.png in Resources */,
 				11064073209C53A9005D8C8A /* nocoupons@2x.png in Resources */,
+				11137FCD20AC1BD00084B007 /* comeing_soon@3x.png in Resources */,
 				1112106A2089EB0100035B05 /* fenge_left@2x.png in Resources */,
 				111583D520A572DF006EAA89 /* card_02.png in Resources */,
 				1179916820A04799007FFAD5 /* exhaust@3x.png in Resources */,
@@ -3210,7 +3212,6 @@
 				11FB0904207C7F4900C63804 /* WordCell.m in Sources */,
 				115572A5208743B000BD0B38 /* MainListItem.m in Sources */,
 				1109D18C207A1233002EBD3D /* OrderPayViewController.m in Sources */,
-				11055CE220A931C2001563A3 /* NSTimer+Block.m in Sources */,
 				1113B70C20A292B200E81EB2 /* AuthCompleteViewController.m in Sources */,
 				111D60A8207B387400AF96D4 /* UIButton+Addition.m in Sources */,
 				111D6090207AFC7900AF96D4 /* UserItem.m in Sources */,
@@ -3277,7 +3278,6 @@
 				11017AFB2080B6670023F5EA /* BaseItem.m in Sources */,
 				1118AC7220885D1900F55D1F /* LoginCodeCell.m in Sources */,
 				11FC9B7C206CC5E1004498B2 /* CarListViewController.m in Sources */,
-				11055CDF20A923FB001563A3 /* UIViewController+CountDownTime.m in Sources */,
 				110633FA208EDC3A004CAF7D /* ConfirmCostCell.m in Sources */,
 				1103A844207DA7430016318E /* WeddingListCell.m in Sources */,
 				1101ABF3207F0C37004044AC /* NewsCell.m in Sources */,
@@ -3521,7 +3521,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3547,8 +3547,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = myAppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = myLaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XingJiang Zhu (4NS23Y99D5)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = FZC6S954D9;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3569,8 +3569,8 @@
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = com.minglongkeji.minglongyongch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6aa3338e-abb0-4ac1-bed5-9838e1d04d7e";
+				PROVISIONING_PROFILE_SPECIFIER = development;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3582,8 +3582,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = myAppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = myLaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ming - ridge automobile technology (Shanghai) Co., Ltd. (FZC6S954D9)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = FZC6S954D9;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3604,8 +3604,8 @@
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = com.minglongkeji.minglongyongch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "a4192f81-f928-4360-b3ab-b7265058a3fc";
+				PROVISIONING_PROFILE_SPECIFIER = distribution;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -3614,7 +3614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = FZC6S954D9;
 				INFOPLIST_FILE = minglongyongcheTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3629,8 +3629,8 @@
 		11FC9B46206CBEE8004498B2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = FZC6S954D9;
 				INFOPLIST_FILE = minglongyongcheTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3646,8 +3646,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FZC6S954D9;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = minglongyongcheUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.minglongkeji.minglongyongcheUITests;
@@ -3662,8 +3662,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FZC6S954D9;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = minglongyongcheUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.minglongkeji.minglongyongcheUITests;

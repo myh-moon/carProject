@@ -149,4 +149,7 @@
 #define UMWXAppId @"wxfe164628e141a951"
 #define UMWXAppSecret @"AppSecret"
 
+
+
+
 #endif /* minglong_h */

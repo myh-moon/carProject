@@ -6,8 +6,8 @@
 //  Copyright © 2018年 minglongkeji. All rights reserved.
 //
 
-#import "NetworkViewController.h"
+#import "MLTableViewController.h"
 
-@interface CarListViewController : NetworkViewController
+@interface CarListViewController : MLTableViewController
 
 @end

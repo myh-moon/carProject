@@ -82,24 +82,6 @@
     return _datePicker;
 }
 
-//-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-//{
-//    UIView *hitView = [super hitTest:point withEvent:event];
-//    // 此时hitView是已经检测出的hit-view了,是self or subViews(hitted subView)
-//
-//    /* 注意：
-//     * 如果想要阻断触摸事件传递给subView，下面的2种做法是不太合理的：
-//     */
-//
-//    /* 方法1：
-//     * 不管3721的直接返回self也是不对的，因为当没有点击在self上(包括它的subView)的时候，self都成了hit-view
-//     */
-//
-//    NSLog(@"%@",hitView);
-//
-//    return hitView;
-//}
-
 
 
 

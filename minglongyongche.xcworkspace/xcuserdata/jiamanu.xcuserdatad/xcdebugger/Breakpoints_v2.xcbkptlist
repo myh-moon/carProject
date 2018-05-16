@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/tabbarController/main/controller/wedding/view/WeddingDetailFormCell.m"
-            timestampString = "547914660.730903"
+            timestampString = "548153421.968558"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -121,8 +121,8 @@
                   symbolName = "-[DetailCollectionViewCell didSetupConstraints]"
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/main/controller/wedding/view/DetailCollectionViewCell.h"
-                  timestampString = "548126939.673686"
+                  urlString = "file:///Users/jiamanu/carProject/minglongyongche/tabbarController/main/controller/wedding/view/DetailCollectionViewCell.h"
+                  timestampString = "548153422.1303509"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -136,8 +136,8 @@
                   symbolName = "-[DetailCollectionViewCell setDidSetupConstraints:]"
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/main/controller/wedding/view/DetailCollectionViewCell.h"
-                  timestampString = "548126939.677713"
+                  urlString = "file:///Users/jiamanu/carProject/minglongyongche/tabbarController/main/controller/wedding/view/DetailCollectionViewCell.h"
+                  timestampString = "548153422.132454"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -169,8 +169,8 @@
                   symbolName = "-[DetailCollectionViewCell didSetupConstraints]"
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/main/controller/wedding/view/DetailCollectionViewCell.h"
-                  timestampString = "548126939.6817271"
+                  urlString = "file:///Users/jiamanu/carProject/minglongyongche/tabbarController/main/controller/wedding/view/DetailCollectionViewCell.h"
+                  timestampString = "548153422.1386451"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -184,8 +184,8 @@
                   symbolName = "-[DetailCollectionViewCell setDidSetupConstraints:]"
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/main/controller/wedding/view/DetailCollectionViewCell.h"
-                  timestampString = "548126939.683955"
+                  urlString = "file:///Users/jiamanu/carProject/minglongyongche/tabbarController/main/controller/wedding/view/DetailCollectionViewCell.h"
+                  timestampString = "548153422.140821"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -209,22 +209,6 @@
             endingLineNumber = "15"
             landmarkName = "textLabel"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "minglongyongche/tabbarController/main/controller/wedding/view/WeddingDetailFormCell.m"
-            timestampString = "547914660.731285"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -297,8 +281,8 @@
                   symbolName = "-[NewsDetailViewController getNewsDetail]"
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/main/controller/news/controller/NewsDetailViewController.m"
-                  timestampString = "548126939.700199"
+                  urlString = "file:///Users/jiamanu/carProject/minglongyongche/tabbarController/main/controller/news/controller/NewsDetailViewController.m"
+                  timestampString = "548153422.153121"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "39"
@@ -312,8 +296,8 @@
                   symbolName = "__41-[NewsDetailViewController getNewsDetail]_block_invoke"
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/main/controller/news/controller/NewsDetailViewController.m"
-                  timestampString = "548126939.702526"
+                  urlString = "file:///Users/jiamanu/carProject/minglongyongche/tabbarController/main/controller/news/controller/NewsDetailViewController.m"
+                  timestampString = "548153422.1550829"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
@@ -362,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/class/PullDatePickerView.m"
-            timestampString = "547637945.139182"
+            timestampString = "548153421.968905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "PullDatePickerView"
             landmarkType = "3">
          </BreakpointContent>
@@ -490,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/tabbarController/user/controller/authen/controller/AuthenViewController.m"
-            timestampString = "547968992.834674"
+            timestampString = "548153421.969146"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "208"
@@ -505,8 +489,8 @@
                   symbolName = "-[AuthenViewController toAuthentyMessage]"
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/user/controller/authen/controller/AuthenViewController.m"
-                  timestampString = "548126939.715507"
+                  urlString = "file:///Users/jiamanu/carProject/minglongyongche/tabbarController/user/controller/authen/controller/AuthenViewController.m"
+                  timestampString = "548153422.1731"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "208"
@@ -520,8 +504,8 @@
                   symbolName = "__41-[AuthenViewController toAuthentyMessage]_block_invoke"
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/user/controller/authen/controller/AuthenViewController.m"
-                  timestampString = "548126939.717888"
+                  urlString = "file:///Users/jiamanu/carProject/minglongyongche/tabbarController/user/controller/authen/controller/AuthenViewController.m"
+                  timestampString = "548153422.174903"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "209"
@@ -538,7 +522,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/tabbarController/user/controller/authen/controller/AuthenViewController.m"
-            timestampString = "547968992.834842"
+            timestampString = "548153421.969201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "210"
@@ -554,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/tabbarController/main/controller/orderdetail/carorder/view/ConfirmCostCell.m"
-            timestampString = "547914660.732668"
+            timestampString = "548153421.969258"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-awakeFromNib"
             landmarkType = "7">
          </BreakpointContent>
@@ -570,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/tabbarController/main/controller/orderdetail/carorder/view/ConfirmCostCell.m"
-            timestampString = "547914660.732711"
+            timestampString = "548153421.96931"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "-selectButton"
             landmarkType = "7">
          </BreakpointContent>
@@ -586,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/tabbarController/main/controller/orderdetail/carorder/view/ConfirmCostCell.m"
-            timestampString = "547914660.732752"
+            timestampString = "548153421.96936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "-chargeLabel"
             landmarkType = "7">
          </BreakpointContent>
@@ -649,22 +633,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "minglongyongche/tabbarController/user/controller/collection/view/CollectionCell.m"
-            timestampString = "547914660.7332079"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Pods/RETableViewManager/RETableViewManager/RETableViewItem.h"
             timestampString = "547542820.824389"
             startingColumnNumber = "9223372036854775807"
@@ -682,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/tabbarController/user/controller/authen/controller/AuthenViewController.m"
-            timestampString = "547968992.83525"
+            timestampString = "548153421.969507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "-uploadImageWithImage:withSide:"
             landmarkType = "7">
          </BreakpointContent>
@@ -698,7 +666,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "minglongyongche/tabbarController/user/controller/authen/controller/AuthenViewController.m"
-            timestampString = "547968992.8353519"
+            timestampString = "548153421.969615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
@@ -745,157 +713,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "minglongyongche/tabbarController/user/controller/order/controller/detail/view/MyOrderDetailActionCell.m"
-            timestampString = "547968992.836215"
+            filePath = "minglongyongche/class/NSTimer+Block.m"
+            timestampString = "548145815.818332"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "-cellWillAppear"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[MyOrderDetailActionCell cellWillAppear]"
-                  moduleName = "minglongyongche"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/user/controller/order/controller/detail/view/MyOrderDetailActionCell.m"
-                  timestampString = "548126939.7573529"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "194"
-                  endingLineNumber = "194"
-                  offsetFromSymbolStart = "7224">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[MyOrderDetailActionCell cellWillAppear]"
-                  moduleName = "minglongyongche"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/user/controller/order/controller/detail/view/MyOrderDetailActionCell.m"
-                  timestampString = "548126939.760062"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "194"
-                  endingLineNumber = "194"
-                  offsetFromSymbolStart = "7228">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__41-[MyOrderDetailActionCell cellWillAppear]_block_invoke.133"
-                  moduleName = "minglongyongche"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/user/controller/order/controller/detail/view/MyOrderDetailActionCell.m"
-                  timestampString = "548126939.762495"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "194"
-                  endingLineNumber = "194"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "minglongyongche/tabbarController/main/controller/orderdetail/cardetail/controller/CarDetailsViewController.m"
-            timestampString = "548126939.486233"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
-            landmarkName = "-shareWebPageToPlatformType:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "minglongyongche/tabbarController/main/controller/orderdetail/cardetail/controller/CarDetailsViewController.m"
-            timestampString = "548126939.48655"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "-UMSocialShareMenuViewDidDisappear"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "minglongyongche/tabbarController/main/controller/orderdetail/cardetail/controller/CarDetailsViewController.m"
-            timestampString = "548126939.48674"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "-UMSocialParentView:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "minglongyongche/tabbarController/main/controller/orderdetail/cardetail/controller/CarDetailsViewController.m"
-            timestampString = "548126939.486915"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "-shareWithUI"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CarDetailsViewController shareWithUI]"
-                  moduleName = "minglongyongche"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/main/controller/orderdetail/cardetail/controller/CarDetailsViewController.m"
-                  timestampString = "548126939.777807"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "89"
-                  endingLineNumber = "89"
-                  offsetFromSymbolStart = "60">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[CarDetailsViewController shareWithUI]_block_invoke"
-                  moduleName = "minglongyongche"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiamanu/Desktop/minglongyongche%E7%9A%84%E6%9C%80%E6%96%B0%E7%89%88/minglongyongche/tabbarController/main/controller/orderdetail/cardetail/controller/CarDetailsViewController.m"
-                  timestampString = "548126939.7801239"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "89"
-                  endingLineNumber = "89"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
+            startingLineNumber = "46"
+            endingLineNumber = "46">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

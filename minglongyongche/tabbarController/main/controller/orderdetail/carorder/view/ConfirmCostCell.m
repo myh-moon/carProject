@@ -17,6 +17,8 @@
 - (void)cellDidLoad {
     [super cellDidLoad];
     
+    self.separatorInset = MLSeparatorInset;
+    
 //    [self.contentView addSubview:self.chargeLabel];
 //    [self.contentView addSubview:self.selectButton];
     [self.contentView addSubview:self.costLabel];

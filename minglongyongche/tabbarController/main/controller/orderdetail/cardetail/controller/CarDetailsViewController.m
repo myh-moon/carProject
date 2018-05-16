@@ -54,10 +54,11 @@
     MLWeakSelf;
     [self.rightNavBtn addAction:^(UIButton *btn) {
         //显示分享面板
-//        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-//            // 根据获取的platformType确定所选平台进行下一步操作
-//        }];
-        [weakself shareWithUI];
+        [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_WechatFavorite),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)]];
+        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+            // 根据获取的platformType确定所选平台进行下一步操作
+            [weakself shareWebPageToPlatformType:platformType];
+        }];
     }];
     
     [self.view addSubview:self.carDetailTableView];
@@ -77,72 +78,6 @@
     
     [self getDetailOfCarWithZId:self.zid];
 }
-
-
-
-#import <UShareUI/UShareUI.h>
-#import <UMShare/UMShare.h>
-
-- (void)shareWithUI {
-    
-    //显示分享面板
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        // 根据获取的platformType确定所选平台进行下一步操作
-        
-        //创建分享消息对象
-        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-        //设置文本
-        messageObject.text = @"社会化组件UShare将各大社交平台接入您的应用，快速武装App。";
-        
-        //调用分享接口
-        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-            if (error) {
-                NSLog(@"************Share fail with error %@*********",error);
-            }else{
-                NSLog(@"response data is %@",data);
-            }
-        }];
-    }];
-}
-
-
-/**
- *  分享面板显示的回调
- */
-- (void)UMSocialShareMenuViewDidAppear{
-    
-}
-/**
- *  分享面板的消失的回调
- */
-- (void)UMSocialShareMenuViewDidDisappear{
-    
-}
-/**
- *  返回分享面板的父窗口,用于嵌入在父窗口上显示
- *
- *  @param defaultSuperView 默认加载的父窗口
- *
- *  @return 返回实际的父窗口
- *  @note 返回的view应该是全屏的view，方便分享面板来布局。
- *  @note 如果用户要替换成自己的ParentView，需要保证该view能覆盖到navigationbar和statusbar
- *  @note 当前分享面板已经是在window上,如果需要切换就重写此协议，如果不需要改变父窗口则不需要重写此协议
- */
-- (UIView*)UMSocialParentView:(UIView*)defaultSuperView{
-    return nil;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
@@ -178,12 +113,6 @@
         //文字显示
         [_orderBottomView.collectionButton.btnImageView setImage:[UIImage imageNamed:@"collectlion"]];
         _orderBottomView.collectionButton.btnLabel.text = @"收藏";
-        
-//        [RACObserve(_orderBottomView.collectionButton.btnLabel, text) subscribeNext:^(id x) {
-//            if (x) {
-//                <#statements#>
-//            }
-//        }];
         
         MLWeakSelf;
         RACSignal *signal = [RACSignal combineLatest:@[RACObserve(_orderBottomView.collectionButton.btnLabel, text)] reduce:^id(NSString *text){
@@ -353,15 +282,23 @@
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
+    CarModel *model = self.detailArray[0];
+    
+    NSString *ppp = [NSString stringWithFormat:@"日租¥%@元/天起",model.money];
+    
     //创建网页内容对象
-    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
+    NSArray *pppp = [model.pic componentsSeparatedByString:@","];
+    
+    NSString* thumbURL =  [NSString stringWithFormat:@"%@%@",MLBaseUrl,pppp[0]];
+    
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:model.name descr:ppp thumImage:thumbURL];
     //设置网页地址
-    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
+    shareObject.webpageUrl = @"http://www.mlong88.vip";
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
     
+    MLWeakSelf;
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
@@ -369,13 +306,16 @@
         }else{
             if ([data isKindOfClass:[UMSocialShareResponse class]]) {
                 UMSocialShareResponse *resp = data;
-                //分享结果消息
-                UMSocialLogInfo(@"response message is %@",resp.message);
-                //第三方原始返回的数据
-                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
                 
+                [weakself showHint:resp.message];
+                
+//                //分享结果消息
+//                UMSocialLogInfo(@"response message is %@",resp.message);
+//                //第三方原始返回的数据
+//                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
             }else{
-                UMSocialLogInfo(@"response data is %@",data);
+//                UMSocialLogInfo(@"response data is %@",data);
+                 [weakself showHint:data];
             }
         }
     }];

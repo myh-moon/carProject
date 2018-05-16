@@ -51,10 +51,6 @@
     
     MLWeakSelf;
     [self requestDataGetWithString:addressStr params:params successBlock:^(id responseObject) {
-        NSLog(@"1321313");
-        NSLog(@"1321313");
-        NSLog(@"1321313");
-        NSLog(@"1321313");
     } andFailBlock:^(NSError *error) {
         
     }];

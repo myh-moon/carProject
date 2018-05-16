@@ -9,15 +9,11 @@
 #import "CarListViewController.h"
 #import "CarDetailsViewController.h"
 
-#import "CarConditionView.h"
-
-#import "CarListItem.h"
+//#import "CarConditionView.h"
+//
+//#import "CarListItem.h"
 
 @interface CarListViewController ()<RETableViewManagerDelegate>
-
-@property (nonatomic,strong) CarConditionView *oldCarHeaderView;
-@property (nonatomic,strong) UITableView *oldCarTableView;
-@property (nonatomic,strong) RETableViewManager *manager;
 
 @end
 
@@ -27,41 +23,42 @@
     [super viewDidLoad];
     self.navigationItem.title = @"二手车";
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftNavBtn];
-    [self.leftNavBtn setTitle:@"定位" forState:0];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightNavBtn];
-    [self.rightNavBtn setTitle:@"个人中心" forState:0];
+    [self.remindImageButton.remindImageView setImage:[UIImage imageNamed:@"comeing_soon"]];
+    self.remindImageButton.remindLabel.text = @"功能开发中，敬请期待！";
+    self.remindImageButton.remindLabel.textColor = MLGrayColor;
+    self.remindImageButton.remindLabel.font = MLFont7;
+    [self.remindImageButton.remindButton setTitle:@"请你耐心等待，我们很快就能见面" forState:0];
+    [self.remindImageButton.remindButton setTitleColor:MLLightGrayColor forState:0];
+    self.remindImageButton.remindButton.titleLabel.font = MLFont3;
     
-    [self.view addSubview:self.oldCarHeaderView];
-    [self.view addSubview:self.oldCarTableView];
+    [self showRemindImage];
     
-    [self.view setNeedsUpdateConstraints];
     
-    self.manager = [[RETableViewManager alloc] initWithTableView:self.oldCarTableView];
-    self.manager[@"CarListItem"] = @"OldCarListCell";
-    
-    [self configOldCarTableView];
+//    [self configOldCarTableView];
 }
 
+/*
 - (void) configOldCarTableView {
     RETableViewSection *section = [RETableViewSection section];
     section.headerHeight = 0;
     section.footerHeight = 0;
     [self.manager addSection:section];
     
-    for ( NSInteger i=0; i<10; i++) {
-        CarListItem *item  = [[CarListItem alloc] init];
-        
-        MLWeakSelf;
-        item.selectionHandler = ^(id item) {
-            CarDetailsViewController *carDetailsVC = [[CarDetailsViewController alloc] init];
-            carDetailsVC.hidesBottomBarWhenPushed = YES;
-            carDetailsVC.type = @"二手车";
-            [weakself.navigationController pushViewController:carDetailsVC animated:YES];
-        };
-        [section addItem:item];
-        
-    }
+    
+//    for ( NSInteger i=0; i<10; i++) {
+//        CarListItem *item  = [[CarListItem alloc] init];
+//
+//        MLWeakSelf;
+//        item.selectionHandler = ^(id item) {
+//            CarDetailsViewController *carDetailsVC = [[CarDetailsViewController alloc] init];
+//            carDetailsVC.hidesBottomBarWhenPushed = YES;
+//            carDetailsVC.type = @"二手车";
+//            [weakself.navigationController pushViewController:carDetailsVC animated:YES];
+//        };
+//        [section addItem:item];
+//
+//    }
+    
 }
 
 - (void)updateViewConstraints {
@@ -92,6 +89,7 @@
     }
     return _oldCarTableView;
 }
+*/
 
 #pragma mark - end
 

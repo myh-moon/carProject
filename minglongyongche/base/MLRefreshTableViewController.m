@@ -34,7 +34,9 @@
         [self.remindImageButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
         [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:100];
         
-        [self.refreshTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+//        [self.refreshTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        [self.refreshTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+        [self.refreshTableView autoPinToTopLayoutGuideOfViewController:self withInset:0];
         
         self.didSetupConstraints = YES;
     }

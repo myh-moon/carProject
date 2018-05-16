@@ -135,25 +135,6 @@
     return _countLabel;
 }
 
-//- (UIButton *)cancelButton {
-//    if (!_cancelButton) {
-//        _cancelButton = [UIButton newAutoLayoutView];
-//        [_cancelButton setTitle:@"取消收藏" forState:0];
-//        [_cancelButton setTitleColor:MLRedColor forState:0];
-//        _cancelButton.titleLabel.font = MLFont;
-//        [_cancelButton setTitleColor:MLWhiteColor forState:0];
-//        _cancelButton.backgroundColor = MLOrangeColor;
-//        
-//        MLWeakSelf;
-//        [_cancelButton addAction:^(UIButton *btn) {
-//            if (weakself.item.didSelectedBtn) {
-//                weakself.item.didSelectedBtn(44);
-//            }
-//        }];
-//    }
-//    return _cancelButton;
-//}
-
 - (void)cellWillAppear {
     [super cellWillAppear];
     
@@ -167,9 +148,6 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"shanchu shanchu ");
-}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

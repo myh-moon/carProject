@@ -93,13 +93,15 @@
                 [weakself.navigationController pushViewController:mySettingVC animated:YES];
             }
         }else if (tag == 88) {//修改用户名|| 登录
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"phone"]) {//进入个人中心
-                MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
-                myInformationVC.hidesBottomBarWhenPushed = YES;
-                [weakself.navigationController pushViewController:myInformationVC animated:YES];
-            }else{
+            if (!TOKEN) {
                 [weakself judgeUserLoginState];
+            }else{
+//                MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
+//                myInformationVC.hidesBottomBarWhenPushed = YES;
+//                [weakself.navigationController pushViewController:myInformationVC animated:YES];
+        
             }
+
         }else {//认证
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"authen"] isEqualToString:@"200"]) {
                 AuthCompleteViewController *authCompleteVC = [[AuthCompleteViewController alloc] init];

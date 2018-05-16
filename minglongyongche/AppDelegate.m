@@ -57,10 +57,10 @@
 //重写
 - (void)onResp:(BaseResp *)resp{
     NSString * strMsg = [NSString stringWithFormat:@"errorCode: %d",resp.errCode];
-    NSLog(@"strMsg: %@",strMsg);
+//    NSLog(@"strMsg: %@",strMsg);
     
     NSString * errStr   = [NSString stringWithFormat:@"errStr: %@",resp.errStr];
-    NSLog(@"errStr: %@",errStr);
+//    NSLog(@"errStr: %@",errStr);
     
     NSString * strTitle;
     
@@ -82,21 +82,21 @@
             case WXSuccess:
             {
                 strMsg = @"支付结果:";
-                NSLog(@"支付成功: %d",resp.errCode);
+//                NSLog(@"支付成功: %d",resp.errCode);
                 wxPayResult = @"success";
                 break;
             }
             case WXErrCodeUserCancel:
             {
                 strMsg = @"用户取消了支付";
-                NSLog(@"用户取消支付: %d",resp.errCode);
+//                NSLog(@"用户取消支付: %d",resp.errCode);
                 wxPayResult = @"cancel";
                 break;
             }
             default:
             {
                 strMsg = [NSString stringWithFormat:@"支付失败! code: %d  errorStr: %@",resp.errCode,resp.errStr];
-                NSLog(@":支付失败: code: %d str: %@",resp.errCode,resp.errStr);
+//                NSLog(@":支付失败: code: %d str: %@",resp.errCode,resp.errStr);
                 wxPayResult = @"faile";
                 break;
             }
@@ -112,12 +112,10 @@
     /* 设置微信的appKey和appSecret */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:UMWXAppId appSecret:UMWXAppSecret redirectURL:@"http://mobile.umeng.com/social"];
 
-    /* 设置分享到QQ互联的appID
-     * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
-     */
-
     /* 支付宝的appKey */
     [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_AlipaySession appKey:UMAlipayOfAppKey appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    /* 设置QQ互联appKey */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:UMQQAppId  appSecret:nil redirectURL:nil];
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

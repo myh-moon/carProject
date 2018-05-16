@@ -89,46 +89,37 @@
             self.actionButton2.layer.borderColor = MLOrangeColor.CGColor;
             self.actionButton2.layer.borderWidth = 1;
             
-            if (self.item.second > 0) {//还剩倒计时
-//                
-//                _countTimer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(timerStart) userInfo:nil repeats:YES];
-//                [[NSRunLoop currentRunLoop] addTimer:_countTimer forMode:NSRunLoopCommonModes];
-                
-                NSInteger sttttt = [self.item.countDownTimeString integerValue];
-                NSString *sssss = [NSString stringWithFormat:@"倒计时%02ld:%02ld:%02ld\n",sttttt/3600,(sttttt%3600)/60,sttttt%60];
-                [self.countDownButton setAttributedTitle:[NSString setFirstPart:sssss firstFont:13 firstColor:MLOrangeColor secondPart:@"将自动关闭订单" secondFont:13 secongColor:MLOrangeColor space:4 align:0] forState:0];
-                
-                
-                [self.actionButton1 setTitle:@"取消订单" forState:0];
-                [self.actionButton1 addAction:^(UIButton *btn) {
-                    if (weakself.item.didSelectedAction) {
-                        weakself.item.didSelectedAction(@"取消订单");
-                    }
-                }];
-                
-                [self.actionButton2 setTitle:@"立即支付" forState:0];
-                [self.actionButton2 addAction:^(UIButton *btn) {
-                    if (weakself.item.didSelectedAction) {
-                        weakself.item.didSelectedAction(@"立即支付");
-                    }
-                }];
-            }else{
-                [self.countDownButton setAttributedTitle:[NSString setFirstPart:self.item.countDownTimeString firstFont:13 firstColor:MLDrakGrayColor secondPart:@"订单已过期" secondFont:13 secongColor:MLDrakGrayColor space:4 align:0] forState:0];
-                
-                [self.actionButton1 setTitle:@"删除订单" forState:0];
-                [self.actionButton1 addAction:^(UIButton *btn) {
-                    if (weakself.item.didSelectedAction) {
-                        weakself.item.didSelectedAction(@"删除订单");
-                    }
-                }];
-                
-                [self.actionButton2 setTitle:@"重新下单" forState:0];
-                [self.actionButton2 addAction:^(UIButton *btn) {
-                    if (weakself.item.didSelectedAction) {
-                        weakself.item.didSelectedAction(@"重新下单");
-                    }
-                }];
-            }
+//            if (self.item.second > 0) {//还剩倒计时
+//
+//                [self.actionButton1 setTitle:@"取消订单" forState:0];
+//                [self.actionButton1 addAction:^(UIButton *btn) {
+//                    if (weakself.item.didSelectedAction) {
+//                        weakself.item.didSelectedAction(@"取消订单");
+//                    }
+//                }];
+//
+//                [self.actionButton2 setTitle:@"立即支付" forState:0];
+//                [self.actionButton2 addAction:^(UIButton *btn) {
+//                    if (weakself.item.didSelectedAction) {
+//                        weakself.item.didSelectedAction(@"立即支付");
+//                    }
+//                }];
+//            }else{
+            
+//                [self.actionButton1 setTitle:@"删除订单" forState:0];
+//                [self.actionButton1 addAction:^(UIButton *btn) {
+//                    if (weakself.item.didSelectedAction) {
+//                        weakself.item.didSelectedAction(@"删除订单");
+//                    }
+//                }];
+//
+//                [self.actionButton2 setTitle:@"重新下单" forState:0];
+//                [self.actionButton2 addAction:^(UIButton *btn) {
+//                    if (weakself.item.didSelectedAction) {
+//                        weakself.item.didSelectedAction(@"重新下单");
+//                    }
+//                }];
+//            }
         }
             break;
         case 1:{//已付款
@@ -191,12 +182,44 @@
             break;
     }
     
-    [[[RACObserve(self.item, countDownTimeString) skip:1] takeUntil:[self rac_prepareForReuseSignal]] subscribeNext:^(id timeString) {
-        [self.countDownButton setAttributedTitle:[NSString setFirstPart:timeString firstFont:13 firstColor:MLOrangeColor secondPart:@"将自动关闭订单" secondFont:13 secongColor:MLOrangeColor space:4 align:0] forState:0];
+    [[RACObserve(self.item, countDownTimeString) takeUntil:[self rac_prepareForReuseSignal]] subscribeNext:^(id timeString) {
+        if (![timeString isEqualToString:@"倒计时00:00:00\n"]) {
+            [self.countDownButton setAttributedTitle:[NSString setFirstPart:timeString firstFont:13 firstColor:MLOrangeColor secondPart:@"将自动关闭订单" secondFont:13 secongColor:MLOrangeColor space:4 align:0] forState:0];
+            
+            [self.actionButton1 setTitle:@"取消订单" forState:0];
+            [self.actionButton1 addAction:^(UIButton *btn) {
+                if (weakself.item.didSelectedAction) {
+                    weakself.item.didSelectedAction(@"取消订单");
+                }
+            }];
+            
+            [self.actionButton2 setTitle:@"立即支付" forState:0];
+            [self.actionButton2 addAction:^(UIButton *btn) {
+                if (weakself.item.didSelectedAction) {
+                    weakself.item.didSelectedAction(@"立即支付");
+                }
+            }];
+            
+        }else{
+            [self.countDownButton setAttributedTitle:[NSString setFirstPart:self.item.countDownTimeString firstFont:13 firstColor:MLDrakGrayColor secondPart:@"订单已过期" secondFont:13 secongColor:MLDrakGrayColor space:4 align:0] forState:0];
+            
+            [self.actionButton1 setTitle:@"删除订单" forState:0];
+            [self.actionButton1 addAction:^(UIButton *btn) {
+                if (weakself.item.didSelectedAction) {
+                    weakself.item.didSelectedAction(@"删除订单");
+                }
+            }];
+            
+            [self.actionButton2 setTitle:@"重新下单" forState:0];
+            [self.actionButton2 addAction:^(UIButton *btn) {
+                if (weakself.item.didSelectedAction) {
+                    weakself.item.didSelectedAction(@"重新下单");
+                }
+            }];
+        }
     }];
-    
-    
 }
+
 
 
 

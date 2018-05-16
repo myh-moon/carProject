@@ -99,6 +99,7 @@
 
 #pragma mark - method
 - (void) getCollectionListWithPage:(NSString *)page {
+    
     NSString *collectionListStr = [NSString stringWithFormat:@"%@%@%@/%@",MLBaseUrl,MLCollectionOfList,TOKEN,page];
     
     MLWeakSelf;

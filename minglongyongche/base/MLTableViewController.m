@@ -31,7 +31,9 @@
         [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:100];
         [self.remindImageButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
         
-        [self.tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+//        [self.tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        [self.tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+        [self.tableView autoPinToTopLayoutGuideOfViewController:self withInset:0];
         
         self.didSetupConstraints = YES;
     }

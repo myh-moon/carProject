@@ -80,10 +80,7 @@
     
     MLWeakSelf;
     [self requestDataPostWithString:addAddress params:nil successBlock:^(id responseObject) {
-        NSLog(@"121212");
-        NSLog(@"121212");
-        NSLog(@"121212");
-        NSLog(@"121212");
+
     } andFailBlock:^(NSError *error) {
         
     }];

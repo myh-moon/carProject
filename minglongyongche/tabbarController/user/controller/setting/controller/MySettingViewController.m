@@ -37,20 +37,19 @@
     [self.manager addSection:section];
     
     
-    BaseItem *item0 = [[BaseItem alloc] initWithTitle:@"个人信息" firstImage:@"" secondText:@"基本资料修改 "];
-    item0.selectionStyle = UITableViewCellSelectionStyleNone;
-    [section addItem:item0];
+//    BaseItem *item0 = [[BaseItem alloc] initWithTitle:@"个人信息" firstImage:@"" secondText:@"基本资料修改 "];
+//    item0.selectionStyle = UITableViewCellSelectionStyleNone;
+//    [section addItem:item0];
     
 //    BaseItem *item1 = [[BaseItem alloc] initWithTitle:@"更改手机密码" firstImage:@"" secondText:@"重置登录密码 "];
 //    item1.selectionStyle = UITableViewCellSelectionStyleNone;
 //    [section addItem:item1];
     
     
-    
-    SeperateItem *item11 = [[SeperateItem alloc] init];
-    item11.selectionStyle = UITableViewCellSelectionStyleNone;
-    item11.cellHeight = smallSpacing;
-    [section addItem:item11];
+//    SeperateItem *item11 = [[SeperateItem alloc] init];
+//    item11.selectionStyle = UITableViewCellSelectionStyleNone;
+//    item11.cellHeight = smallSpacing;
+//    [section addItem:item11];
     
     BaseItem *item2 = [[BaseItem alloc] initWithTitle:@"常见问题" firstImage:@"" secondText:@""];
     item2.selectionStyle = UITableViewCellSelectionStyleNone;

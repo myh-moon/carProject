@@ -34,7 +34,7 @@
         
         NSArray *array = [model.pic componentsSeparatedByString:@","];
         self.img = [NSString stringWithFormat:@"%@%@",MLBaseUrl,array[0]];  //汽车大图
-        self.name = model.name;
+        self.namess = model.name;
         
         if ([model.belong isEqualToString:@"1"]) {
             self.license = @"沪";

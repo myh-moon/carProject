@@ -9,8 +9,6 @@
 #import "MyOrderDetailViewController.h"
 #import "CarDetailsViewController.h"  //详情
 #import "OrderPayViewController.h" //立即支付
-#import "UIViewController+CountDownTime.h"
-#import "NSTimer+Block.h"
 
 #import "MyOrderDetailResponse.h"
 #import "PreOrderModel.h"
@@ -28,6 +26,7 @@
 
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) NSMutableArray *listlist;
+@property (nonatomic,strong) NSString *countString;
 
 @end
 
@@ -141,26 +140,12 @@
     
     //倒计时
     MLWeakSelf;
-    [_timer addAction:^(NSTimer *timer) {
-        if ([response.order.statuss integerValue] == 0) {
-            NSDate *datenow = [NSDate date];//现在时间
-            NSString *nowTime = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
-            
-            //2.计算差值
-            NSInteger value = [response.order.times integerValue] - [nowTime integerValue];
-            
-            if (value > 0) {//倒计时未结束
-                value--;
-                NSString *sssss = [NSString stringWithFormat:@"倒计时%02ld:%02ld:%02ld\n",value/3600,(value%3600)/60,value%60];
-                NSLog(@"*********%@******",sssss);
-                item13.countDownTimeString = sssss;
-            }
-        }
-    }];
-//    _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(startTheCountDown) userInfo:nil repeats:YES];
-//    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-    
-
+    if ([orderModel.statuss integerValue] == 0) {
+        _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(startTheCountDown) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+        
+    }
+    //action
     item13.didSelectedAction = ^(NSString *acttionType) {
         if ([acttionType isEqualToString:@"删除订单"]) {
             [weakself deleteOrCancelTheOrderWithID:orderModel.ID action:@"删除"];
@@ -173,6 +158,18 @@
         }
     };
     [section addItem:item13];
+    
+    RACSignal *countDownSignal = [RACSignal combineLatest:@[RACObserve(self, countString)] reduce:^id(NSString *countDownString){
+        if (!countDownString) {
+            item13.countDownTimeString =  @"倒计时 00:00:00\n";
+        }else{
+            item13.countDownTimeString = countDownString;
+        }
+        return @"12";
+    }];
+    [countDownSignal subscribeNext:^(id x) {
+        
+    }];
     
 }
 
@@ -267,41 +264,40 @@
 }
 
 
+//判断是否开始倒计时
+- (void) judgeCountdownOfYesOrNoWithEndtime:(NSString *)endtime {
+    NSDate *datenow = [NSDate date];//现在时间
+    NSString *nowTime = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
+    
+    //2.计算差值
+    NSInteger value = [endtime integerValue] - [nowTime integerValue];
+//    if (value > 0) {
+        _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(startTheCountDown) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+//    }
+}
+
 //倒计时
 
 - (void)startTheCountDown {
-    
     MyOrderDetailResponse *response = self.listlist[0];
     
-    if ([response.order.statuss integerValue] == 0) {
-        NSDate *datenow = [NSDate date];//现在时间
-        NSString *nowTime = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
-        
-        //2.计算差值
-        NSInteger value = [response.order.times integerValue] - [nowTime integerValue];
-        
-        if (value > 0) {//倒计时未结束
-            value--;
-            NSString *sssss = [NSString stringWithFormat:@"倒计时%02ld:%02ld:%02ld\n",value/3600,(value%3600)/60,value%60];
-            NSLog(@"*********%@******",sssss);
-        }
+    NSDate *datenow = [NSDate date];//现在时间
+    NSString *nowTime = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
+    
+    //2.计算差值
+    NSInteger value = [response.order.times integerValue] - [nowTime integerValue];
+    NSString *sssss;
+    value--;
+    if (value > 0) {//倒计时未结束
+        sssss = [NSString stringWithFormat:@"倒计时%02ld:%02ld:%02ld\n",value/3600,(value%3600)/60,value%60];
+    }else{
+        sssss = @"倒计时00:00:00\n";
+        [_timer invalidate];
     }
+    self.countString = sssss;
     
 }
-
-
-//- (void) timerStartWithTime:(NSTimer *)timer{
-//    NSInteger sttttt = [self.item.countDownTimeString integerValue];
-//    sttttt--;
-//
-//    NSString *sssss = [NSString stringWithFormat:@"倒计时%02ld:%02ld:%02ld\n",sttttt/3600,(sttttt%3600)/60,sttttt%60];
-//
-//    [self.countDownButton setAttributedTitle:[NSString setFirstPart:sssss firstFont:13 firstColor:MLOrangeColor secondPart:@"将自动关闭订单" secondFont:13 secongColor:MLOrangeColor space:4 align:0] forState:0];
-//
-//    if (sttttt == 0) {
-//        [self.countDownButton setAttributedTitle:[NSString setFirstPart:@"倒计时00:00:00" firstFont:13 firstColor:MLDrakGrayColor secondPart:@"订单已过期" secondFont:13 secongColor:MLDrakGrayColor space:4 align:0] forState:0];
-//    }
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
