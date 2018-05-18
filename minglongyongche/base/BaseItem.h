@@ -19,5 +19,6 @@
 - (instancetype) initWithTitle:(NSString *)firstString firstImage:(NSString *)imgString;
 
 @property (nonatomic,strong) void (^didSelectedBtn)(NSInteger tag);
+@property (nonatomic,strong) void (^didClickBtn)(NSString *zid);
 
 @end

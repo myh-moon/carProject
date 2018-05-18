@@ -126,6 +126,7 @@
     item3.selectionStyle = UITableViewCellSelectionStyleNone;
     @weakify(item3);
     item3.didSelectedBtn = ^(NSInteger tag) {
+        [weakself setupForDismissKeyboard];
         [weakself showDatePickerViewInView:weakself.view finishBlock:^(NSString *dateStr, NSDate *date) {
             @strongify(item3);
             item3.dateString = [dateStr substringWithRange:NSMakeRange(0, 10)];
@@ -144,6 +145,7 @@
     item4.selectionStyle = UITableViewCellSelectionStyleNone;
     @weakify(item4);
     item4.didSelectedBtn = ^(NSInteger tag) {
+        [weakself setupForDismissKeyboard];
         [weakself showDatePickerViewInView:weakself.view finishBlock:^(NSString *dateStr, NSDate *date) {
             @strongify(item4);
             item4.dateString = [dateStr substringWithRange:NSMakeRange(0, 10)];
@@ -221,7 +223,6 @@
 
 - (void) uploadImageWithImage:(UIImage *)image withSide:(NSString *)side  {
     
-//    [self showHudInView:self.view hint:@"正在上传图片"];
     [self showSuitHint:@"正在上传"];
 
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];

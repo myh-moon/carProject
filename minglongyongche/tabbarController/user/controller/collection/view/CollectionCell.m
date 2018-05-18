@@ -54,7 +54,8 @@
         
         [self.qualityLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.lisenceLabel];
         [self.qualityLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.lisenceLabel withOffset:smallSpacing];
-        [self.qualityLabel autoSetDimensionsToSize:CGSizeMake(60, 20)];
+//        [self.qualityLabel autoSetDimensionsToSize:CGSizeMake(60, 20)];
+        [self.qualityLabel autoSetDimension:ALDimensionHeight toSize:20];
         
         [self.priceLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.qualityLabel];
         [self.priceLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.coBackView withOffset:-7.5];
@@ -141,11 +142,10 @@
     [self.carImageView sd_setImageWithURL:[NSURL URLWithString:self.item.imageName]];
     self.nameLabel.text = self.item.carName;
     self.lisenceLabel.text = self.item.carLicense;
-    self.qualityLabel.text = self.item.collocation;
+    self.qualityLabel.text = [NSString stringWithFormat:@"%@  ",self.item.collocation];
 
     self.priceLabel.attributedText = [NSString setFirstPart:@"日租¥" firstFont:11 firstColor:MLOrangeColor secondPart:self.item.carPrice secondFont:18 secongColor:MLOrangeColor thirdPart:@"/天" thirdFont:11 thirdColor:MLOrangeColor];
     self.countLabel.text = self.item.carUsedDays;
-    
 }
 
 

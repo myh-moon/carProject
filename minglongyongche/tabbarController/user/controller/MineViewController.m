@@ -96,10 +96,9 @@
             if (!TOKEN) {
                 [weakself judgeUserLoginState];
             }else{
-//                MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
-//                myInformationVC.hidesBottomBarWhenPushed = YES;
-//                [weakself.navigationController pushViewController:myInformationVC animated:YES];
-        
+                MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
+                myInformationVC.hidesBottomBarWhenPushed = YES;
+                [weakself.navigationController pushViewController:myInformationVC animated:YES];
             }
 
         }else {//认证

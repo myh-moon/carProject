@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "NewsViewController.h"  //消息
 #import "ShortRentViewController.h"  //短租
+#import "CarDetailsViewController.h" //详情
 
 #import "CarDetailBannerItem.h" //banner
 #import "MainSingleItem.h"
@@ -30,8 +31,6 @@
     [super viewWillAppear:animated];
 
     self.navigationController.navigationBarHidden = YES;
-    
-    [self getMainBannerList];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -47,6 +46,8 @@
     self.manager[@"MainListItem"] = @"MainListCell";
     
     [self setupMainTableView];
+    
+    [self getMainBannerList];
 }
 
 - (void)setupMainTableView {
@@ -77,14 +78,17 @@
     MainListItem *item4 = [[MainListItem alloc] initWithHotList:self.hotArray];
     item4.selectionStyle = UITableViewCellSelectionStyleNone;
     [mainSection addItem:item4];
-    [item4 setDidSelectedBtn:^(NSInteger tag) {
-//        if (tag == 66) {
-        
-//        }else if (tag == 678){
+    [item4 setDidClickBtn:^(NSString *zid) {
+        if ([zid isEqualToString:@"更多"]) {
             ShortRentViewController *shortRentVC = [[ShortRentViewController alloc] init];
             shortRentVC.hidesBottomBarWhenPushed = YES;
             [weakself.navigationController pushViewController:shortRentVC animated:YES];
-//        }
+        }else{
+            CarDetailsViewController *carDetailVC = [[CarDetailsViewController alloc] init];
+            carDetailVC.hidesBottomBarWhenPushed = YES;
+            carDetailVC.zid = zid;
+            [weakself.navigationController pushViewController:carDetailVC animated:YES];
+        }
     }];
 }
 

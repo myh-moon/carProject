@@ -53,6 +53,7 @@
         _messageTextField = [UITextField newAutoLayoutView];
         _messageTextField.textColor = MLBlackColor;
         _messageTextField.font = MLFont;
+        _messageTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         
         MLWeakSelf;
         [_messageTextField.rac_textSignal subscribeNext:^(id x) {

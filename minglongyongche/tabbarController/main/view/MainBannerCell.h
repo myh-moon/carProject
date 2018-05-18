@@ -14,6 +14,7 @@
 @property (nonatomic,strong) UIScrollView *bannerScrollView;
 @property (nonatomic,strong) UIPageControl *bannerPage;
 @property (nonatomic,strong) UIButton *newsButton;
+@property (nonatomic,strong) UIImageView *borderView;
 
 @property (nonatomic,strong) void (^didSelectedBanner)(NSInteger tag);
 

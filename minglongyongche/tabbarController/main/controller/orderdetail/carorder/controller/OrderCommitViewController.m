@@ -10,7 +10,9 @@
 #import "OrderPayViewController.h"
 #import "AddAddressViewController.h"
 #import "OrderTicketViewController.h"
+#import "AuthenViewController.h"
 #import "NSDate+FormatterTime.h"
+#import "UIViewController+Blur.h"
 
 #import "ConfirmBottomView.h"
 
@@ -299,6 +301,14 @@
     }];
 }
 
+
+- (NSMutableDictionary *)orderDic {
+    if (!_orderDic) {
+        _orderDic = [NSMutableDictionary new];
+    }
+    return _orderDic;
+}
+
 //预支付
 - (void) generatePreOrder {
     NSString *generateStr = [NSString stringWithFormat:@"%@%@%@",MLBaseUrl,MLOrderOfGenerate,TOKEN];
@@ -335,18 +345,16 @@
             OrderPayViewController *orderPayVC = [[OrderPayViewController alloc] init];
             orderPayVC.preOrderModel = model;
             [weakself.navigationController pushViewController:orderPayVC animated:YES];
+        }else if ([model.status isEqualToString:@"403"]){//未认证
+//            AuthenViewController *authenVC = [[AuthenViewController alloc] init];
+//            [weakself.navigationController pushViewController:authenVC animated:YES];
+            [weakself showAuthentyAlertView];
         }
     } andFailBlock:^(NSError *error) {
         
     }];
 }
 
-- (NSMutableDictionary *)orderDic {
-    if (!_orderDic) {
-        _orderDic = [NSMutableDictionary new];
-    }
-    return _orderDic;
-}
 
 - (void)captureTimeDifferenceOfItem:(ConfirmDateItem *)item2  dateString:(NSString *)dateStr date:(NSDate *)date tag:(NSUInteger)tag{
     
@@ -426,109 +434,6 @@
             [self showHint:@"时间选择不合理"];
         }
     }
-    
-    /*
-    if (tag == 45) {//租车日期
-        if (!self.endMoment) {//若未选择还车日期
-            NSString *firstPart = [dateStr substringWithRange:NSMakeRange(0, 5)];
-            NSString *secondPart = [dateStr substringFromIndex:6];
-            
-            item2.startMoments = dateStr;
-            item2.startDate = firstPart;
-            item2.startTime = secondPart;
-            
-            //参数重组
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            //设置时间格式
-            formatter.dateFormat = @"yyyy-MM-dd H:mm";
-            NSString *asasa = [formatter  stringFromDate:date];
-            [self.orderDic setValue:asasa forKey:@"qctime"];
-        }else{
-            //2、计算天数差
-            NSString *start = [NSString stringWithFormat:@"%f",[self.startMoment timeIntervalSince1970]];
-            NSString *end = [NSString stringWithFormat:@"%f",[self.endMoment timeIntervalSince1970]];
-            NSInteger dudu = [end integerValue] - [start integerValue];
-            
-            if (dudu <= 0) {
-                [self showHint:@"租车时间不合理，请重新选择"];
-            }else{
-                //3、若时间差是合理的（即差值为正数），则计算时间差
-                NSInteger dddd = dudu/86400;
-                
-                if (dddd%86400>0) {
-                    item2.duration = [NSString stringWithFormat:@"%ld",dddd+1];
-                }else{
-                    item2.duration = [NSString stringWithFormat:@"%ld",dddd];
-                    item2.zuqi = @"租期";
-                }
-                
-                //参数重组
-                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                //设置时间格式
-                formatter.dateFormat = @"yyyy-MM-dd H:mm";
-                NSString *asasa = [formatter  stringFromDate:date];
-                [self.orderDic setValue:asasa forKey:@"qctime"];
-                
-            }
-        }
-    }else if(tag == 46){
-        if (!self.startMoment) {
-             [self showHint:@"请先选择租车日期"];
-        }
-    }
-    
-    
-    
-    //2、计算天数差
-    NSString *start = [NSString stringWithFormat:@"%f",[self.startMoment timeIntervalSince1970]];
-    NSString *end = [NSString stringWithFormat:@"%f",[self.endMoment timeIntervalSince1970]];
-    NSInteger dudu = [end integerValue] - [start integerValue];
-    
-    if (dudu <= 0) {
-        [self showHint:@"还车时间不合理，请重新选择"];
-    }else{
-        
-    }
-    
-    //3、若时间差是合理的（即差值为正数），则计算时间差
-    NSInteger dddd = dudu/86400;
-    
-    if (dddd%86400>0) {
-        item2.duration = [NSString stringWithFormat:@"%ld",dddd+1];
-    }else{
-        item2.duration = [NSString stringWithFormat:@"%ld",dddd];
-    }
-    
-    item2.zuqi = @"租期";
-    
-    NSString *firstPart = [dateStr substringWithRange:NSMakeRange(0, 5)];
-    NSString *secondPart = [dateStr substringFromIndex:6];
-    
-    if (tag == 45) {
-        item2.startMoments = dateStr;
-        item2.startDate = firstPart;
-        item2.startTime = secondPart;
-        
-        //参数重组
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        //设置时间格式
-        formatter.dateFormat = @"yyyy-MM-dd H:mm";
-        NSString *asasa = [formatter  stringFromDate:date];
-        [self.orderDic setValue:asasa forKey:@"qctime"];
-        
-    }else if (tag == 46){
-        item2.endMoments = dateStr;
-        item2.endDate = firstPart;
-        item2.endTime = secondPart;
-        //参数重组
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        //设置时间格式
-        formatter.dateFormat = @"yyyy-MM-dd H:mm";
-        NSString *asasa = [formatter  stringFromDate:date];
-        [self.orderDic setValue:asasa forKey:@"hctime"];
-    }
-     */
-//    }
 }
 
 - (void)didReceiveMemoryWarning {

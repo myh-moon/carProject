@@ -9,6 +9,7 @@
 #import "CarDetailsViewController.h"
 #import "OrderCommitViewController.h"
 #import "LoginViewController.h" //登录
+#import "AuthenViewController.h" //认证
 #import <UMShare/UMShare.h>
 #import <UShareUI/UShareUI.h>
 
@@ -121,7 +122,12 @@
                     [weakself toLoginifNotLoginFromController:weakself];
                 }else{
                     if ([text isEqualToString:@"收藏"]) {
-                        [weakself addCollectionWithZid:weakself.zid];
+//                        NSString *authen = [[NSUserDefaults standardUserDefaults] objectForKey:@"authen"];
+//                        if ([authen isEqualToString:@"403"]) {//未认证
+//                            [weakself showHint:@"未认证"];
+//                        }else{
+//                        }
+                                                    [weakself addCollectionWithZid:weakself.zid];
                     }else{
                         [weakself deleteCollectionWithZid:weakself.zid];
                     }
@@ -133,8 +139,6 @@
         [signal subscribeNext:^(id x) {
             
         }];
-        
-        
         
         //target
         [_orderBottomView setDidSelectedBtn:^(NSInteger tag) {
@@ -250,6 +254,10 @@
         if ([model.status isEqualToString:@"200"]) {
             weakself.orderBottomView.collectionButton.btnLabel.text = @"已收藏";
             [weakself.orderBottomView.collectionButton.btnImageView setImage:[UIImage imageNamed:@"collected"]];
+        }else if([model.status isEqualToString:@"403"]){
+//            AuthenViewController *authenVC = [[AuthenViewController alloc] init];
+//            [weakself.navigationController pushViewController:authenVC animated:YES];
+            [weakself showAuthentyAlertView];
         }
         
     } andFailBlock:^(NSError *error) {
@@ -274,7 +282,6 @@
        
    }];
 }
-
 
 #pragma mark - share
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType

@@ -10,6 +10,4 @@
 
 @interface AuthenViewController : NetworkViewController
 
-//@property (nonatomic,strong) void (^didSelectedImage)(UIImage *image);
-
 @end

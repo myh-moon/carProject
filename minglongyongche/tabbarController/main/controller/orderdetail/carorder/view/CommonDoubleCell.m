@@ -62,12 +62,6 @@
     [self.firstButton setTitle:self.item.leftStr forState:0];
     [self.secondButton setTitle:self.item.rightStr forState:0];
     
-//    [self.firstButton setImage:[UIImage imageNamed:self.item.titleImageString] forState:0];
-//
-//    [self.firstButton setTitle:self.item.firstTitleString forState:0];
-//
-//    [self.secondButton setTitle:self.item.secondTextString forState:0];
-    
     [RACObserve(self.item, rightStr) subscribeNext:^(id x) {
         [self.secondButton setTitle:self.item.rightStr forState:0];
     }];

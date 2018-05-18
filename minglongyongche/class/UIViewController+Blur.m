@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+Blur.h"
+#import "AuthenViewController.h"
 
 @implementation UIViewController (Blur)
 
@@ -252,6 +253,71 @@
             finishBlock(text,childID);
         }];
     }
+}
+
+- (void)showAuthentyAlertView {
+    UIView *backView = [UIView newAutoLayoutView];
+    backView.backgroundColor = [UIColor colorWithRed:0.2510 green:0.2510 blue:0.2510 alpha:0.8];
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:backView];
+    
+    [backView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+    
+    
+    //背景
+    UIButton *backButton = [UIButton newAutoLayoutView];
+    backButton.layer.cornerRadius = 11;
+    backButton.backgroundColor = MLWhiteColor;
+    backButton.titleLabel.numberOfLines = 0;
+    [backButton setAttributedTitle: [NSString setFirstPart:@"去实名认证\n" firstFont:17 firstColor:MLDrakGrayColor secondPart:@"轻松租到你想要的车" secondFont:17 secongColor:MLDrakGrayColor space:10 align:1] forState:0];
+    
+    [backView addSubview:backButton];
+    
+    //取消按钮
+    UIButton *cancelAuthenButton = [UIButton newAutoLayoutView];
+    [cancelAuthenButton setImage:[UIImage imageNamed:@"close"] forState:0];
+    [backView addSubview:cancelAuthenButton];
+
+    [cancelAuthenButton addAction:^(UIButton *btn) {
+        [backView removeFromSuperview];
+    }];
+    
+    //头像
+    UIButton *imageButton = [UIButton newAutoLayoutView];
+    [imageButton setImage:[UIImage imageNamed:@"ic_tishi"] forState:0];
+    [backView addSubview:imageButton];
+    
+    //认证按钮
+    UIButton *toAuthenButton = [UIButton newAutoLayoutView];
+    [toAuthenButton setTitle:@"前往认证" forState:0];
+    [toAuthenButton setTitleColor:MLWhiteColor forState:0];
+    toAuthenButton.titleLabel.font = MLFont7;
+    toAuthenButton.backgroundColor = MLOrangeColor;
+    toAuthenButton.layer.cornerRadius = 5;
+    [backView addSubview:toAuthenButton];
+    MLWeakSelf;
+    [toAuthenButton addAction:^(UIButton *btn) {
+        [backView removeFromSuperview];
+        AuthenViewController *authenVC = [[AuthenViewController alloc] init];
+        [weakself.navigationController pushViewController:authenVC animated:YES];
+    }];
+    
+    [backButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
+    [backButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:MLWindowWidth/2];
+    [backButton autoSetDimensionsToSize:CGSizeMake(260, 240)];
+    
+    [cancelAuthenButton autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:backButton withOffset:-20];
+    [cancelAuthenButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:backButton];
+    
+    [imageButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
+    [imageButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:backButton withOffset:-120];
+
+    [toAuthenButton autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:backButton withOffset:-middleSpacing];
+    [toAuthenButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:backButton withOffset:middleSpacing];
+    [toAuthenButton autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:backButton withOffset:-middleSpacing];
+    [toAuthenButton autoSetDimension:ALDimensionHeight toSize:40];
+
 }
 
 

@@ -29,7 +29,6 @@
             self.carLicense = model.belong;  //牌照
         }
         
-//        self.carPrice = [NSString stringWithFormat:@"日租¥%@/天",model.money];  //价格
         self.carPrice = model.money;
         self.carUsedDay = [NSString stringWithFormat:@"已租%@次",model.count];  //已使用的次数
         self.carUsedDays = [NSString stringWithFormat:@"已租%@次",model.counts];  //已使用的次数

@@ -37,4 +37,7 @@
 - (void) showDatePickerViewInView:(UIView *)view finishBlock:(void(^)(NSString *dateStr,NSDate *date))finishBlock;
 
 
+//未认证，弹出认证框
+- (void) showAuthentyAlertView;
+
 @end

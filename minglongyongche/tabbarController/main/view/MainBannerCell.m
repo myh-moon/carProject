@@ -18,9 +18,12 @@
 - (void)cellDidLoad {
     [super cellDidLoad];
     
+    self.separatorInset = MLSeparatorInset;
+    
     [self.contentView addSubview:self.bannerScrollView];
     [self.contentView addSubview:self.bannerPage];
     [self.contentView addSubview:self.newsButton];
+    [self.contentView  addSubview:self.borderView];
     
     [self setNeedsUpdateConstraints];
 }
@@ -29,6 +32,8 @@
     if (!self.didSetupConstraints) {
         
         [self.bannerScrollView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        
+        [self.borderView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
         
         [self.newsButton autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:bigSpacing];
         [self.newsButton autoPinEdgeToSuperviewEdge:ALEdgeTop  withInset:smallSpacing];
@@ -44,20 +49,11 @@
 - (UIScrollView *)bannerScrollView {
     if (!_bannerScrollView) {
         _bannerScrollView = [UIScrollView newAutoLayoutView];
-//        _bannerScrollView.translatesAutoresizingMaskIntoConstraints = NO;
-//        _bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MLWindowWidth, HH)];
         _bannerScrollView.contentSize = CGSizeMake(MLWindowWidth * 1, HH);
         _bannerScrollView.pagingEnabled = YES;
         _bannerScrollView.backgroundColor = MLLightGrayColor;
         _bannerScrollView.delegate = self;
         _bannerScrollView.showsVerticalScrollIndicator = NO;
-        
-        
-//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:_bannerScrollView.bounds byRoundingCorners:UIRectCornerBottomLeft cornerRadii:CGSizeMake(100, 10)];
-//        CAShapeLayer *maskLayer=[[CAShapeLayer alloc] init];
-//        maskLayer.frame = _bannerScrollView.bounds;
-//        maskLayer.path=maskPath.CGPath;
-//        _bannerScrollView.layer.mask=maskLayer;
         
         MLWeakSelf;
         for (NSInteger i=0; i<1; i++) {
@@ -69,6 +65,14 @@
         }
     }
     return _bannerScrollView;
+}
+
+- (UIImageView *)borderView {
+    if (!_borderView) {
+        _borderView = [UIImageView newAutoLayoutView];
+        [_borderView setImage:[UIImage imageNamed:@"huxian"]];
+    }
+    return _borderView;
 }
 
 - (UIButton *)newsButton {

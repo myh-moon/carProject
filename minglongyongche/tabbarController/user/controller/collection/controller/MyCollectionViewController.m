@@ -7,7 +7,9 @@
 //
 
 #import "MyCollectionViewController.h"
-#import "ShortRentViewController.h" 
+#import "ShortRentViewController.h"
+#import "CarDetailsViewController.h"  //详情
+
 
 #import "CarListItem.h"
 #import "SeperateItem.h"
@@ -31,6 +33,7 @@
     //空白图片
     self.remindImageButton.btnHeightConstraints.constant = 35;
     [self setRemindImageView:@"no_collection" remindLabel:@"暂时没有你的收藏" remindAction:@"去发现精彩" actionBackGroubdColor:MLOrangeColor actionTextColor:MLWhiteColor actionCorner:17.5];
+    
     MLWeakSelf;
     [self setDidSelectedRemindBtn:^(NSString *remind) {
         UINavigationController *nav = weakself.navigationController;
@@ -40,6 +43,9 @@
         shortRentVC.hidesBottomBarWhenPushed = YES;
         [nav pushViewController:shortRentVC animated:NO];
     }];
+    
+    self.manager[@"CarListItem"] = @"CollectionCell";
+    self.manager[@"SeperateItem"] = @"SeperateCell";
     
     self.pullToRefreshHandler = ^{
         weakself.pageIndex = 1;
@@ -53,8 +59,6 @@
         [weakself.refreshTableView.mj_footer endRefreshing];
     };
     
-    self.manager[@"CarListItem"] = @"CollectionCell";
-    self.manager[@"SeperateItem"] = @"SeperateCell";
 }
 
 - (NSMutableArray *)collectionList {
@@ -69,12 +73,13 @@
     
     [self.manager removeAllSections];
     
+    RETableViewSection *section = [RETableViewSection section];
+    section.headerHeight = 0;
+    section.footerHeight = 0;
+    [self.manager addSection:section];
+    
     for (NSInteger i=0; i<self.collectionList.count; i++) {
-        RETableViewSection *section = [RETableViewSection section];
-        section.headerHeight = 0;
-        section.footerHeight = 0;
-        [self.manager addSection:section];
-        
+
         SeperateItem *item1 = [[SeperateItem alloc] init];
         item1.cellHeight = smallSpacing;
         item1.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -87,6 +92,13 @@
         item0.editingStyle = UITableViewCellEditingStyleDelete;
        
         MLWeakSelf;
+        //查看详情
+        item0.selectionHandler = ^(id item) {
+            CarDetailsViewController *carDetailVC = [[CarDetailsViewController alloc] init];
+            carDetailVC.zid = model.zid;
+            [weakself.navigationController pushViewController:carDetailVC animated:YES];
+        };
+        //取消收藏
         @weakify(item0);
         item0.deletionHandlerWithCompletion = ^(id item, void (^delete)(void)) {
             @strongify(item0);
@@ -122,7 +134,7 @@
         }
         
         [weakself setupMyCollectionTableView];
-        
+
         [weakself.refreshTableView reloadData];
         
     } andFailBlock:^(NSError *error) {

@@ -13,7 +13,7 @@
 @implementation MainListCell
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return BH+MLCellHeight;
+    return 10+ BH+MLCellHeight;
 }
 
 - (void)cellDidLoad {
@@ -32,7 +32,7 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.tiLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing];
+        [self.tiLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:bigSpacing];
         [self.tiLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:middleSpacing];
 
         [self.actBtn autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
@@ -84,8 +84,11 @@
 
         MLWeakSelf;
         [_actBtn addAction:^(UIButton *btn) {
-            if (weakself.item.didSelectedBtn) {
-                weakself.item.didSelectedBtn(66);
+//            if (weakself.item.didSelectedBtn) {
+//                weakself.item.didSelectedBtn(66);
+//            }
+            if (weakself.item.didClickBtn) {
+                weakself.item.didClickBtn(@"更多");
             }
         }];
     }
@@ -116,8 +119,9 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.item.didSelectedBtn) {
-        self.item.didSelectedBtn(678);
+    if (self.item.didClickBtn) {
+        CarModel *model = self.item.hotList[indexPath.item];
+        self.item.didClickBtn(model.zid);
     }
 }
 

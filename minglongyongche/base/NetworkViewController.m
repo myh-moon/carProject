@@ -9,6 +9,7 @@
 #import "NetworkViewController.h"
 #import "BaseModel.h"
 #import "LoginViewController.h"
+#import "AuthenViewController.h"
 
 
 @interface NetworkViewController ()
@@ -63,8 +64,6 @@
     
 //    MLWeakSelf;
     [session POST:string parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-        
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (successBlock) {
