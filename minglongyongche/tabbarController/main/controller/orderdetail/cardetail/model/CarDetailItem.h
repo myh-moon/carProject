@@ -15,6 +15,7 @@
 @property (nonatomic,copy,readwrite) NSString *mname;
 @property (nonatomic,copy,readwrite) NSString *belong; //牌照
 @property (nonatomic,copy,readwrite) NSString *money; //价格
+@property (nonatomic,copy) NSString *originalMoney;  //原价
 @property (nonatomic,copy,readwrite) NSString *address; //车所在地址
 @property (nonatomic,copy,readwrite) NSString *count;  //已租次数
 

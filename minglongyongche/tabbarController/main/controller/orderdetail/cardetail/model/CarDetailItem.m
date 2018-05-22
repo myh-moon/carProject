@@ -23,6 +23,9 @@
             self.belong = model.belong;
         }
         
+        //原价
+        NSInteger qwqwq = [self getRandomNumber:300 to:600];
+        self.originalMoney = [NSString stringWithFormat:@"¥%.2f元",[model.money floatValue]+qwqwq];
         self.money= model.money;
         self.address = model.address;
         self.count = model.count;
@@ -110,6 +113,13 @@
         
     }
     return self;
+}
+
+
+//随机数
+-(NSInteger)getRandomNumber:(NSInteger)from to:(NSInteger)to
+{
+    return (int)(from + (arc4random() % (to - from + 1)));
 }
 
 @end

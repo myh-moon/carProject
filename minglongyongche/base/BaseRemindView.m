@@ -56,6 +56,7 @@
         _remindLabel = [UILabel newAutoLayoutView];
         _remindLabel.textColor = MLLightGrayColor;
         _remindLabel.font = MLFont8;
+        _remindLabel.numberOfLines = 0;
     }
     return _remindLabel;
 }

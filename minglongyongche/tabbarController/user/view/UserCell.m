@@ -33,10 +33,10 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing];
+        [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing*2];
         [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
         
-        [self.userImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing];
+        [self.userImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing*2];
         [self.userImageView autoSetDimensionsToSize:CGSizeMake(65,65)];
         [self.userImageView autoAlignAxisToSuperviewAxis:ALAxisVertical];
         

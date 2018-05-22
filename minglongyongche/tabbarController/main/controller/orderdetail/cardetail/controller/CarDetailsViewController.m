@@ -12,6 +12,7 @@
 #import "AuthenViewController.h" //认证
 #import <UMShare/UMShare.h>
 #import <UShareUI/UShareUI.h>
+#import "UIImage+Color.h"
 
  //footer
 #import "DetailOrderView.h"
@@ -44,6 +45,21 @@
 @end
 
 @implementation CarDetailsViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forBarMetrics:UIBarMetricsDefault];
+
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:MLWhiteColor] forBarMetrics:UIBarMetricsDefault];
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

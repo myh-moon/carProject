@@ -154,8 +154,10 @@
     
     
     
-    NSString *mmmm = [NSString stringWithFormat:@"¥%@",@"500"];
-    self.originalPriceLabel.text = @"原价¥500";
+    NSString *mmmm = self.item.originalMoney;
+//    [NSString stringWithFormat:@"¥%@",self.item.originalMoney];
+    self.originalPriceLabel.text = [NSString stringWithFormat:@"原价%@",self.item.originalMoney];
+//    @"原价¥500";
     NSMutableAttributedString *originPrice = [[NSMutableAttributedString alloc] initWithString:self.originalPriceLabel.text];
     [originPrice addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(2, mmmm.length)];
     self.originalPriceLabel.attributedText = originPrice;

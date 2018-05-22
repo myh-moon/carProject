@@ -19,7 +19,10 @@
 #import "CarModel.h"
 
 
-@interface MainViewController ()
+@interface MainViewController ()<RETableViewManagerDelegate>
+
+@property (nonatomic,strong) UITableView *mainTableView;
+@property (nonatomic,strong) RETableViewManager *mainManager;
 
 @property (nonatomic,strong) NSMutableArray *hotArray;
 
@@ -29,7 +32,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     self.navigationController.navigationBarHidden = YES;
 }
 
@@ -41,22 +44,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.manager[@"CarDetailBannerItem"] = @"MainBannerCell";
-    self.manager[@"MainSingleItem"] = @"MainSingleCell";
-    self.manager[@"MainListItem"] = @"MainListCell";
+    [self.view addSubview:self.mainTableView];
+    
+    [self.view setNeedsUpdateConstraints];
+    
+    self.mainManager = [[RETableViewManager alloc] initWithTableView:self.mainTableView];
+    self.mainManager[@"CarDetailBannerItem"] = @"MainBannerCell";
+    self.mainManager[@"MainSingleItem"] = @"MainSingleCell";
+    self.mainManager[@"MainListItem"] = @"MainListCell";
     
     [self setupMainTableView];
     
     [self getMainBannerList];
 }
 
+- (void)updateViewConstraints {
+    if (!self.didSetupConstraints) {
+        
+        [self.mainTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        
+        self.didSetupConstraints = YES;
+    }
+    [super updateViewConstraints];
+}
+
 - (void)setupMainTableView {
-    [self.manager removeAllSections];
+    [self.mainManager removeAllSections];
     
     RETableViewSection *mainSection = [RETableViewSection section];
     mainSection.headerHeight = 0;
     mainSection.footerHeight = 0;
-    [self.manager addSection:mainSection];
+    [self.mainManager addSection:mainSection];
     
     //banner
     MLWeakSelf;
@@ -118,8 +136,7 @@
         
         [weakself setupMainTableView];
         
-        [weakself.tableView reloadData];
-        
+        [weakself.mainTableView reloadData];
         
     } andFailBlock:^(NSError *error) {
         

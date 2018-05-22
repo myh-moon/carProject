@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //设置导航条的字体颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:MLBlackColor,NSFontAttributeName:MLFont7}];
     
@@ -30,7 +30,7 @@
     //设置导航栏颜色
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:MLGrayColor] forBarMetrics:UIBarMetricsDefault];
     
-//    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     //右滑返回
     self.navigationController.interactivePopGestureRecognizer.delegate = self;

@@ -30,7 +30,7 @@
 
 //    https://openauth.alipay.com/oauth2/appToAppAuth.htm?app_id=2018041102535930&redirect_uri=http://api.mlong88.vip/leaseapi/alipay
 //    https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FappToAppAuth.htm%3Fapp_id%3D2018041102535930%26redirect_uri%3Dhttp%3A%2F%2Fapi.mlong88.vip%2Fleaseapi%2Falipay
-    NSString *shou = @"https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FappToAppAuth.htm%3Fapp_id%3D2018041102535930%26redirect_uri%3Dhttp%3A%2F%2Fapi.mlong88.vip%2Fleaseapi%2Falipay";
+    NSString *shou = @"%20https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FappToAppAuth.htm%3Fapp_id%3D2018041102535930%26redirect_uri%3Dhttp%3A%2F%2Fapi.mlong88.vip%2Fleaseapi%2Falipay";
     
 //    //支付宝获取用户信息
 ////    https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2018041102535930&scope=auth_zhima&redirect_uri=http://api.mlong88.vip/leaseapi/alipay

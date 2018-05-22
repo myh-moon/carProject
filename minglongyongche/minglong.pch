@@ -46,13 +46,13 @@
 #define MLLightGrayColor UIColorFromRGB(0x999999)
 #define MLGrayColor  UIColorFromRGB(0x666666)
 #define MLWhiteColor  UIColorFromRGB(0xffffff)
-//#define MLDrakGrayColor [UIColor darkGrayColor]
 #define MLDrakGrayColor UIColorFromRGB(0x333333)
 #define MLOrangeColor UIColorFromRGB(0xff5722)
 #define MLGGColor UIColorFromRGB(0xbfbfbf)
 
 #define MLLoginColor  [UIColor colorWithRed:0.0392 green:0.0941 blue:0.1529 alpha:1]
 #define MLBackGroundColor  [UIColor colorWithRed:0.9647 green:0.9647 blue:0.9647 alpha:1]
+
 
 //font
 #define MLFont [UIFont systemFontOfSize:14]
