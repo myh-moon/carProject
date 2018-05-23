@@ -34,15 +34,15 @@
         [self.limitLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing];
         
         NSArray *views = @[self.firstButton1,self.firstButton2,self.firstButton3,self.firstButton4];
-        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:smallSpacing];
+        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:smallSpacing insetSpacing:YES];
         
         [views autoMatchViewsDimension:ALDimensionHeight];
         
-        [[views firstObject] autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.limitLabel];
+//        [[views firstObject] autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.limitLabel];
         [[views firstObject] autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:middleSpacing];
         [[views firstObject] autoSetDimension:ALDimensionHeight toSize:65];
         
-        [[views lastObject] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
+//        [[views lastObject] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
         
         self.didSetupConstraints = YES;
     }
@@ -66,17 +66,6 @@
         _firstButton1.titleLabel.textAlignment = NSTextAlignmentCenter;
         _firstButton1.layer.borderColor = MLLightGrayColor.CGColor;
         _firstButton1.layer.borderWidth = 0.4;
-        
-//        CALayer *layer = [_firstButton1 layer];
-//        layer.shadowColor = MLBlackColor.CGColor;
-//        layer.shadowOffset = CGSizeMake(0, 20);
-//        layer.shadowRadius = 0.5;
-
-        
-//        CALayer *laler = [_firstButton1 layer];
-//        laler.shadowColor = MLBlackColor.CGColor;
-//        laler.shadowOffset = CGSizeMake(0, 10);
-//        laler.shadowOpacity = 0.5;
     }
     return _firstButton1;
 }

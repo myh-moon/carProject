@@ -13,6 +13,7 @@
 #import <UMShare/UMShare.h>
 #import <UShareUI/UShareUI.h>
 #import "UIImage+Color.h"
+#import "UIViewController+ImageBrowser.h"
 
  //footer
 #import "DetailOrderView.h"
@@ -34,7 +35,7 @@
 
 #import "ShortRentResult.h"
 
-@interface CarDetailsViewController ()
+@interface CarDetailsViewController ()<RETableViewManagerDelegate>
 
 @property (nonatomic,strong) UITableView *carDetailTableView;
 @property (nonatomic,strong) DetailOrderView *orderBottomView;
@@ -42,33 +43,40 @@
 
 @property (nonatomic,strong) NSMutableArray *detailArray;
 
+@property (nonatomic,assign) CGFloat offY;
+
 @end
 
 @implementation CarDetailsViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forBarMetrics:UIBarMetricsDefault];
-
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@""]];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:MLWhiteColor] forBarMetrics:UIBarMetricsDefault];
-
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.leftBarButtonItem = self.leftBarItem;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftNavBtn];
+    [self.leftNavBtn setImage:[UIImage imageNamed:@"return_white"] forState:0];
+    MLWeakSelf;
+    [self.leftNavBtn addAction:^(UIButton *btn) {
+        [weakself.navigationController popViewControllerAnimated:YES];
+    }];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightNavBtn];
     [self.rightNavBtn setImage:[UIImage imageNamed:@"share"] forState:0];
-    MLWeakSelf;
+    
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forBarMetrics:UIBarMetricsDefault];
+    
     [self.rightNavBtn addAction:^(UIButton *btn) {
         //显示分享面板
         [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_WechatFavorite),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)]];
@@ -83,7 +91,7 @@
     
     [self.view setNeedsUpdateConstraints];
     
-    self.manager = [[RETableViewManager alloc] initWithTableView:self.carDetailTableView];
+    self.manager = [[RETableViewManager alloc] initWithTableView:self.carDetailTableView delegate:self];
     
 //    if ([self.type isEqualToString:@"短租"]) {
         self.manager[@"CarDetailBannerItem"] = @"BannnerCell";
@@ -119,6 +127,7 @@
     if (!_carDetailTableView) {
         _carDetailTableView  = [UITableView newAutoLayoutView];
         _carDetailTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, bigSpacing)];
+        _carDetailTableView.showsVerticalScrollIndicator = NO;
     }
     return _carDetailTableView;
 }
@@ -138,12 +147,7 @@
                     [weakself toLoginifNotLoginFromController:weakself];
                 }else{
                     if ([text isEqualToString:@"收藏"]) {
-//                        NSString *authen = [[NSUserDefaults standardUserDefaults] objectForKey:@"authen"];
-//                        if ([authen isEqualToString:@"403"]) {//未认证
-//                            [weakself showHint:@"未认证"];
-//                        }else{
-//                        }
-                                                    [weakself addCollectionWithZid:weakself.zid];
+                            [weakself addCollectionWithZid:weakself.zid];
                     }else{
                         [weakself deleteCollectionWithZid:weakself.zid];
                     }
@@ -190,11 +194,16 @@
     [self.manager addSection:detailSection];
     
     CarModel *carModel = self.detailArray[0];
+    NSArray *arr = [carModel.pic componentsSeparatedByString:@","];
     
     //1.短租
     //banner
     CarDetailBannerItem *item0 = [[CarDetailBannerItem alloc] initWithCarModel:carModel];
     item0.selectionStyle = UITableViewCellSelectionStyleNone;
+    MLWeakSelf;
+    item0.didSelectedBtn = ^(NSInteger tag) {
+        [weakself showImages:arr currentIndex:tag];
+    };
     [detailSection addItem:item0];
     
     //详情
@@ -271,8 +280,6 @@
             weakself.orderBottomView.collectionButton.btnLabel.text = @"已收藏";
             [weakself.orderBottomView.collectionButton.btnImageView setImage:[UIImage imageNamed:@"collected"]];
         }else if([model.status isEqualToString:@"403"]){
-//            AuthenViewController *authenVC = [[AuthenViewController alloc] init];
-//            [weakself.navigationController pushViewController:authenVC animated:YES];
             [weakself showAuthentyAlertView];
         }
         
@@ -326,25 +333,52 @@
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
             UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            NSDictionary *info = error.userInfo;
+            [weakself showHint:info[@"message"]];
         }else{
-            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                UMSocialShareResponse *resp = data;
-                
-                [weakself showHint:resp.message];
-                
-//                //分享结果消息
-//                UMSocialLogInfo(@"response message is %@",resp.message);
-//                //第三方原始返回的数据
-//                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-            }else{
-//                UMSocialLogInfo(@"response data is %@",data);
-                 [weakself showHint:data];
-            }
+            [weakself showHint:@"分享成功"];
+//            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+//                UMSocialShareResponse *resp = data;
+//                [weakself showHint:resp.message];
+//            }else{
+//                 [weakself showHint:data];
+//            }
         }
     }];
 }
 
-
+#pragma mark - scrollview delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat yy = scrollView.contentOffset.y;
+    
+    CGFloat alphaa = yy/250;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB1(0xffffff,alphaa)] forBarMetrics:UIBarMetricsDefault];
+    
+    CarModel *model = self.detailArray[0];
+    self.title = model.name;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB1(0x000000, alphaa)}];
+    
+    if (yy < 125) {
+//        self.title = @"";
+        
+        [self.leftNavBtn setImage:[UIImage imageNamed:@"return_white"] forState:0];
+        self.leftNavBtn.alpha = 1 - yy/125;
+        [self.rightNavBtn setImage:[UIImage imageNamed:@"share"] forState:0];
+        self.rightNavBtn.alpha = 1 - yy/125;
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    }else if (yy > 125 && yy < 250){
+        [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
+        self.leftNavBtn.alpha = yy/125 - 1;
+        [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
+        self.rightNavBtn.alpha = yy/125 - 1;
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    }else{
+        [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
+        [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
+        [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
+    }
+}
 
 
 - (void)didReceiveMemoryWarning {

@@ -11,6 +11,12 @@
 @implementation CollectionCell
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
+   
+//    return [UIScreen mainScreen].bounds.size.width;
+    
+//    if (MLWindowWidth == 320) {
+//        return 85;
+//    }
     return 120;
 }
 
@@ -43,7 +49,11 @@
         [self.carImageView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.coBackView withOffset:7.5];
         [self.carImageView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.coBackView withOffset:7.5];
         [self.carImageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.coBackView withOffset:-7.5];
-        [self.carImageView autoSetDimension:ALDimensionWidth toSize:140];
+        if (MLWindowWidth == 320) {
+            [self.carImageView autoSetDimension:ALDimensionWidth toSize:120];
+        }else{
+            [self.carImageView autoSetDimension:ALDimensionWidth toSize:140];
+        }
         
         [self.nameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.carImageView withOffset:4];
         [self.nameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.carImageView withOffset:middleSpacing];
@@ -61,7 +71,7 @@
         [self.priceLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.coBackView withOffset:-7.5];
         
         [self.countLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.priceLabel];
-        [self.countLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.coBackView withOffset:-middleSpacing];
+        [self.countLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.coBackView withOffset:-5];
         
 //        [self.cancelButton autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
 //        [self.cancelButton autoSetDimensionsToSize:CGSizeMake(80, 30)];
@@ -83,7 +93,8 @@
 - (UIImageView *)carImageView {
     if (!_carImageView) {
         _carImageView = [UIImageView newAutoLayoutView];
-        _carImageView.backgroundColor = MLBackGroundColor;
+        _carImageView.layer.borderColor = MLBackGroundColor.CGColor;
+        _carImageView.layer.borderWidth = 1;
     }
     return _carImageView;
 }
@@ -91,7 +102,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [UILabel newAutoLayoutView];
-        _nameLabel.text = @"车车车车";
+//        _nameLabel.text = @"车车车车";
         _nameLabel.textColor = MLBlackColor;
         _nameLabel.font = MLFont;
     }
@@ -101,7 +112,7 @@
 - (UILabel *)lisenceLabel {
     if (!_lisenceLabel) {
         _lisenceLabel = [UILabel newAutoLayoutView];
-        _lisenceLabel.text = @"沪牌沪牌";
+//        _lisenceLabel.text = @"沪牌沪牌";
         _lisenceLabel.textColor = MLGrayColor;
         _lisenceLabel.font = MLFont;
     }

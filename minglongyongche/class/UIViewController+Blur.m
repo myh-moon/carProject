@@ -257,7 +257,7 @@
 
 - (void)showAuthentyAlertView {
     UIView *backView = [UIView newAutoLayoutView];
-    backView.backgroundColor = [UIColor colorWithRed:0.2510 green:0.2510 blue:0.2510 alpha:0.8];
+    backView.backgroundColor = [UIColor colorWithRed:0.2510 green:0.2510 blue:0.2510 alpha:0.7];
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:backView];

@@ -21,6 +21,7 @@
         layer.backgroundColor = MLBackGroundColor.CGColor;
         [self.layer addSublayer:layer];
         
+        [self addSubview:self.comprehensiveBtn];
         [self addSubview:self.typeBtn];
         [self addSubview:self.rentBtn];
         [self addSubview:self.brandBtn];
@@ -33,40 +34,40 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         
-        NSArray *views = @[self.typeBtn,self.rentBtn,self.brandBtn];
+        NSArray *views = @[self.comprehensiveBtn,self.typeBtn,self.rentBtn,self.brandBtn];
         //        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:20 insetSpacing:YES matchedSizes:YES];
-        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:20];
+        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:0];
         [views autoSetViewsDimension:ALDimensionHeight toSize:50];
         
         [[views firstObject ] autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self];
         
-        [[views firstObject] autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:bigSpacing];
-        [[views lastObject] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:bigSpacing];
+//        [[views firstObject] autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:bigSpacing];
+//        [[views lastObject] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:bigSpacing];
         
         self.didSetupConstraints = YES;
     }
     [super updateConstraints];
 }
 
-//- (UIButton *)comprehensiveBtn {
-//    if (!_comprehensiveBtn) {
-//        _comprehensiveBtn = [UIButton newAutoLayoutView];
-//        [_comprehensiveBtn setTitle:@"综合排序^" forState:0];
-//        [_comprehensiveBtn setTitleColor:[UIColor grayColor] forState:0];
-//        _comprehensiveBtn.titleLabel.font = MLFont;
-//        //        _comprehensiveBtn.backgroundColor = [UIColor redColor];
-//        _comprehensiveBtn.contentHorizontalAlignment = 1;
-//        
-//        MLWeakSelf;
-//        [_comprehensiveBtn addAction:^(UIButton *btn) {
-//            if (weakself.didSelectedBtn) {
-//                weakself.didSelectedBtn(111);
-//            }
-//        }];
-//        
-//    }
-//    return _comprehensiveBtn;
-//}
+- (UIButton *)comprehensiveBtn {
+    if (!_comprehensiveBtn) {
+        _comprehensiveBtn = [UIButton newAutoLayoutView];
+        [_comprehensiveBtn setTitle:@"综合排序  " forState:0];
+        [_comprehensiveBtn setTitleColor:[UIColor grayColor] forState:0];
+        _comprehensiveBtn.titleLabel.font = MLFont;
+        [_comprehensiveBtn swapImage];
+        [_comprehensiveBtn setImage:[UIImage imageNamed:@"xiala"] forState:0];
+        
+        MLWeakSelf;
+        [_comprehensiveBtn addAction:^(UIButton *btn) {
+            if (weakself.didSelectedBtn) {
+                weakself.didSelectedBtn(111);
+            }
+        }];
+        
+    }
+    return _comprehensiveBtn;
+}
 
 - (UIButton *)typeBtn {
     if (!_typeBtn) {
@@ -74,7 +75,6 @@
         [_typeBtn setTitle:@"类型  " forState:0];
         [_typeBtn setTitleColor:[UIColor grayColor] forState:0];
         _typeBtn.titleLabel.font = MLFont;
-//        _typeBtn.contentHorizontalAlignment = 2;
         [_typeBtn swapImage];
         [_typeBtn setImage:[UIImage imageNamed:@"xiala"] forState:0];
         
@@ -114,7 +114,6 @@
         [_brandBtn setTitle:@"品牌  " forState:0];
         [_brandBtn setTitleColor:[UIColor grayColor] forState:0];
         _brandBtn.titleLabel.font = MLFont;
-//        _brandBtn.contentHorizontalAlignment = 1;
         [_brandBtn swapImage];
         [_brandBtn setImage:[UIImage imageNamed:@"pinpai"] forState:0];
 

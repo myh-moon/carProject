@@ -19,10 +19,7 @@
 #import "CarModel.h"
 
 
-@interface MainViewController ()<RETableViewManagerDelegate>
-
-@property (nonatomic,strong) UITableView *mainTableView;
-@property (nonatomic,strong) RETableViewManager *mainManager;
+@interface MainViewController ()
 
 @property (nonatomic,strong) NSMutableArray *hotArray;
 
@@ -43,38 +40,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.view addSubview:self.mainTableView];
     
-    [self.view setNeedsUpdateConstraints];
-    
-    self.mainManager = [[RETableViewManager alloc] initWithTableView:self.mainTableView];
-    self.mainManager[@"CarDetailBannerItem"] = @"MainBannerCell";
-    self.mainManager[@"MainSingleItem"] = @"MainSingleCell";
-    self.mainManager[@"MainListItem"] = @"MainListCell";
+    self.navManager[@"CarDetailBannerItem"] = @"MainBannerCell";
+    self.navManager[@"MainSingleItem"] = @"MainSingleCell";
+    self.navManager[@"MainListItem"] = @"MainListCell";
     
     [self setupMainTableView];
     
     [self getMainBannerList];
 }
 
-- (void)updateViewConstraints {
-    if (!self.didSetupConstraints) {
-        
-        [self.mainTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
-        
-        self.didSetupConstraints = YES;
-    }
-    [super updateViewConstraints];
-}
-
 - (void)setupMainTableView {
-    [self.mainManager removeAllSections];
+    
+    [self.navManager removeAllSections];
     
     RETableViewSection *mainSection = [RETableViewSection section];
     mainSection.headerHeight = 0;
     mainSection.footerHeight = 0;
-    [self.mainManager addSection:mainSection];
+    [self.navManager addSection:mainSection];
     
     //banner
     MLWeakSelf;
@@ -136,7 +119,7 @@
         
         [weakself setupMainTableView];
         
-        [weakself.mainTableView reloadData];
+        [weakself.navTableView reloadData];
         
     } andFailBlock:^(NSError *error) {
         

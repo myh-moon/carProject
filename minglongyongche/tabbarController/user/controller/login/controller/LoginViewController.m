@@ -32,12 +32,12 @@
     
     self.navigationItem.leftBarButtonItem = self.leftBarItem;
     
-    self.tableView.backgroundColor = MLLoginColor;
+    self.navTableView.backgroundColor = MLLoginColor;
     
-    self.manager[@"LoginImageItem"] = @"LoginImageCell";
-    self.manager[@"LoginItem"] = @"LoginCell";
-    self.manager[@"LoginCodeItem"] = @"LoginCodeCell";
-    self.manager[@"LoginAgreeItem"] = @"LoginAgreeCell";
+    self.navManager[@"LoginImageItem"] = @"LoginImageCell";
+    self.navManager[@"LoginItem"] = @"LoginCell";
+    self.navManager[@"LoginCodeItem"] = @"LoginCodeCell";
+    self.navManager[@"LoginAgreeItem"] = @"LoginAgreeCell";
     
     [self setupLoginView];
     
@@ -49,7 +49,7 @@
     RETableViewSection *section = [RETableViewSection section];
     section.headerHeight = 0;
     section.footerHeight = 0;
-    [self.manager addSection:section];
+    [self.navManager addSection:section];
     
     //header
     LoginImageItem *item = [[LoginImageItem alloc] init];

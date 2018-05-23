@@ -63,6 +63,7 @@
     [self setupMineTableView];
 }
 
+#pragma mark - method
 - (void)setupMineTableView {
     
     [self.manager removeAllSections];
@@ -85,22 +86,9 @@
     item0.selectionStyle = UITableViewCellSelectionStyleNone;
     [item0 setDidSelectedBtn:^(NSInteger tag) {
         if (tag == 87) {//设置
-            if (!TOKEN) {
-                [weakself judgeUserLoginState];
-            }else{
-                MySettingViewController *mySettingVC = [[MySettingViewController alloc] init];
-                mySettingVC.hidesBottomBarWhenPushed = YES;
-                [weakself.navigationController pushViewController:mySettingVC animated:YES];
-            }
+            [weakself judgeLoginStatesOfType:1];
         }else if (tag == 88) {//修改用户名|| 登录
-            if (!TOKEN) {
-                [weakself judgeUserLoginState];
-            }else{
-                MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
-                myInformationVC.hidesBottomBarWhenPushed = YES;
-                [weakself.navigationController pushViewController:myInformationVC animated:YES];
-            }
-
+            [weakself judgeLoginStatesOfType:2];
         }else {//认证
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"authen"] isEqualToString:@"200"]) {
                 AuthCompleteViewController *authCompleteVC = [[AuthCompleteViewController alloc] init];
@@ -156,13 +144,7 @@
     item1.selectionStyle = UITableViewCellSelectionStyleNone;
     
     item1.selectionHandler = ^(id item) {
-        if (!TOKEN) {
-            [weakself judgeUserLoginState];
-        }else{
-            MyCollectionViewController *myCollectionVC = [[MyCollectionViewController alloc] init];
-            myCollectionVC.hidesBottomBarWhenPushed = YES;
-            [weakself.navigationController pushViewController:myCollectionVC animated:YES];
-        }
+        [weakself judgeLoginStatesOfType:3];
     };
     [section addItem:item1];
     
@@ -175,13 +157,7 @@
     BaseItem *item2 = [[BaseItem alloc] initWithTitle:@"    我的订单" firstImage:@"mine_order" secondText:@""];
     item2.selectionStyle = UITableViewCellSelectionStyleNone;
     item2.selectionHandler = ^(id item) {
-        if (!TOKEN) {
-            [weakself judgeUserLoginState];
-        }else{
-            MyOrderViewController *myOrderVC = [[MyOrderViewController alloc] init];
-            myOrderVC.hidesBottomBarWhenPushed = YES;
-            [weakself.navigationController pushViewController:myOrderVC animated:YES];
-        }
+        [weakself judgeLoginStatesOfType:4];
     };
     [section addItem:item2];
     
@@ -218,21 +194,39 @@
     BaseItem *item4 = [[BaseItem alloc] initWithTitle:@"    我的优惠券" firstImage:@"mine_discounts" secondText:@""];
     item4.selectionStyle = UITableViewCellSelectionStyleNone;
     item4.selectionHandler = ^(id item) {
-        if (!TOKEN) {
-            [weakself judgeUserLoginState];
-        }else{
-            MyTicketViewController *myTicketVC = [[MyTicketViewController alloc] init];
-            myTicketVC.hidesBottomBarWhenPushed = YES;
-            [weakself.navigationController pushViewController:myTicketVC animated:YES];
-        }
+        [weakself judgeLoginStatesOfType:5];
     };
     [section addItem:item4];
 }
 
-- (void) judgeUserLoginState {
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    loginVC.hidesBottomBarWhenPushed = YES;
-    [self presentViewController:loginVC animated:YES completion:nil];
+- (void)judgeLoginStatesOfType:(NSInteger )type {
+    if (!TOKEN) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:loginVC animated:YES completion:nil];
+    }else{
+        if (type == 1) {
+            MySettingViewController *mySettingVC = [[MySettingViewController alloc] init];
+            mySettingVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:mySettingVC animated:YES];
+        }else if (type == 2){
+            MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
+            myInformationVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:myInformationVC animated:YES];
+        }else if (type == 3){
+            MyCollectionViewController *myCollectionVC = [[MyCollectionViewController alloc] init];
+            myCollectionVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:myCollectionVC animated:YES];
+        }else if (type == 4){
+            MyOrderViewController *myOrderVC = [[MyOrderViewController alloc] init];
+            myOrderVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:myOrderVC animated:YES];
+        }else if (type == 5){
+            MyTicketViewController *myTicketVC = [[MyTicketViewController alloc] init];
+            myTicketVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:myTicketVC animated:YES];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

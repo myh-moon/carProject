@@ -49,13 +49,15 @@
         NSArray *views1 = @[self.processImageButton1,self.processImageButton2,self.processImageButton3,self.processImageButton4];
         [views1 autoMatchViewsDimension:ALDimensionWidth];
         [views1 autoMatchViewsDimension:ALDimensionHeight];
-        [views1 autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSize:bigSpacing];
+        [views1 autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSize:MLWindowWidth/4];
+//        [views1 autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSize:bigSpacing insetSpacing:YES];
         
-        [[views1 firstObject] autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:35];
+        
+//        [[views1 firstObject] autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:35];
         [[views1 firstObject] autoSetDimensionsToSize:CGSizeMake(bigSpacing, bigSpacing)];
         [[views1 firstObject] autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.carStatusLabel withOffset:bigSpacing];
         
-        [[views1 lastObject] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:35];
+//        [[views1 lastObject] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:35];
         
         
         //4个label

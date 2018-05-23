@@ -42,7 +42,7 @@
         [self.moneyLabel autoPinEdge:ALEdgeRight  toEdge:ALEdgeRight ofView:self.backView];
         [self.moneyLabel autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.sourceLabel];
         [self.moneyLabel autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:self.sourceLabel];
-        [self.moneyLabel autoSetDimension:ALDimensionWidth toSize:120];
+        [self.moneyLabel autoSetDimension:ALDimensionWidth toSize:110];
         
         [self.expirationLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.backView withOffset:middleSpacing];
         [self.expirationLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.backView];

@@ -6,8 +6,8 @@
 //  Copyright © 2018年 minglongkeji. All rights reserved.
 //
 
-#import "NetworkViewController.h"
+#import "MLNavTableViewController.h"
 
-@interface MainViewController : NetworkViewController
+@interface MainViewController : MLNavTableViewController
 
 @end

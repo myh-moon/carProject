@@ -39,6 +39,8 @@
 
 //色值
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define UIColorFromRGB1(rgbValue,alpha1) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:alpha1]
+
 
 #define MLRedColor [UIColor redColor]
 #define MLBlueColor [UIColor colorWithRed:88/255 green:205/255 blue:145/255 alpha:1]

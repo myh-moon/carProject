@@ -82,7 +82,13 @@
         MLWeakSelf;
         [_shortConditionView setDidSelectedBtn:^(NSInteger tag) {
             [weakself hiddenBlurView];
-            if (tag == 112){//类型
+            if (tag == 111) {//综合排序
+                [weakself.parameter setValue:@"0" forKey:@"type"];
+                [weakself.parameter setValue:@"0" forKey:@"brand"];
+                [weakself.parameter setValue:@"0" forKey:@"rent"];
+
+                [weakself getCarListOfShortRentTableViewWithPage:@"1"];
+            }else  if (tag == 112){//类型
                 if (!weakself.conditionDic[@"type"]) {
                     [weakself getListOfAllKindsConditionWithSolor:@"2"];
                 }else {
@@ -129,6 +135,7 @@
     return _listArray;
 }
 
+//请求的条件字典
 - (NSMutableDictionary *)conditionDic {
     if (!_conditionDic) {
         _conditionDic = [NSMutableDictionary dictionary];

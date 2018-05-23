@@ -10,7 +10,7 @@
 
 @interface AboutViewController ()
 
-@property (nonatomic,assign) BOOL didSetupConstraints;
+//@property (nonatomic,assign) BOOL didSetupConstraints;
 
 @property (nonatomic,strong) UIWebView *aboutWebView;
 
@@ -32,7 +32,8 @@
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.aboutWebView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        [self.aboutWebView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+        [self.aboutWebView autoPinToTopLayoutGuideOfViewController:self withInset:0];
         
         self.didSetupConstraints = YES;
     }

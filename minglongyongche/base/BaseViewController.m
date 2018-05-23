@@ -42,6 +42,8 @@
         UIButton *leftBtn = [UIButton buttonWithType:0];
         leftBtn.frame = CGRectMake(0, 0, 40, 44);
         [leftBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
+        [leftBtn setContentHorizontalAlignment:1];
+        [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         
         [leftBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         

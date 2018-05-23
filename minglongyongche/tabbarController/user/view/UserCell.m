@@ -13,7 +13,7 @@
 @dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 170;
+    return 190;
 }
 
 - (void)cellDidLoad {
@@ -33,10 +33,11 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing*2];
+        [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing];
         [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
         
-        [self.userImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing*2];
+//        [self.userImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing*2];
+        [self.userImageView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.settingButton withOffset:smallSpacing];
         [self.userImageView autoSetDimensionsToSize:CGSizeMake(65,65)];
         [self.userImageView autoAlignAxisToSuperviewAxis:ALAxisVertical];
         

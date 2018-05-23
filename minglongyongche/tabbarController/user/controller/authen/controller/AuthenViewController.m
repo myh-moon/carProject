@@ -65,7 +65,10 @@
 
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
-        [self.authenTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeBottom];
+//        [self.authenTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeBottom];
+        [self.authenTableView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+        [self.authenTableView autoPinEdgeToSuperviewEdge:ALEdgeRight];
+        [self.authenTableView autoPinToTopLayoutGuideOfViewController:self withInset:0];
         [self.authenTableView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.authenConfirmView];
         
         [self.authenConfirmView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];

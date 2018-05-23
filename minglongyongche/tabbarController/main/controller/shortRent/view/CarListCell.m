@@ -12,6 +12,9 @@
 @implementation CarListCell
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
+    if (MLWindowWidth == 320) {
+        return 130;
+    }
     return 150;
 }
 
@@ -43,11 +46,15 @@
         [self.carImageView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.backView withOffset:smallSpacing];
         [self.carImageView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.backView withOffset:smallSpacing];
         [self.carImageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.backView withOffset:-smallSpacing];
-        [self.carImageView autoSetDimension:ALDimensionWidth toSize:150];
+        if (MLWindowWidth == 320) {
+            [self.carImageView autoSetDimension:ALDimensionWidth toSize:110];
+        }else{
+            [self.carImageView autoSetDimension:ALDimensionWidth toSize:150];
+        }
         
         [self.carNameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.carImageView withOffset:middleSpacing];
         [self.carNameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.carImageView withOffset:4];
-        [self.carNameLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.backView withOffset:-smallSpacing];
+        [self.carNameLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.backView withOffset:-5];
         
         [self.carLicenseLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.carNameLabel];
         [self.carLicenseLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.carNameLabel withOffset:5];
@@ -80,6 +87,8 @@
 - (UIImageView *)carImageView {
     if (!_carImageView) {
         _carImageView = [UIImageView newAutoLayoutView];
+        _carImageView.layer.borderColor = MLBackGroundColor.CGColor;
+        _carImageView.layer.borderWidth = 1;
     }
     return _carImageView;
 }

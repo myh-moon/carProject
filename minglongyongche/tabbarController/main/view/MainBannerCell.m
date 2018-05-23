@@ -12,7 +12,7 @@
 @implementation MainBannerCell
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return HH;
+    return HH+0.5;
 }
 
 - (void)cellDidLoad {
@@ -51,7 +51,7 @@
         _bannerScrollView = [UIScrollView newAutoLayoutView];
         _bannerScrollView.contentSize = CGSizeMake(MLWindowWidth * 1, HH);
         _bannerScrollView.pagingEnabled = YES;
-        _bannerScrollView.backgroundColor = MLLightGrayColor;
+        _bannerScrollView.backgroundColor = MLBackGroundColor;
         _bannerScrollView.delegate = self;
         _bannerScrollView.showsVerticalScrollIndicator = NO;
         

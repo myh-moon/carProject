@@ -8,12 +8,12 @@
 
 #import "BannnerCell.h"
 
-#define HHH 170
+#define HHH 250
 
 @implementation BannnerCell
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return HHH;
+    return HHH+1;
 }
 
 - (void)cellDidLoad {
@@ -72,13 +72,19 @@
     MLWeakSelf;
     for (NSInteger i=0; i<self.item.imgArray.count; i++) {
         UIButton *imgButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MLWindowWidth, HHH)];
-       
+        imgButton.tag = i+10;
         NSString *aoaoa = [NSString stringWithFormat:@"%@/%@",MLBaseUrl,self.item.imgArray[i]];
         
         [imgButton sd_setBackgroundImageWithURL:[NSURL URLWithString:aoaoa] forState:0];
         
         imgButton.frame = CGRectMake(MLWindowWidth*i, 0, MLWindowWidth, HHH);
         [weakself.bannerScrollView addSubview:imgButton];
+        
+        [imgButton addAction:^(UIButton *btn) {
+            if (weakself.item.didSelectedBtn) {
+                weakself.item.didSelectedBtn(btn.tag);
+            }
+        }];
     }
     
 }

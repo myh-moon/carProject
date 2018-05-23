@@ -37,7 +37,7 @@
         
 //        [self.rightButton autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
         [self.rightButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(smallSpacing, 0, smallSpacing, middleSpacing) excludingEdge:ALEdgeLeft];
-        [self.rightButton autoSetDimension:ALDimensionWidth toSize:160];
+        [self.rightButton autoSetDimension:ALDimensionWidth toSize:140];
         
         self.didSetupConstraints = YES;
     }

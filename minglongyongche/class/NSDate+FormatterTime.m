@@ -31,7 +31,7 @@
     //处理模型数据时间
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[timeInterval doubleValue]];
     NSString *dateSMS = [dateFormatter stringFromDate:date];
-    [dateFormatter setDateFormat:@"MM月dd日 \n EEEE H:mm"];
+    [dateFormatter setDateFormat:@"MM月dd日 \nEEEE H:mm"];
     dateSMS = [dateFormatter stringFromDate:date];
     return dateSMS;
 }

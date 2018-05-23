@@ -52,7 +52,7 @@
         _startLabel.textColor = MLDrakGrayColor;
         _startLabel.font = MLFont;
         _startLabel.numberOfLines = 0;
-        _startLabel.textAlignment = NSTextAlignmentCenter;
+        _startLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _startLabel;
 }
@@ -63,7 +63,7 @@
         _endLabel.textColor = MLDrakGrayColor;
         _endLabel.font = MLFont;
         _endLabel.numberOfLines = 0;
-        _endLabel.textAlignment = NSTextAlignmentCenter;
+        _endLabel.textAlignment = NSTextAlignmentRight;
     }
     return _endLabel;
 }
