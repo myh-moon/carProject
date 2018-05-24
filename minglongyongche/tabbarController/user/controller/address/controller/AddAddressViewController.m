@@ -28,10 +28,10 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightNavBtn];
     [self.rightNavBtn setTitle:@"保存" forState:0];
     
-    MLWeakSelf;
-    [self.rightNavBtn addAction:^(UIButton *btn) {
-        
-    }];
+//    MLWeakSelf;
+//    [self.rightNavBtn addAction:^(UIButton *btn) {
+//
+//    }];
     
     self.manager[@"PlaceItem"] = @"PlaceCell";
     self.manager[@"PlaceProvinceItem"] = @"PlaceProvinceCell";
@@ -76,14 +76,14 @@
 }
 
 - (void) addAddress {
-    NSString *addAddress = [NSString stringWithFormat:@"%@%@%@",MLBaseUrl,MLMyAddressOfAdd,TOKEN];
+//    NSString *addAddress = [NSString stringWithFormat:@"%@%@%@",MLBaseUrl,MLMyAddressOfAdd,TOKEN];
     
-    MLWeakSelf;
-    [self requestDataPostWithString:addAddress params:nil successBlock:^(id responseObject) {
-
-    } andFailBlock:^(NSError *error) {
-        
-    }];
+//    MLWeakSelf;
+//    [self requestDataPostWithString:addAddress params:nil successBlock:^(id responseObject) {
+//
+//    } andFailBlock:^(NSError *error) {
+//        
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

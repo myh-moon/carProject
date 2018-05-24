@@ -59,7 +59,7 @@
     NSString * strMsg = [NSString stringWithFormat:@"errorCode: %d",resp.errCode];
 //    NSLog(@"strMsg: %@",strMsg);
     
-    NSString * errStr   = [NSString stringWithFormat:@"errStr: %@",resp.errStr];
+//    NSString * errStr   = [NSString stringWithFormat:@"errStr: %@",resp.errStr];
 //    NSLog(@"errStr: %@",errStr);
     
     NSString * strTitle;

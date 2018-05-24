@@ -12,11 +12,16 @@
 
 @implementation UserThreeCell
 
+@dynamic item;
+
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return KH;
 }
 
 - (void)cellDidLoad {
+    
+    [super cellDidLoad];
+        
     [self.contentView addSubview:self.ticketBtn];
     [self.contentView addSubview:self.accountBtn];
     [self.contentView addSubview:self.wordBtn];

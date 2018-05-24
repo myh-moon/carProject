@@ -10,6 +10,8 @@
 
 @implementation BaseDoubleCell
 
+@dynamic item;
+
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return MLCellHeight;
 }
@@ -61,6 +63,12 @@
 
 - (void)cellWillAppear {
     [super cellWillAppear];
+    
+    if (!self.item.displaySeparate) {
+        self.separatorInset = MLSeparatorInset;
+    }else{
+        self.separatorInset = UIEdgeInsetsMake(0, middleSpacing, 0, 0);
+    }
     
     [self.firstButton setImage:[UIImage imageNamed:self.item.titleImageString] forState:0];
     

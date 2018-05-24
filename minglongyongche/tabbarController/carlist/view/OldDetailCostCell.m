@@ -10,6 +10,8 @@
 
 @implementation OldDetailCostCell
 
+@dynamic item;
+
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return 110;
 }
@@ -115,7 +117,8 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    // Configure the view for the selected s
+    
 }
 
 @end

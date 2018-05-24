@@ -9,7 +9,7 @@
 #import "PlaceProvinceCell.h"
 
 @implementation PlaceProvinceCell
-
+@dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return MLCellHeight;
 }

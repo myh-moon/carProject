@@ -10,9 +10,7 @@
 
 @implementation ConfirmPhoneCell
 
-//+ (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-//    return 80;
-//}
+@dynamic item;
 
 - (void)cellDidLoad {
     [super cellDidLoad];

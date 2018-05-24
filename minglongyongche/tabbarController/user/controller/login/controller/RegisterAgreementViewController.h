@@ -10,4 +10,6 @@
 
 @interface RegisterAgreementViewController : NetworkViewController
 
+@property (nonatomic,copy) NSString *category;  //入口不同
+
 @end

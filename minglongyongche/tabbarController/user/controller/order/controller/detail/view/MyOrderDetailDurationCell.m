@@ -9,7 +9,7 @@
 #import "MyOrderDetailDurationCell.h"
 
 @implementation MyOrderDetailDurationCell
-
+@dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return 70;
 }

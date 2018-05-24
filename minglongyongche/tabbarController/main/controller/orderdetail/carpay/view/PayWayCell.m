@@ -9,10 +9,7 @@
 #import "PayWayCell.h"
 
 @implementation PayWayCell
-
-//+ (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-//    return MLCellHeight;
-//}
+@dynamic item;
 
 - (void)cellDidLoad {
     [super cellDidLoad];

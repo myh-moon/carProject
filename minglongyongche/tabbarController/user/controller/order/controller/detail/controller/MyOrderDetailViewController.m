@@ -263,20 +263,6 @@
     }
 }
 
-
-//判断是否开始倒计时
-- (void) judgeCountdownOfYesOrNoWithEndtime:(NSString *)endtime {
-    NSDate *datenow = [NSDate date];//现在时间
-    NSString *nowTime = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
-    
-    //2.计算差值
-    NSInteger value = [endtime integerValue] - [nowTime integerValue];
-//    if (value > 0) {
-        _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(startTheCountDown) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-//    }
-}
-
 //倒计时
 
 - (void)startTheCountDown {

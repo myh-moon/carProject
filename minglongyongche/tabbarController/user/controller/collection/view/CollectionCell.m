@@ -9,7 +9,7 @@
 #import "CollectionCell.h"
 
 @implementation CollectionCell
-
+@dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
    
 //    return [UIScreen mainScreen].bounds.size.width;

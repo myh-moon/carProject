@@ -10,6 +10,8 @@
 
 @implementation SeperateCell
 
+@dynamic item;
+
 - (void)cellDidLoad {
     [super cellDidLoad];
     

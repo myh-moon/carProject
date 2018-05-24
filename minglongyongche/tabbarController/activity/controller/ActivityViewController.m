@@ -9,7 +9,7 @@
 #import "ActivityViewController.h"
 #import "ActivityDetailViewController.h"
 
-#import "CarListItem.h"
+#import "ActivityItem.h"
 
 @interface ActivityViewController ()
 
@@ -19,37 +19,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"发现";
+    self.navigationItem.title = @"活动中心";
     
-    [self.remindImageButton.remindImageView setImage:[UIImage imageNamed:@"comeing_soon"]];
-    self.remindImageButton.remindLabel.attributedText =  [NSString setFirstPart:@"\n功能开发中，敬请期待!\n" firstFont:17 firstColor:MLGrayColor secondPart:@"请你耐心等待，我们很快就能见面" secondFont:12 secongColor:MLLightGrayColor space:10 align:1];
+//    [self.remindImageButton.remindImageView setImage:[UIImage imageNamed:@"comeing_soon"]];
+//    self.remindImageButton.remindLabel.attributedText =  [NSString setFirstPart:@"\n功能开发中，敬请期待!\n" firstFont:17 firstColor:MLGrayColor secondPart:@"请你耐心等待，我们很快就能见面" secondFont:12 secongColor:MLLightGrayColor space:10 align:1];
+//
+//    [self showRemindImage];
     
-    [self showRemindImage];
-    
-    self.tableView.backgroundColor = MLWhiteColor;
+//    self.tableView.backgroundColor = MLWhiteColor;
     
     
-//    self.manager[@"CarListItem"] = @"ActivityCell";
+    self.manager[@"ActivityItem"] = @"ActivityCell";
     
-//    [self configActivityTableView];
+    [self configActivityTableView];
 }
 
 - (void) configActivityTableView {
-//    for (NSInteger i=0; i<10; i++) {
-//        RETableViewSection *section = [RETableViewSection section];
-//        section.headerHeight = 0;
-//        section.footerHeight = middleSpacing;
-//        [self.manager addSection:section];
-//        CarListItem *item = [[CarListItem alloc] init];
-//        item.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [item deselectRowAnimated:YES];
-//        MLWeakSelf;
-//        item.selectionHandler = ^(id item) {
-//            ActivityDetailViewController *activityDetailVC = [[ActivityDetailViewController alloc] init];
-//            [weakself.navigationController pushViewController:activityDetailVC animated:YES];
-//        };
-//        [section addItem:item];
-//    }
+    RETableViewSection *section = [RETableViewSection section];
+    section.headerHeight = 0;
+    section.footerHeight = 0;
+    [self.manager addSection:section];
+    
+    ActivityItem *item0 = [[ActivityItem alloc] init];
+    item0.selectionStyle = UITableViewCellSelectionStyleNone;
+    item0.imageName = @"活动_01";
+    item0.status = @"进行中";
+    item0.time = @"【活动时间】2018.05.22 00:00至2018.6.10 00:00";
+    [section addItem:item0];
+    
+    ActivityItem *item1 = [[ActivityItem alloc] init];
+    item1.selectionStyle = UITableViewCellSelectionStyleNone;
+    item1.imageName = @"活动_02";
+    item1.status = @"已结束";
+    item1.time = @"【活动时间】2018.05.10 00:00至2018.5.20 00:00";
+    [section addItem:item1];
 }
 
 - (void)didReceiveMemoryWarning {

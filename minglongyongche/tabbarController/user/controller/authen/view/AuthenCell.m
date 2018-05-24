@@ -10,6 +10,8 @@
 
 @implementation AuthenCell
 
+@dynamic item;
+
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return MLCellHeight;
 }

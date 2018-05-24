@@ -10,7 +10,7 @@
 
 
 @implementation CarListCell
-
+@dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     if (MLWindowWidth == 320) {
         return 130;

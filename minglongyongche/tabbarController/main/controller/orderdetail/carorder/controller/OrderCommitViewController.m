@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"确认订单";
+    self.navigationItem.title = @"确认订单";
     
     self.navigationItem.leftBarButtonItem = self.leftBarItem;
     

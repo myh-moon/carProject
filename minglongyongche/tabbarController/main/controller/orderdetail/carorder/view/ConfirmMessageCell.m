@@ -9,7 +9,7 @@
 #import "ConfirmMessageCell.h"
 
 @implementation ConfirmMessageCell
-
+@dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return 105;

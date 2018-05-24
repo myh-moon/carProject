@@ -9,7 +9,7 @@
 #import "PayMessageCell.h"
 
 @implementation PayMessageCell
-
+@dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return 130;
 }

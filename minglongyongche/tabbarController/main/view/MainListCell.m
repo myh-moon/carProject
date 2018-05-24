@@ -12,6 +12,8 @@
 
 @implementation MainListCell
 
+@dynamic item;
+
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return 10+ BH+MLCellHeight;
 }

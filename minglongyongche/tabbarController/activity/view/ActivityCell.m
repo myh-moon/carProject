@@ -10,19 +10,22 @@
 
 @implementation ActivityCell
 
+@dynamic item;
+
+
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 190;
+    return 215;
 }
 
 - (void)cellDidLoad {
     [super cellDidLoad];
     
-    self.contentView.backgroundColor = MLLightGrayColor;
+    self.backgroundColor = MLBackGroundColor;
+    self.separatorInset = MLSeparatorInset;
     
     [self.contentView addSubview:self.activityBannerButton];
-    [self.contentView addSubview:self.activityNameLabel];
-    [self.contentView addSubview:self.lookedButton];
     [self.contentView addSubview:self.statusButton];
+    [self.contentView addSubview:self.activityTimeLabel];
     
     [self setNeedsUpdateConstraints];
 }
@@ -30,68 +33,73 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.activityBannerButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeBottom];
-        [self.activityBannerButton autoSetDimension:ALDimensionHeight toSize:120];
+        [self.activityBannerButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(middleSpacing, middleSpacing, 0, middleSpacing) excludingEdge:ALEdgeBottom];
+        [self.activityBannerButton autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.activityTimeLabel];
         
+        [self.statusButton autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.activityBannerButton];
+        [self.statusButton autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.activityBannerButton];
         
-        [self.activityNameLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:bigSpacing];
-        [self.activityNameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.activityBannerButton withOffset:smallSpacing];
-        
-        [self.lookedButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.activityNameLabel];
-        [self.lookedButton autoPinEdge: ALEdgeTop toEdge:ALEdgeBottom ofView:self.activityNameLabel];
-        
-        [self.statusButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.lookedButton];
-        [self.statusButton autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:bigSpacing];
+        [self.activityTimeLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, middleSpacing, 0,middleSpacing) excludingEdge:ALEdgeTop];
+        [self.activityTimeLabel autoSetDimension:ALDimensionHeight toSize:45];
     }
     [super updateConstraints];
 }
 
 #pragma mark - getter
+
 - (UIButton *)activityBannerButton {
     if (!_activityBannerButton) {
-        _activityBannerButton = [UIButton newAutoLayoutView];
-        _activityBannerButton.backgroundColor = MLRedColor;
+        _activityBannerButton.translatesAutoresizingMaskIntoConstraints = YES;
+        _activityBannerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MLWindowWidth-middleSpacing*2, 155)];
         _activityBannerButton.userInteractionEnabled = NO;
+        _activityBannerButton.layer.masksToBounds = YES;
+
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_activityBannerButton.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(6, 6)];
+        CAShapeLayer *layer = [CAShapeLayer layer];
+        layer.path = path.CGPath;
+        layer.frame = _activityBannerButton.bounds;
+        _activityBannerButton.layer.mask = layer;
+
     }
     return _activityBannerButton;
-}
-
-- (UILabel *)activityNameLabel {
-    if (!_activityNameLabel) {
-        _activityNameLabel = [UILabel newAutoLayoutView];
-        _activityNameLabel.textColor = MLBlackColor;
-        _activityNameLabel.font = MLFont;
-    }
-    return _activityNameLabel;
-}
-
-- (UIButton *)lookedButton {
-    if (!_lookedButton) {
-        _lookedButton = [UIButton newAutoLayoutView];
-        _lookedButton.titleLabel.font = MLFont1;
-        [_lookedButton setTitleColor:MLWhiteColor forState:0];
-    }
-    return _lookedButton;
 }
 
 - (UIButton *)statusButton {
     if (!_statusButton) {
         _statusButton = [UIButton newAutoLayoutView];
-        _statusButton.backgroundColor = MLDrakGrayColor;
-        [_statusButton setTitleColor:MLWhiteColor forState:0];
-        _statusButton.titleLabel.font = MLFont1;
     }
     return _statusButton;
+}
+
+- (UILabel *)activityTimeLabel {
+    if (!_activityTimeLabel) {
+        _activityTimeLabel.translatesAutoresizingMaskIntoConstraints = YES;
+        _activityTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, MLWindowWidth-middleSpacing*2, 45)];
+        _activityTimeLabel.backgroundColor = MLWhiteColor;
+        _activityTimeLabel.textColor = MLDrakGrayColor;
+        _activityTimeLabel.font = MLFont8;
+        
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_activityTimeLabel.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(6, 6)];
+        CAShapeLayer *layer = [CAShapeLayer layer];
+        layer.path = path.CGPath;
+        layer.frame = _activityTimeLabel.bounds;
+        _activityTimeLabel.layer.mask = layer;
+    }
+    return _activityTimeLabel;
 }
 
 - (void)cellWillAppear {
     [super cellWillAppear];
     
-    [self.activityBannerButton setTitle:@"banner图片" forState:0];
-    self.activityNameLabel.text = @"一锤定音活动";
-    [self.lookedButton setTitle:@"100次" forState:0];
-    [self.statusButton setTitle:@"正在进行中" forState:0];
-    
+    [self.activityBannerButton setImage:[UIImage imageNamed:self.item.imageName] forState:0];
+    self.activityTimeLabel.text = self.item.time;
+    if ([self.item.status isEqualToString:@"进行中"]) {
+        [self.statusButton setImage:[UIImage imageNamed:@"in_progress"] forState:0];
+        self.activityTimeLabel.textColor = MLDrakGrayColor;
+    }else{
+        [self.statusButton setImage:[UIImage imageNamed:@"finished"] forState:0];
+        self.activityTimeLabel.textColor = MLLightGrayColor;
+    }
 }
 
 - (void)awakeFromNib {

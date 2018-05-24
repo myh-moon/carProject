@@ -9,7 +9,7 @@
 #import "CarDetailLimitCell.h"
 
 @implementation CarDetailLimitCell
-
+@dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return 130;

@@ -17,15 +17,14 @@
 
 @implementation RegisterAgreementViewController
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = NO;
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"注册协议";
+    if ([self.category isEqualToString:@"用户协议"]) {
+        self.title = self.category;
+    }else{
+        self.title = @"注册协议";
+    }
     
     self.navigationItem.leftBarButtonItem = self.leftBarItem;
     
@@ -42,7 +41,8 @@
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
 
-        [self.registerWebView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        [self.registerWebView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+        [self.registerWebView autoPinToTopLayoutGuideOfViewController:self withInset:0];
 
         self.didSetupConstraints = YES;
     }
@@ -52,6 +52,7 @@
 - (UIWebView *)registerWebView {
     if (!_registerWebView) {
         _registerWebView = [UIWebView newAutoLayoutView];
+        _registerWebView.backgroundColor = MLBackGroundColor;
         NSString *agreementStr = [NSString stringWithFormat:@"%@%@",MLBaseUrl,MLRegisterAgreenment];
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:agreementStr]];
         [_registerWebView loadRequest:request];

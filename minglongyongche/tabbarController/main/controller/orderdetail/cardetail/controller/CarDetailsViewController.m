@@ -51,11 +51,40 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    //1.导航栏
+    CGFloat alphaa = _offY/250;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB1(0xffffff,alphaa)] forBarMetrics:UIBarMetricsDefault];
+    
+    //2.title
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB1(0x000000, alphaa)}];
+    
+    //3.分享和返回按钮
+    if (_offY < 125) {
+        [self.leftNavBtn setImage:[UIImage imageNamed:@"return_white"] forState:0];
+        self.leftNavBtn.alpha = 1 - _offY/125;
+        [self.rightNavBtn setImage:[UIImage imageNamed:@"share"] forState:0];
+        self.rightNavBtn.alpha = 1 - _offY/125;
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    }else if(_offY >= 125 &&  _offY < 250){
+        [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
+        self.leftNavBtn.alpha = _offY/125 - 1;
+        [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
+        self.rightNavBtn.alpha = _offY/125 - 1;
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    }else{
+        [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
+        [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
+        [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:MLBlackColor}];
+
     [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@""]];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:MLWhiteColor] forBarMetrics:UIBarMetricsDefault];
 }
@@ -202,7 +231,7 @@
     item0.selectionStyle = UITableViewCellSelectionStyleNone;
     MLWeakSelf;
     item0.didSelectedBtn = ^(NSInteger tag) {
-        [weakself showImages:arr currentIndex:tag];
+        [weakself showImages:arr currentIndex:tag-10];
     };
     [detailSection addItem:item0];
     
@@ -360,14 +389,12 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB1(0x000000, alphaa)}];
     
     if (yy < 125) {
-//        self.title = @"";
-        
         [self.leftNavBtn setImage:[UIImage imageNamed:@"return_white"] forState:0];
         self.leftNavBtn.alpha = 1 - yy/125;
         [self.rightNavBtn setImage:[UIImage imageNamed:@"share"] forState:0];
         self.rightNavBtn.alpha = 1 - yy/125;
         [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    }else if (yy > 125 && yy < 250){
+    }else if (yy >= 125 && yy < 250){
         [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
         self.leftNavBtn.alpha = yy/125 - 1;
         [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
@@ -378,6 +405,8 @@
         [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
         [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
     }
+    
+    _offY = yy;
 }
 
 

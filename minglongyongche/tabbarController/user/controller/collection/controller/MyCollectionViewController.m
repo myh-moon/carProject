@@ -43,6 +43,8 @@
         [nav pushViewController:shortRentVC animated:NO];
     }];
     
+    self.manager.delegate = self;
+    
     self.manager[@"CarListItem"] = @"CollectionCell";
     self.manager[@"SeperateItem"] = @"SeperateCell";
     
@@ -166,6 +168,11 @@
     } andFailBlock:^(NSError *error) {
 
     }];
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
 }
 
 - (void)didReceiveMemoryWarning {

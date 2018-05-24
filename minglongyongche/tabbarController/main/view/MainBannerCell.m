@@ -11,6 +11,8 @@
 
 @implementation MainBannerCell
 
+@dynamic item;
+
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return HH+0.5;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "MySettingViewController.h"
+#import "RegisterAgreementViewController.h"
 
 #import "BaseItem.h"
 #import "SeperateItem.h"
@@ -57,6 +58,12 @@
     
     BaseItem *item3 = [[BaseItem alloc] initWithTitle:@"鸣垄名车用户协议" firstImage:@"" secondText:@""];
     item3.selectionStyle = UITableViewCellSelectionStyleNone;
+    MLWeakSelf;
+    item3.selectionHandler = ^(id item) {
+        RegisterAgreementViewController *registerAgreementVC = [[RegisterAgreementViewController alloc] init];
+        registerAgreementVC.category = @"用户协议";
+        [weakself.navigationController pushViewController:registerAgreementVC animated:YES];
+    };
     [section addItem:item3];
     
     
@@ -74,7 +81,7 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
-        [self.navigationController popViewControllerAnimated:YES];
+        [weakself.navigationController popViewControllerAnimated:YES];
     };
     [section addItem:item4];
 }

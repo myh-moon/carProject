@@ -31,10 +31,10 @@
     mainVC.title = @"租车";
     mainVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"租车" image:[UIImage imageNamed:@"home_1"] selectedImage:[UIImage imageNamed:@"home_1_selected"]];
     
-    CarListViewController *carListVC = [[CarListViewController alloc] init];
-    UINavigationController *carListNav = [[UINavigationController alloc] initWithRootViewController:carListVC];
-    carListVC.title = @"二手车";
-    carListVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"二手车" image:[UIImage imageNamed:@"home_2"] selectedImage:[UIImage imageNamed:@"home_2_selected"]];
+//    CarListViewController *carListVC = [[CarListViewController alloc] init];
+//    UINavigationController *carListNav = [[UINavigationController alloc] initWithRootViewController:carListVC];
+//    carListVC.title = @"二手车";
+//    carListVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"二手车" image:[UIImage imageNamed:@"home_2"] selectedImage:[UIImage imageNamed:@"home_2_selected"]];
     
   
     ActivityViewController *activityVC = [[ActivityViewController alloc] init];
@@ -43,9 +43,7 @@
     activityVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"home_3"] selectedImage:[UIImage imageNamed:@"home_3_selected"]];
 //    activityNav.tabBarItem  = [[UITabBarItem alloc] initWithTitle:@"活动" image:@"" selectedImage:@""];
     
-//    UserViewController *userVC = [[UserViewController alloc] init];
-//    UINavigationController *userNav = [[UINavigationController alloc] initWithRootViewController:userVC];
-//    userVC.title = @"我的";
+
     MineViewController *mineVC = [[MineViewController alloc] init];
     UINavigationController *mineNav = [[UINavigationController alloc] initWithRootViewController:mineVC];
     mineVC.title = @"我的";
@@ -56,7 +54,7 @@
     
     
     
-    NSArray *lists = @[mainNav,carListNav,activityNav,mineNav];
+    NSArray *lists = @[mainNav,activityNav,mineNav];
     self.viewControllers = lists;
     self.tabBar.tintColor = MLBlackColor;
     

@@ -69,14 +69,14 @@
         [_bookView.leftBtn setTitle:@"收藏" forState:0];
         [_bookView.rightBtn setTitle:@"立即预订" forState:0];
         
-        MLWeakSelf;
-        [_bookView setDidSelectedBtn:^(NSInteger tag) {
-            if (tag == 56) {//收藏
-                NSLog(@"收藏");
-            }else{//立即预订
-                NSLog(@"立即预订");
-            }
-        }];
+//        MLWeakSelf;
+//        [_bookView setDidSelectedBtn:^(NSInteger tag) {
+//            if (tag == 56) {//收藏
+//                NSLog(@"收藏");
+//            }else{//立即预订
+//                NSLog(@"立即预订");
+//            }
+//        }];
     }
     return _bookView;
 }

@@ -13,7 +13,7 @@
 @dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 190;
+    return 200;
 }
 
 - (void)cellDidLoad {

@@ -15,7 +15,7 @@ pod 'MJExtension', '~> 3.0.13'
 
 pod 'RETableViewManager', '~> 1.7'
 
-pod 'ReactiveCocoa', '~>2.5'
+pod 'ReactiveCocoa', :git => 'https://github.com/zhao0/ReactiveCocoa.git', :tag => '2.5.2'
 
 pod 'MJRefresh', '~> 3.1.15.3'
 

@@ -45,15 +45,15 @@
 }
 
 - (void) getAddressListWithPage:(NSString *)page {
-    NSString *addressStr = [NSString stringWithFormat:@"%@%@%@/%@",MLBaseUrl,MLMyAddressOfList,TOKEN,page];
+//    NSString *addressStr = [NSString stringWithFormat:@"%@%@%@/%@",MLBaseUrl,MLMyAddressOfList,TOKEN,page];
+//    
+//    NSDictionary *params = @{@"type" : @"1"};
     
-    NSDictionary *params = @{@"type" : @"1"};
-    
-    MLWeakSelf;
-    [self requestDataGetWithString:addressStr params:params successBlock:^(id responseObject) {
-    } andFailBlock:^(NSError *error) {
-        
-    }];
+//    MLWeakSelf;
+//    [self requestDataGetWithString:addressStr params:params successBlock:^(id responseObject) {
+//    } andFailBlock:^(NSError *error) {
+//        
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

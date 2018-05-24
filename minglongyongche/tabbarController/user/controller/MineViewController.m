@@ -136,13 +136,14 @@
 //    }];
 //    [section addItem:item1];
     
-//    SeperateItem *item00 = [[SeperateItem alloc] init];
-//    item0.cellHeight = smallSpacing;
-//    [section addItem:item00];
+    SeperateItem *item00 = [[SeperateItem alloc] init];
+    item00.selectionStyle = UITableViewCellSelectionStyleNone;
+    item00.cellHeight = smallSpacing;
+    [section addItem:item00];
     
     BaseItem *item1 = [[BaseItem alloc] initWithTitle:@"    我的收藏" firstImage:@"mine_collection" secondText:@""];
     item1.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    item1.displaySeparate = NO;
     item1.selectionHandler = ^(id item) {
         [weakself judgeLoginStatesOfType:3];
     };
@@ -156,6 +157,7 @@
     //我的订单
     BaseItem *item2 = [[BaseItem alloc] initWithTitle:@"    我的订单" firstImage:@"mine_order" secondText:@""];
     item2.selectionStyle = UITableViewCellSelectionStyleNone;
+    item2.displaySeparate = NO;
     item2.selectionHandler = ^(id item) {
         [weakself judgeLoginStatesOfType:4];
     };
@@ -168,35 +170,49 @@
     
 //    NSArray *asArr = @[@"    邀请有礼",@"    关于鸣垄",@"    联系客服"];
 //    NSArray *imArr = @[@"mine_gift",@"mine_about",@"mine_service"];
-    NSArray *asArr = @[@"    关于鸣垄",@"    联系客服"];
-    NSArray *imArr = @[@"mine_about",@"mine_service"];
-    for (NSInteger i=0; i<2; i++) {
-        BaseItem *item3 = [[BaseItem alloc] initWithTitle:asArr[i] firstImage:imArr[i] secondText:@""];
-        item3.selectionStyle = UITableViewCellSelectionStyleNone;
-        [section addItem:item3];
-        
-            item3.selectionHandler = ^(id item) {
-                if (i == 0) {//关于鸣垄
-                    AboutViewController *aboutVC = [[AboutViewController alloc] init];
-                    aboutVC.hidesBottomBarWhenPushed = YES;
-                    [weakself.navigationController pushViewController:aboutVC animated:YES];
-                }else  if (i == 1) {//联系客服
-                    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-62127903"];
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-                }
-            };
-    }
     
-    SeperateItem *item33 = [[SeperateItem alloc] init];
-    item33.cellHeight = smallSpacing;
-    [section addItem:item33];
     
-    BaseItem *item4 = [[BaseItem alloc] initWithTitle:@"    我的优惠券" firstImage:@"mine_discounts" secondText:@""];
+    
+    BaseItem *item3 = [[BaseItem alloc] initWithTitle:@"    关于鸣垄" firstImage:@"mine_about" secondText:@""];
+    item3.selectionStyle = UITableViewCellSelectionStyleNone;
+    item3.displaySeparate = YES;
+    [section addItem:item3];
+    item3.selectionHandler = ^(id item) {
+        AboutViewController *aboutVC = [[AboutViewController alloc] init];
+        aboutVC.hidesBottomBarWhenPushed = YES;
+        [weakself.navigationController pushViewController:aboutVC animated:YES];
+    };
+//
+    BaseItem *item4 = [[BaseItem alloc] initWithTitle:@"    联系客服" firstImage:@"mine_service" secondText:@""];
     item4.selectionStyle = UITableViewCellSelectionStyleNone;
+    item4.displaySeparate = NO;
+    [section addItem:item4];
     item4.selectionHandler = ^(id item) {
+        UIAlertController *phoneAlertController = [UIAlertController alertControllerWithTitle:@"拨打客服电话?" message:@"021-62127903" preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *action0 = [UIAlertAction actionWithTitle:@"否" style:0 handler:nil];
+        [phoneAlertController addAction:action0];
+
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"是" style:0 handler:^(UIAlertAction * _Nonnull action) {
+            NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-62127903"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        }];
+        [phoneAlertController addAction:action1];
+
+        [weakself presentViewController:phoneAlertController animated:YES completion:nil];
+    };
+    
+    SeperateItem *item44 = [[SeperateItem alloc] init];
+    item44.cellHeight = smallSpacing;
+    [section addItem:item44];
+    
+    BaseItem *item5 = [[BaseItem alloc] initWithTitle:@"    我的优惠券" firstImage:@"mine_discounts" secondText:@""];
+    item5.selectionStyle = UITableViewCellSelectionStyleNone;
+    item5.displaySeparate = NO;
+    item5.selectionHandler = ^(id item) {
         [weakself judgeLoginStatesOfType:5];
     };
-    [section addItem:item4];
+    [section addItem:item5];
 }
 
 - (void)judgeLoginStatesOfType:(NSInteger )type {
@@ -210,9 +226,9 @@
             mySettingVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:mySettingVC animated:YES];
         }else if (type == 2){
-            MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
-            myInformationVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:myInformationVC animated:YES];
+//            MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
+//            myInformationVC.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:myInformationVC animated:YES];
         }else if (type == 3){
             MyCollectionViewController *myCollectionVC = [[MyCollectionViewController alloc] init];
             myCollectionVC.hidesBottomBarWhenPushed = YES;

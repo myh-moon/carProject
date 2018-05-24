@@ -7,16 +7,17 @@
 //
 
 #import <RETableViewManager/RETableViewManager.h>
-#import "CarListItem.h"
+#import "ActivityItem.h"
 
 @interface ActivityCell : RETableViewCell
 
 @property (nonatomic,assign) BOOL didSetupConstraints;
+
 @property (nonatomic,strong) UIButton *activityBannerButton;
-@property (nonatomic,strong) UILabel *activityNameLabel;
-@property (nonatomic,strong) UIButton *lookedButton;
 @property (nonatomic,strong) UIButton *statusButton;
 
-@property (nonatomic,strong,readwrite) CarListItem *item;
+@property (nonatomic,strong) UILabel *activityTimeLabel;
+
+@property (nonatomic,strong,readwrite) ActivityItem *item;
 
 @end

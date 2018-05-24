@@ -14,6 +14,8 @@
 @property (nonatomic,copy) NSString *firstTitleString;
 @property (nonatomic,copy) NSString *secondTextString;
 
+@property (nonatomic,assign) BOOL displaySeparate;  //是否显示分割线
+
 - (instancetype) initWithTitle:(NSString *)firstString firstImage:(NSString *)imgString secondText:(NSString *)secondString;
 
 - (instancetype) initWithTitle:(NSString *)firstString firstImage:(NSString *)imgString;

@@ -9,7 +9,7 @@
 #import "AccountRuleCell.h"
 
 @implementation AccountRuleCell
-
+@dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return 120;
 }

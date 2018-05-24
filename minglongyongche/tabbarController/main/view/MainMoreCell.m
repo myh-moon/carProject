@@ -9,7 +9,7 @@
 #import "MainMoreCell.h"
 
 @implementation MainMoreCell
-
+@dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
     return MLCellHeight;
