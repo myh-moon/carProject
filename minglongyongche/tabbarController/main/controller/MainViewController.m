@@ -19,7 +19,7 @@
 #import "CarModel.h"
 
 
-@interface MainViewController ()
+@interface MainViewController ()<UINavigationControllerDelegate>
 
 @property (nonatomic,strong) NSMutableArray *hotArray;
 
@@ -30,16 +30,23 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBarHidden = YES;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    if (self.hotArray.count == 0) {
+        [self getMainBannerList];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-        self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationController.delegate = self;
     
     self.navManager[@"CarDetailBannerItem"] = @"MainBannerCell";
     self.navManager[@"MainSingleItem"] = @"MainSingleCell";
@@ -47,7 +54,25 @@
     
     [self setupMainTableView];
     
-    [self getMainBannerList];
+//    [self getMainBannerList];
+    
+    MLWeakSelf;
+    NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+//        [self loadImageSource:imgUrl];
+        [weakself checkAppUpdate];
+    }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [queue addOperation:blockOperation];
+    
+}
+
+#pragma mark - UINavigationControllerDelegate
+// 将要显示控制器
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    // 判断要显示的控制器是否是自己
+    BOOL isShowHomePage = [viewController isKindOfClass:[self class]];
+    
+    [self.navigationController setNavigationBarHidden:isShowHomePage animated:YES];
 }
 
 - (void)setupMainTableView {
@@ -62,6 +87,7 @@
     //banner
     MLWeakSelf;
     CarDetailBannerItem *item0 = [[CarDetailBannerItem alloc] init];
+    item0.selectionStyle = UITableViewCellSelectionStyleNone;
     [item0 setDidSelectedBtn:^(NSInteger tag) {
         if (tag == 90) {
             NewsViewController *newsVC = [[NewsViewController alloc] init];
@@ -107,8 +133,6 @@
     MLWeakSelf;
     [self requestDataGetWithString:hotListStr params:nil successBlock:^(id responseObject) {
         
-        [weakself checkAppUpdate];
-        
         [weakself.hotArray removeAllObjects];
         
         ShortRentResult *response = [ShortRentResult mj_objectWithKeyValues:responseObject];
@@ -149,11 +173,12 @@
     
     //当前版本
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
-    NSString *currentVersion = [infoDic objectForKey:@"CFBundleVersion"];
+    NSString *currentVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
     
     //比较版本号
     NSString *s1 = [currentVersion substringToIndex:1];//当前
     NSString *s2 = [latestVersion substringToIndex:1];//最新
+    
     if ([s1 integerValue] == [s2 integerValue]) {//第一位
         NSString *s11 = [currentVersion substringWithRange:NSMakeRange(2,1)];
         NSString *s22 = [latestVersion substringWithRange:NSMakeRange(2,1)];
@@ -169,6 +194,7 @@
     }else if ([s1 integerValue] < [s2 integerValue]){
         [self showNewVersionAlertWithTrackUrl:trackUrl andTrackName:trackName andLatestVersion:latestVersion];
     }
+    
 }
 
 - (void)showNewVersionAlertWithTrackUrl:(NSString *)trackUrl andTrackName:(NSString *)trackName andLatestVersion:(NSString *)latestVersion
@@ -180,7 +206,11 @@
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleDefault handler:nil];
     
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackUrl]];//@"itms-apps://itunes.apple.com/us/app/qing-dao-fu-zhai-guan-jia/id1116869191?l=zh&ls=1&mt=8"
+        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"guide"];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackUrl]];
+        //@"itms-apps://itunes.apple.com/us/app/qing-dao-fu-zhai-guan-jia/id1116869191?l=zh&ls=1&mt=8"
     }];
     
     [alertController addAction:action1];

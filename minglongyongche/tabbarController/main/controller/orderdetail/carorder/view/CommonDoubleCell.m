@@ -62,7 +62,7 @@
     [self.firstButton setTitle:self.item.leftStr forState:0];
     [self.secondButton setTitle:self.item.rightStr forState:0];
     
-    [RACObserve(self.item, rightStr) subscribeNext:^(id x) {
+    [[RACObserve(self.item, rightStr) takeUntil:[self rac_prepareForReuseSignal]] subscribeNext:^(id x) {
         [self.secondButton setTitle:self.item.rightStr forState:0];
     }];
     

@@ -21,4 +21,9 @@
     self.titleLabel.transform = CGAffineTransformRotate(self.titleLabel.transform, M_PI_2 * 3);
     self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, M_PI_2 * 3);
 }
+
+- (void)swapOnlyImage {
+    self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, M_PI);
+}
+
 @end

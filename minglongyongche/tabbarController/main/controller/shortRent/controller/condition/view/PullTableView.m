@@ -9,6 +9,8 @@
 #import "PullTableView.h"
 #import "ConditionModel.h"
 
+#import "PullItem.h"
+
 @implementation PullTableView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -20,11 +22,16 @@
         
         self.manager = [[RETableViewManager alloc] initWithTableView:self];
         
+        self.manager[@"PullItem"] = @"PullCell";
+        
     }
     return self;
 }
 
 - (void)loadAllData:(NSArray *)array {
+    
+    [self.manager removeAllSections];
+    
     RETableViewSection *section = [RETableViewSection section];
     section.headerHeight = 0;
     section.footerHeight = 0;
@@ -39,7 +46,7 @@
                     weakself.didSelectedItem(array[i],@"");
                 }
             }];
-            
+
             item.cellHeight = 40;
             [section addItem:item];
         }
@@ -51,19 +58,30 @@
             ConditionModel *model = array[i];
             
             MLWeakSelf;
-            RETableViewItem *item = [[RETableViewItem alloc] initWithTitle:model.name accessoryType:UITableViewCellAccessoryNone selectionHandler:^(RETableViewItem *item) {
+            PullItem *item0 = [[PullItem alloc] init];
+            item0.conditionModel = model;
+            item0.selectionStyle = UITableViewCellSelectionStyleNone;
+            item0.cellHeight = 40;
+            item0.selectionHandler = ^(id item) {
                 if (weakself.didSelectedItem) {
-                    weakself.didSelectedItem(model.name, model.pid);
+                    weakself.didSelectedItem(model.name,model.pid);
                 }
-            }];
-            
-            item.cellHeight = 40;
-            [section addItem:item];
+            };
+            [section addItem:item0];
+//            RETableViewItem *item = [[RETableViewItem alloc] initWithTitle:model.name accessoryType:UITableViewCellAccessoryNone selectionHandler:^(RETableViewItem *item) {
+//                if (weakself.didSelectedItem) {
+//                    weakself.didSelectedItem(model.name, model.pid);
+//                }
+//            }];
+//
+//            item.cellHeight = 40;
+//            [section addItem:item];
         }
     }
     
     [self reloadData];
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

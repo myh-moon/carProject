@@ -13,7 +13,9 @@
 
 @property (nonatomic,strong) UIView *topBackView;
 @property (nonatomic,strong) UILabel *timeLabel;
-@property (nonatomic,strong) UILabel *moneyLabel;
+@property (nonatomic,strong) UIImageView *moneyImageView;
+@property (nonatomic,strong) UIButton *moneyButton;
+
 
 @property (nonatomic,strong) UIView *bottomBackView;
 @property (nonatomic,strong) UIImageView *carImage;

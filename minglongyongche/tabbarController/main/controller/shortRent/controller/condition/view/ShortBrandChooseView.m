@@ -10,6 +10,8 @@
 #import "ConditionModel.h"
 #import "ConditionChildModel.h"
 
+#import "PullItem.h"
+
 @implementation ShortBrandChooseView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -19,15 +21,15 @@
         [self addSubview:self.firstTableView];
         [self addSubview:self.secondTableView];
         
-        
         [self setNeedsUpdateConstraints];
         
         self.firstWidthConstraints = [self.firstTableView autoSetDimension:ALDimensionWidth toSize:MLWindowWidth];
         
         self.firstManager = [[RETableViewManager alloc] initWithTableView:self.firstTableView];
-        
+        self.firstManager[@"PullItem"] = @"BrandCell";
         
         self.secondManager = [[RETableViewManager alloc] initWithTableView:self.secondTableView];
+        self.secondManager[@"PullItem"] = @"BrandCell";
     }
     
     return self;
@@ -67,6 +69,9 @@
 }
 
 - (void)loadBrandData:(NSArray *)brandList {
+    
+    [self.firstManager removeAllSections];
+    
     RETableViewSection *section = [RETableViewSection section];
     section.footerHeight = 0;
     section.headerHeight = 0;
@@ -77,13 +82,23 @@
         
         ConditionModel *conditionModel = brandList[i];
         
-        RETableViewItem *item1 = [[RETableViewItem alloc] initWithTitle:conditionModel.name];
+        PullItem *item1 = [[PullItem alloc] init];
+        item1.names = conditionModel.name;
+        item1.selectionStyle = UITableViewCellSelectionStyleNone;
         item1.selectionHandler = ^(id item) {
             weakself.firstWidthConstraints.constant = MLWindowWidth/2;
             [weakself setupSecondTableViewWithArray:conditionModel.child brandName:conditionModel.name];
             [weakself.secondTableView reloadData];
         };
         [section addItem:item1];
+        
+//        RETableViewItem *item1 = [[RETableViewItem alloc] initWithTitle:conditionModel.name];
+//        item1.selectionHandler = ^(id item) {
+//            weakself.firstWidthConstraints.constant = MLWindowWidth/2;
+//            [weakself setupSecondTableViewWithArray:conditionModel.child brandName:conditionModel.name];
+//            [weakself.secondTableView reloadData];
+//        };
+//        [section addItem:item1];
     }
 }
 
@@ -101,7 +116,9 @@
         
         ConditionChildModel *childModel = secondArray[i];
         
-        RETableViewItem *item2 = [[RETableViewItem alloc] initWithTitle:childModel.name];
+        PullItem *item2 = [[PullItem alloc] init];
+        item2.names = childModel.name;
+        item2.selectionStyle = UITableViewCellSelectionStyleNone;
         item2.selectionHandler = ^(id item) {
             if (weakself.didSelectedBrand) {
                 NSString *comName = [NSString stringWithFormat:@"%@%@",brand,childModel.name];
@@ -109,6 +126,15 @@
             }
         };
         [section addItem:item2];
+        
+//        RETableViewItem *item2 = [[RETableViewItem alloc] initWithTitle:childModel.name];
+//        item2.selectionHandler = ^(id item) {
+//            if (weakself.didSelectedBrand) {
+//                NSString *comName = [NSString stringWithFormat:@"%@%@",brand,childModel.name];
+//                weakself.didSelectedBrand(comName, childModel.childID);
+//            }
+//        };
+//        [section addItem:item2];
     }
 }
 

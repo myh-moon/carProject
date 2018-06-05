@@ -12,6 +12,8 @@
 
 #import "TicketItem.h"
 #import "SeperateItem.h"
+#import "BaseRemindItem.h"
+#import "BaseBottomItem.h"
 
 #import "TicketResponse.h"
 #import "TicketModel.h"
@@ -41,24 +43,20 @@
     
     self.ticketType = @"0";
     
-    [self.view addSubview:self.remindImageButton];
     [self.view addSubview:self.conditionView];
     [self.view addSubview:self.myTicketTableView];
-    
-    [self setRemindImageView:@"nocoupons" remindLabel:@"暂无内容哦～" remindAction:@"" actionBackGroubdColor:MLBackGroundColor actionTextColor:MLBackGroundColor actionCorner:0];
     
     [self.view setNeedsUpdateConstraints];
     
     _manager = [[RETableViewManager alloc] initWithTableView:self.myTicketTableView];
     _manager[@"TicketItem"] = @"TicketCell";
     _manager[@"SeperateItem"] = @"SeperateCell";
+    _manager[@"BaseRemindItem"] = @"BaseRemindCell";
+    _manager[@"BaseBottomItem"] = @"BaseBottomCell";
 }
 
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
-        
-        [self.remindImageButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
-        [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:150];
         
         [self.conditionView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
         [self.conditionView autoPinEdgeToSuperviewEdge:ALEdgeRight];
@@ -73,6 +71,7 @@
     [super updateViewConstraints];
 }
 
+#pragma mark- config
 - (void) configTicketTableView {
     
     [self.manager removeAllSections];
@@ -82,27 +81,48 @@
     section.footerHeight = 0;
     [_manager addSection:section];
     
-    for (NSInteger i=0; i<self.ticketList.count; i++) {
-        SeperateItem *item00 = [[SeperateItem alloc] init];
-        item00.cellHeight = smallSpacing;
-        item00.selectionStyle = UITableViewCellSelectionStyleNone;
-        [section addItem:item00];
-        
-        TicketModel *model = self.ticketList[i];
-        TicketItem *item = [[TicketItem alloc] initWithTicketModel:model];
-        item.selectionStyle = UITableViewCellSelectionStyleNone;
-        [section addItem:item];
-
-        if ([self.direction integerValue] == 1) {
-            if ([item.status isEqualToString:@"0"]) {
-                MLWeakSelf;
-                item.selectionHandler = ^(id item) {
-                    if (weakself.didSelectedTicket) {
-                        weakself.didSelectedTicket(model);
-                    }
-                };
+    if (self.ticketList.count > 0) {
+        for (NSInteger i=0; i<self.ticketList.count; i++) {
+            SeperateItem *item00 = [[SeperateItem alloc] init];
+            item00.cellHeight = smallSpacing;
+            item00.selectionStyle = UITableViewCellSelectionStyleNone;
+            [section addItem:item00];
+            
+            TicketModel *model = self.ticketList[i];
+            TicketItem *item = [[TicketItem alloc] initWithTicketModel:model];
+            item.selectionStyle = UITableViewCellSelectionStyleNone;
+            [section addItem:item];
+            
+            if ([self.direction integerValue] == 1) {
+                if ([item.status isEqualToString:@"0"]) {
+                    MLWeakSelf;
+                    item.selectionHandler = ^(id item) {
+                        if (weakself.didSelectedTicket) {
+                            weakself.didSelectedTicket(model);
+                        }
+                    };
+                }
             }
         }
+        
+        if (self.showBottom) {//我也是有底线的，，此时tableview无上拉加载功能
+            BaseBottomItem *item999 = [[BaseBottomItem alloc] init];
+            item999.selectionStyle = UITableViewCellSelectionStyleNone;
+            [section addItem:item999];
+            
+            self.myTicketTableView.mj_footer = nil;
+        }else {
+            self.myTicketTableView.mj_footer = [MJRefreshBackGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfMyTicket)];
+        }
+        
+    }else{
+        BaseRemindItem *item1234 = [[BaseRemindItem alloc] init];
+        item1234.remindImage = @"nocoupons";
+        item1234.remindText = @"暂无内容哦～";
+        item1234.remindAction = @"";
+        item1234.selectionStyle = UITableViewCellSelectionStyleNone;
+        item1234.cellHeight = 300;
+        [section addItem:item1234];
     }
 }
 
@@ -126,12 +146,13 @@
         _myTicketTableView = [UITableView newAutoLayoutView];
         _myTicketTableView.tableFooterView = [UIView new];
         _myTicketTableView.backgroundColor = MLBackGroundColor;
+        _myTicketTableView.showsVerticalScrollIndicator = NO;
         
         MLWeakSelf;
         _myTicketTableView.mj_header = [MJRefreshStateHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshOfMyTicket)];
         [weakself.myTicketTableView.mj_header beginRefreshing];
         
-        _myTicketTableView.mj_footer = [MJRefreshBackGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfMyTicket)];
+        _myTicketTableView.mj_footer = [MJRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfMyTicket)];
         [weakself.myTicketTableView.mj_footer beginRefreshing];
         
     }
@@ -145,6 +166,7 @@
     return _ticketList;
 }
 
+#pragma mark - method
 - (void) headerRefreshOfMyTicket {
     _pageTicket = 1;
     [self getTicketListWithPage:@"1"];
@@ -160,23 +182,29 @@
 }
 
 - (void) getTicketListWithPage:(NSString *)page {
-    NSString *ticketStr = [NSString stringWithFormat:@"%@%@%@/%@/%@",MLBaseUrl,MLMyTicket,TOKEN,page,self.ticketType];
+    NSString *tokenn = TOKEN?TOKEN:@"";
+    NSString *ticketStr = [NSString stringWithFormat:@"%@%@%@/%@/%@",MLBaseUrl,MLMyTicket,tokenn,page,self.ticketType];
     
     MLWeakSelf;
     [self requestDataGetWithString:ticketStr params:nil successBlock:^(id responseObject) {
+        
         if ([page integerValue] == 1) {
             [weakself.ticketList removeAllObjects];
         }
+        
         TicketResponse *response = [TicketResponse mj_objectWithKeyValues:responseObject];
+        
+        [weakself showHint:response.info];
         
         for (TicketModel *model in response.tickets) {
             [weakself.ticketList addObject:model];
         }
         
-        if (weakself.ticketList.count == 0) {
-            [weakself showRemindImage];
+        //最后一页
+        if (response.tickets.count < 8 && response.tickets.count > 0) {
+            weakself.showBottom = YES;
         }else{
-            [weakself hiddenRemindImage];
+            weakself.showBottom = NO;
         }
         
         [weakself configTicketTableView];

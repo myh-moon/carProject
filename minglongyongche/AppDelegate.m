@@ -7,9 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "MLTabBarViewController.h"
 #import <WXApi.h>
 #import <UMShare/UMShare.h>
+
+#import "MLTabBarViewController.h"
+#import "GuideViewController.h"
 
 
 //#import <UMShare/UMShare.h>  //友盟分享
@@ -25,9 +27,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    MLTabBarViewController *tabBarVC = [[MLTabBarViewController alloc] init];
-    self.window.rootViewController =tabBarVC;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
+    
+//    NSString *guide = [[NSUserDefaults standardUserDefaults] objectForKey:@"guide"];
+//    if ([guide isEqualToString:@"5"]) {
+        MLTabBarViewController *tabBarVC = [[MLTabBarViewController alloc] init];
+        self.window.rootViewController = tabBarVC;
+//    }else{
+//        GuideViewController *guideVC = [[GuideViewController alloc] init];
+//        self.window.rootViewController = guideVC;
+//
+//        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"guide"];
+//        [[NSUserDefaults  standardUserDefaults] synchronize];
+//    }
     self.window.backgroundColor = [UIColor whiteColor];
+    
     
 ////    设置友盟appkey
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"5ac3472df29d983a910000b5"];

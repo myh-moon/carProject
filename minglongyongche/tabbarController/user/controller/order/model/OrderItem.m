@@ -16,8 +16,10 @@
     
     if (self) {
         
-        NSArray *array = [model.pic componentsSeparatedByString:@","];
-        self.pic = [NSString stringWithFormat:@"%@%@",MLBaseUrl,array[0]];  //汽车大图
+//        NSArray *array = [model.pic componentsSeparatedByString:@","];
+//        self.pic = [NSString stringWithFormat:@"%@%@",MLBaseUrl,array[0]];  //汽车大图
+        
+        self.pic =  [NSString stringWithFormat:@"%@%@",MLBaseUrl,model.img];
         
         self.namess = model.name;
         
@@ -29,9 +31,9 @@
         
         
         if ([model.is_auto integerValue] == 2) {
-            self.feature1 = @"手动挡";
+            self.feature1 = @"手动档";
         }else{
-            self.feature1 = @"自动挡";
+            self.feature1 = @"自动档";
         }
         self.feature2 = [NSString stringWithFormat:@"%@座",model.site];
         

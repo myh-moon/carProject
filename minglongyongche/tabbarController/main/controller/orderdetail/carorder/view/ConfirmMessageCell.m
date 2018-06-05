@@ -12,7 +12,7 @@
 @dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 105;
+    return 95;
 }
 
 - (void)cellDidLoad {
@@ -33,10 +33,10 @@
         
         [self.orderImage autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:middleSpacing];
         [self.orderImage autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:middleSpacing];
-        [self.orderImage autoPinEdgeToSuperviewEdge:ALEdgeTop];
+        [self.orderImage autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:middleSpacing];
         [self.orderImage autoSetDimension:ALDimensionWidth toSize:100];
         
-        [self.nameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.orderImage withOffset:bigSpacing];
+        [self.nameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.orderImage withOffset:middleSpacing];
         [self.nameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.orderImage];
         
         [self.licenseLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.nameLabel];
@@ -53,8 +53,8 @@
 - (UIImageView *)orderImage {
     if (!_orderImage) {
         _orderImage = [UIImageView newAutoLayoutView];
-        _orderImage.layer.borderColor = [UIColor colorWithRed:0.9647 green:0.9647 blue:0.9647 alpha:1].CGColor;
-        _orderImage.layer.borderWidth = 1;
+        _orderImage.layer.borderColor = UIColorFromRGB(0xefefef).CGColor;
+        _orderImage.layer.borderWidth = 0.5;
     }
     return _orderImage;
 }
@@ -89,7 +89,7 @@
 - (void)cellWillAppear {
     [super cellWillAppear];
     
-    [self.orderImage sd_setImageWithURL:[NSURL URLWithString:self.item.img]];
+    [self.orderImage sd_setImageWithURL:[NSURL URLWithString:self.item.img] placeholderImage:[UIImage imageNamed:@"defaultsb"]];
     self.nameLabel.text = self.item.namess;
     self.licenseLabel.text  = self.item.license;
     self.featureLabel1.text = self.item.feature1;

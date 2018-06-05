@@ -57,6 +57,7 @@
     NSArray *lists = @[mainNav,activityNav,mineNav];
     self.viewControllers = lists;
     self.tabBar.tintColor = MLBlackColor;
+    self.tabBar.backgroundColor = MLWhiteColor;
     
 //    self.tabBar.backgroundColor = [UIColor blueColor];
 }

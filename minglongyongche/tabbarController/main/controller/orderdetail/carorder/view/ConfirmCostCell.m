@@ -83,7 +83,7 @@
 //    self.costLabel.text = @"总共300元";
     
     
-    [RACObserve(self.item, costMoney) subscribeNext:^(id x) {
+    [[RACObserve(self.item, costMoney) takeUntil:[self rac_prepareForReuseSignal]] subscribeNext:^(id x) {
         NSString *cast = [NSString stringWithFormat:@"费用合计：%@",x];
         self.costLabel.text = cast;
         

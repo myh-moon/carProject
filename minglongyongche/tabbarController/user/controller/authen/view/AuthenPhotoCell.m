@@ -37,8 +37,8 @@
         [self.photoLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:bigSpacing];
         
         NSArray *views = @[self.photoButton1,self.photoButton2];
-//        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:middleSpacing insetSpacing:YES];
-        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSize:165 insetSpacing:YES];
+        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:middleSpacing insetSpacing:YES];
+//        [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSize:165 insetSpacing:YES];
         [views autoMatchViewsDimension:ALDimensionHeight];
         
         [self.photoButton1 autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.photoLabel withOffset:bigSpacing];
@@ -67,7 +67,7 @@
 - (IntegrationButton *)photoButton1 {
     if (!_photoButton1) {
         _photoButton1.translatesAutoresizingMaskIntoConstraints = YES;
-        _photoButton1 = [[IntegrationButton alloc] initWithFrame:CGRectMake(middleSpacing, middleSpacing, 165, 105)];
+        _photoButton1 = [[IntegrationButton alloc] initWithFrame:CGRectMake(0, 0, (MLWindowWidth - middleSpacing*3)/2, 105)];
         _photoButton1.btnImageView.image = [UIImage imageNamed:@"plus"];
         _photoButton1.btnLabel.text = @"上传身份证正面照片";
         _photoButton1.btnLabel.font = MLFont8;
@@ -96,7 +96,7 @@
 - (IntegrationButton *)photoButton2 {
     if (!_photoButton2) {
         _photoButton2.translatesAutoresizingMaskIntoConstraints = YES;
-        _photoButton2 = [[IntegrationButton alloc] initWithFrame:CGRectMake(middleSpacing, middleSpacing, 165, 105)];
+        _photoButton2 = [[IntegrationButton alloc] initWithFrame:CGRectMake(0, 0, (MLWindowWidth - middleSpacing*3)/2, 105)];
         _photoButton2.btnImageView.image = [UIImage imageNamed:@"plus"];
         _photoButton2.btnLabel.text = @"上传身份证反面照片";
         _photoButton2.btnLabel.font = MLFont8;

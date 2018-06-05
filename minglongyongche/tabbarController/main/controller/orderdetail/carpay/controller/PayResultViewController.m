@@ -25,8 +25,7 @@
     NSArray *tielArr = @[@"支付成功",@"在线支付",@"在线支付"];
     self.title = tielArr[ [self.payFlag integerValue] -1];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftNavBtn];
-    self.leftNavBtn.userInteractionEnabled = NO;
+    self.navigationItem.leftBarButtonItem = self.leftBarItem;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightNavBtn];
     [self.rightNavBtn setTitle:@"完成" forState:0];
@@ -47,6 +46,19 @@
     self.manager[@"ResultItem"] = @"ResultCell";
         
     [self getResultOfPay];
+}
+
+//右滑返回上一页
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return NO;
+}
+
+//重写
+- (void)back {
+    UINavigationController *navc = self.navigationController;
+    [navc popViewControllerAnimated:NO];
+    [navc popViewControllerAnimated:NO];
+    [navc popViewControllerAnimated:NO];
 }
 
 - (void)setupResultTableViewWithModel:(PayResultModel *)model {

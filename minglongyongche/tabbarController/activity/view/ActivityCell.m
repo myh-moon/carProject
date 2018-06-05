@@ -14,7 +14,9 @@
 
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 215;
+//    return 215;
+    float hhhh = (MLWindowWidth-middleSpacing*2) * 465/1036 + 45;
+    return hhhh;
 }
 
 - (void)cellDidLoad {
@@ -91,7 +93,8 @@
 - (void)cellWillAppear {
     [super cellWillAppear];
     
-    [self.activityBannerButton setImage:[UIImage imageNamed:self.item.imageName] forState:0];
+//    [self.activityBannerButton setImage:[UIImage imageNamed:self.item.imageName] forState:0];
+    [self.activityBannerButton setBackgroundImage:[UIImage imageNamed:self.item.imageName] forState:0];
     self.activityTimeLabel.text = self.item.time;
     if ([self.item.status isEqualToString:@"进行中"]) {
         [self.statusButton setImage:[UIImage imageNamed:@"in_progress"] forState:0];

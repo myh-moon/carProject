@@ -13,7 +13,7 @@
 
 @property (nonatomic,copy) NSString *namess;
 @property (nonatomic,copy) NSString *license;
-@property (nonatomic,copy) NSString *pic;
+@property (nonatomic,copy) NSString *pic;  //小图片
 
 @property (nonatomic,copy) NSString *money;
 

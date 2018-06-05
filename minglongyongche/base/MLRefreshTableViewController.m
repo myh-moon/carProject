@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.remindImageButton];
+//    [self.view addSubview:self.remindImageButton];
     [self.view addSubview:self.refreshTableView];
     
     [self.view setNeedsUpdateConstraints];
@@ -31,8 +31,8 @@
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.remindImageButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
-        [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:100];
+//        [self.remindImageButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+//        [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:100];
         
 //        [self.refreshTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
         [self.refreshTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];

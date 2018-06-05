@@ -29,10 +29,9 @@
 
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
-        
-//        [self.imgBtn autoAlignAxisToSuperviewAxis:ALAxisVertical];
-//        [self.imgBtn autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
-        [self.imgBtn autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+
+        [self.imgBtn autoAlignAxisToSuperviewAxis:ALAxisVertical];
+        [self.imgBtn autoPinEdgeToSuperviewEdge:ALEdgeBottom];
         
         self.didSetupConstraints = YES;
     }

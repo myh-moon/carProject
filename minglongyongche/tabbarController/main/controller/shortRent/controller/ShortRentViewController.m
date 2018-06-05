@@ -12,8 +12,11 @@
 //view
 #import "ShortConditionView.h" //
 
-//model
 #import "CarListItem.h"
+#import "BaseRemindItem.h"
+#import "BaseBottomItem.h"
+
+//model
 #import "ShortRentResult.h"
 #import "CarModel.h"
 #import "ConditionResult.h" //查询条件
@@ -43,23 +46,19 @@
     self.title = @"精选优车";
     self.navigationItem.leftBarButtonItem = self.leftBarItem;
     
-    [self.view addSubview:self.remindImageButton];
     [self.view addSubview:self.shortConditionView];
     [self.view addSubview:self.shortRentTableView];
-    
-    [self setRemindImageView:@"nocar" remindLabel:@"未发现相关车辆信息" remindAction:@"" actionBackGroubdColor:MLBackGroundColor actionTextColor:MLBackGroundColor actionCorner:0];
     
     [self.view setNeedsUpdateConstraints];
     
     self.manager = [[RETableViewManager alloc] initWithTableView:self.shortRentTableView];
     self.manager[@"CarListItem"] = @"CarListCell";
+    self.manager[@"BaseRemindItem"] = @"BaseRemindCell";
+    self.manager[@"BaseBottomItem"] = @"BaseBottomCell";
 }
 
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
-        
-        [self.remindImageButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
-        [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:150];
         
         [self.shortConditionView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
         [self.shortConditionView autoPinEdgeToSuperviewEdge:ALEdgeRight];
@@ -80,31 +79,46 @@
         _shortConditionView.backgroundColor = MLWhiteColor;
         
         MLWeakSelf;
-        [_shortConditionView setDidSelectedBtn:^(NSInteger tag) {
-            [weakself hiddenBlurView];
-            if (tag == 111) {//综合排序
+        [_shortConditionView setDidSelectBtn:^(UIButton *sender) {
+            if (sender.tag == 111) {//综合排序
+                
+                //1.隐藏弹出框
+                [weakself hiddenBlurView];
+                
+                //2.修改相应参数
                 [weakself.parameter setValue:@"0" forKey:@"type"];
                 [weakself.parameter setValue:@"0" forKey:@"brand"];
                 [weakself.parameter setValue:@"0" forKey:@"rent"];
-
+                
+                
+                _rentPage = 1;
                 [weakself getCarListOfShortRentTableViewWithPage:@"1"];
-            }else  if (tag == 112){//类型
-                if (!weakself.conditionDic[@"type"]) {
-                    [weakself getListOfAllKindsConditionWithSolor:@"2"];
-                }else {
-                    [weakself showConditionTableViewWithType:@"2"];
-                }
-            }else if (tag == 113){//品牌
-                if (!weakself.conditionDic[@"brand"]) {
-                    [weakself getListOfAllKindsConditionWithSolor:@"3"];
-                }else {
-                    [weakself showConditionTableViewWithType:@"3"];
-                }
-            }else if (tag == 114){//租金
-                if (!weakself.conditionDic[@"rent"]) {
-                    [weakself getListOfAllKindsConditionWithSolor:@"4"];
-                }else {
-                    [weakself showConditionTableViewWithType:@"4"];
+                
+            }else{
+                if (!sender.selected) {
+                    
+                    [weakself hiddenBlurView];
+                    if (sender.tag == 112){//类型
+                        if (!weakself.conditionDic[@"type"]) {
+                            [weakself getListOfAllKindsConditionWithSolor:@"2"];
+                        }else {
+                            [weakself showConditionTableViewWithType:@"2"];
+                        }
+                    }else if (sender.tag == 113){//品牌
+                        if (!weakself.conditionDic[@"brand"]) {
+                            [weakself getListOfAllKindsConditionWithSolor:@"3"];
+                        }else {
+                            [weakself showConditionTableViewWithType:@"3"];
+                        }
+                    }else if (sender.tag == 114){//租金
+                        if (!weakself.conditionDic[@"rent"]) {
+                            [weakself getListOfAllKindsConditionWithSolor:@"4"];
+                        }else {
+                            [weakself showConditionTableViewWithType:@"4"];
+                        }
+                    }
+                }else{
+                    [weakself hiddenBlurView];
                 }
             }
         }];
@@ -116,13 +130,13 @@
     if (!_shortRentTableView) {
         _shortRentTableView = [UITableView newAutoLayoutView];
         _shortRentTableView.backgroundColor = MLBackGroundColor;
-        _shortRentTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 40)];
+        _shortRentTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, bigSpacing)];
         
         //刷新
         _shortRentTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshOfShortRentTableView)];
         [_shortRentTableView.mj_header beginRefreshing];
         
-        _shortRentTableView.mj_footer = [MJRefreshBackGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfShortRentTableView)];
+        _shortRentTableView.mj_footer = [MJRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfShortRentTableView)];
         [_shortRentTableView.mj_footer beginRefreshing];
     }
     return _shortRentTableView;
@@ -153,6 +167,7 @@
     return _parameter;
 }
 
+#pragma mark - set up
 - (void) setUpShortTableView {
     
     [self.manager removeAllSections];
@@ -162,36 +177,57 @@
     shortSection.footerHeight = 0;
     [self.manager addSection:shortSection];
     
-    for (NSInteger i=0; i<self.listArray.count; i++) {
+    if (self.listArray.count > 0) {
+        for (NSInteger i=0; i<self.listArray.count; i++) {
+            
+            CarModel *carModel = self.listArray[i];
+            
+            CarListItem *item = [[CarListItem alloc] initWIthModel:carModel];
+            
+            item.carName = carModel.name;
+            item.selectionStyle = UITableViewCellSelectionStyleNone;
+            [shortSection addItem:item];
+            
+            MLWeakSelf;
+            [item setSelectionHandler:^(id item) {
+                CarDetailsViewController *carDetailsVC = [[CarDetailsViewController alloc] init];
+                carDetailsVC.zid = carModel.zid;
+                carDetailsVC.type = @"短租";
+                [weakself.navigationController pushViewController:carDetailsVC animated:YES];
+            }];
+        }
         
-        CarModel *carModel = self.listArray[i];
+        if (self.showBottom) {
+            BaseBottomItem *item999 = [[BaseBottomItem alloc] init];
+            item999.selectionStyle = UITableViewCellSelectionStyleNone;
+            [shortSection addItem:item999];
+            
+            self.shortRentTableView.mj_footer = nil;
+        }else{
+            self.shortRentTableView.mj_footer = [MJRefreshBackGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfShortRentTableView)];
+        }
         
-        CarListItem *item = [[CarListItem alloc] initWIthModel:carModel];
-
-        item.carName = carModel.name;
-        item.selectionStyle = UITableViewCellSelectionStyleNone;
-        [shortSection addItem:item];
-
-        MLWeakSelf;
-        [item setSelectionHandler:^(id item) {
-            CarDetailsViewController *carDetailsVC = [[CarDetailsViewController alloc] init];
-            carDetailsVC.zid = carModel.zid;
-            carDetailsVC.type = @"短租";
-            [weakself.navigationController pushViewController:carDetailsVC animated:YES];
-        }];
+    }else{
+        BaseRemindItem *item1234 = [[BaseRemindItem alloc] init];
+        item1234.remindImage = @"nocar";
+        item1234.remindText = @"未发现相关车辆信息";
+        item1234.remindAction = @"";
+        item1234.selectionStyle = UITableViewCellSelectionStyleNone;
+        item1234.cellHeight = 300;
+        [shortSection addItem:item1234];
     }
 }
 
+#pragma mark - refresh
 //下拉刷新
 - (void) headerRefreshOfShortRentTableView {
-    
     _rentPage = 1;
     
     [self getCarListOfShortRentTableViewWithPage:@"1"];
     
     [self.shortRentTableView.mj_header endRefreshing];
 }
-#pragma mark - refresh
+
 //上拉加载
 - (void) footerRefreshOfShortRentTableView {
     
@@ -221,10 +257,10 @@
             [weakself.listArray addObject:carModel];
         }
         
-        if (weakself.listArray.count == 0) {
-            [weakself showRemindImage];
+        if (shortRent.lease.count < 8 && shortRent.lease.count > 0) {
+            weakself.showBottom = YES;
         }else{
-            [weakself hiddenRemindImage];
+            weakself.showBottom = NO;
         }
         
         [weakself setUpShortTableView];
@@ -260,19 +296,32 @@
     }];
 }
 
-//弹出框
+//弹出下拉框
 - (void) showConditionTableViewWithType:(NSString *)tag {
     NSArray *soso = @[@"type",@"brand",@"rent"];
     NSString *pre = soso[[tag integerValue] -2];
     
+    
     MLWeakSelf;
     if ([pre isEqualToString:@"type"] || [pre isEqualToString:@"rent"]) {//类型或租金
+        
+//        NSDictionary *ssss = @{@"name" : @"不限",@"pid" : @"0"};
+//        ConditionModel *mmm = [ConditionModel mj_objectWithKeyValues:ssss];
+//        [self.conditionDic[pre] addObject:mmm];
+        
+        
         [self showBlurViewInView:self.view array:self.conditionDic[pre] top:50 finishBlock:^(NSString *name, NSString *cid) {
             
             NSString *namaaa  = [NSString stringWithFormat:@"%@  ",name];
             if ([pre isEqualToString:@"type"]) {
+                [weakself.shortConditionView.typeBtn swapOnlyImage];
+                weakself.shortConditionView.typeBtn.selected = NO;
+                
                 [weakself.shortConditionView.typeBtn setTitle:namaaa forState:0];
             }else if ([pre isEqualToString:@"rent"]){
+                [weakself.shortConditionView.rentBtn swapOnlyImage];
+                weakself.shortConditionView.rentBtn.selected = NO;
+                
                 [weakself.shortConditionView.rentBtn setTitle:namaaa forState:0];
             }
             

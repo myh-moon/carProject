@@ -13,7 +13,7 @@
 @dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 130;
+    return 105;
 }
 
 - (void)cellDidLoad {
@@ -103,7 +103,7 @@
 - (void)cellWillAppear {
     [super cellWillAppear];
     
-    [self.orderImage sd_setImageWithURL:[NSURL URLWithString:self.item.img]];
+    [self.orderImage sd_setImageWithURL:[NSURL URLWithString:self.item.img] placeholderImage:[UIImage imageNamed:@"defaultsb"]];
     self.nameLabel.text = self.item.namess;
     self.licenseLabel.text  = self.item.license;
     self.featureLabel1.text = self.item.feature1;

@@ -64,6 +64,7 @@
     //text
     MyOrderDetailTextItem *item1 = [[MyOrderDetailTextItem alloc] initWithModel:response];
     item1.selectionStyle = UITableViewCellSelectionStyleNone;
+    item1.img = [NSString stringWithFormat:@"%@/%@",MLBaseUrl,response.img];
     [section addItem:item1];
     
     CarModel *orderModel = response.order;
@@ -143,14 +144,16 @@
     if ([orderModel.statuss integerValue] == 0) {
         _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(startTheCountDown) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-        
     }
     //action
     item13.didSelectedAction = ^(NSString *acttionType) {
-        if ([acttionType isEqualToString:@"删除订单"]) {
-            [weakself deleteOrCancelTheOrderWithID:orderModel.ID action:@"删除"];
-        }else if ([acttionType isEqualToString:@"取消订单"]){
-            [weakself deleteOrCancelTheOrderWithID:orderModel.ID action:@"取消"];
+        
+        
+        if ([acttionType isEqualToString:@"删除订单"] || [acttionType isEqualToString:@"取消订单"]) {
+            [weakself showActionAlertOfType:acttionType withResponse:response];
+//            [weakself deleteOrCancelTheOrderWithID:orderModel.ID action:@"删除"];
+//        }else if ([acttionType isEqualToString:@"取消订单"]){
+//            [weakself deleteOrCancelTheOrderWithID:orderModel.ID action:@"取消"];
         }else if ([acttionType isEqualToString:@"重新下单"]){
             [weakself reOrderOrImmediatePaymentWithResponse:response withType:@"1"];
         }else if ([acttionType isEqualToString:@"立即支付"]){
@@ -259,7 +262,7 @@
         
         orderPayVC.preOrderModel = preOrderModel;
         orderPayVC.hidesBottomBarWhenPushed = YES;
-        [nav pushViewController:orderPayVC animated:YES];
+        [nav pushViewController:orderPayVC animated:NO];
     }
 }
 
@@ -278,11 +281,49 @@
     if (value > 0) {//倒计时未结束
         sssss = [NSString stringWithFormat:@"倒计时%02ld:%02ld:%02ld\n",value/3600,(value%3600)/60,value%60];
     }else{
-        sssss = @"倒计时00:00:00\n";
+        sssss = @"倒计时 00:00:00\n";
         [_timer invalidate];
     }
     self.countString = sssss;
+}
+
+- (void) showActionAlertOfType:(NSString *)type withResponse:(MyOrderDetailResponse *)response {
     
+    NSString *sdsdsdsd = [NSString stringWithFormat:@"确认%@?",type];
+    
+    UIAlertController *actAlertController = [UIAlertController alertControllerWithTitle:sdsdsdsd message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    
+    NSString *actString0;
+    NSString *actString1;
+    if ([type isEqualToString:@"删除订单"]) {
+        actString0 = @"取消";
+        actString1 = @"确认";
+    }else{
+        actString0 = @"再想想";
+        actString1 = @"确认";
+    }
+    
+    UIAlertAction *action0 = [UIAlertAction actionWithTitle:actString0 style:0 handler:nil];
+    [actAlertController addAction:action0];
+    
+    MLWeakSelf;
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:actString1 style:0 handler:^(UIAlertAction * _Nonnull action) {
+        if ([type isEqualToString:@"删除订单"]) {
+            [weakself deleteOrCancelTheOrderWithID:response.order.ID action:@"删除"];
+        }else if([type isEqualToString:@"取消订单"]){
+            [weakself deleteOrCancelTheOrderWithID:response.order.ID action:@"取消"];
+        }
+//        else if ([type isEqualToString:@"重新下单"]){
+//            [weakself reOrderOrImmediatePaymentWithResponse:response withType:@"1"];
+//        }else if ([type isEqualToString:@"立即支付"]){
+//            [weakself reOrderOrImmediatePaymentWithResponse:response withType:@"2"];
+//        }
+    }];
+    [action1 setValue:MLGrayColor forKey:@"titleTextColor"];
+
+    [actAlertController addAction:action1];
+    
+    [self presentViewController:actAlertController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

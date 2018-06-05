@@ -14,6 +14,8 @@
 
 @property (nonatomic,copy) NSString *signType; //标记
 
+@property (nonatomic,strong) NSLayoutConstraint *layout;
+
 @property (nonatomic,strong) void (^didSelectedItem)(NSString *text,NSString *cid);
 
 - (void) loadAllData : (NSArray *)array ;

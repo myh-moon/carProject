@@ -14,4 +14,6 @@
 
 - (void) upImage;
 
+- (void) swapOnlyImage;
+
 @end

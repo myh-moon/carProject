@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.remindImageButton];
+//    [self.view addSubview:self.remindImageButton];
     [self.view addSubview:self.navTableView];
     
     self.navManager = [[RETableViewManager alloc] initWithTableView:self.navTableView];
@@ -28,10 +28,17 @@
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:100];
-        [self.remindImageButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
+        NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
         
-        [self.navTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        NSArray *vers = [systemVersion componentsSeparatedByString:@"."];
+        if ([vers[0] integerValue] > 10) {//11以后
+            [self.navTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+            [self.navTableView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:-20];
+//            [self.navTableView autoPinToTopLayoutGuideOfViewController:self withInset:0];
+        }else{
+            [self.navTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+            [self.navTableView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+        }
         
         self.didSetupConstraints = YES;
     }

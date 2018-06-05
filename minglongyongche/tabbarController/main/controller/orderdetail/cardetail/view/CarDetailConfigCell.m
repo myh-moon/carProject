@@ -80,7 +80,7 @@
         collectionCell = [[ConfigCollectionCell alloc] init];
     }
     
-    NSArray *iiiArr = @[@"gas-station",@"parking-4",@"parking_89",@"airbag",@"skylight",@"engine",@"exhaust",@"drive",@"window",@"seat",@"seatfabrics",@"GPS",@"sound",@"airbag_windows"];
+    NSArray *iiiArr = @[@"gearshift",@"gas-station",@"parking-4",@"parking_89",@"airbag",@"skylight",@"engine",@"exhaust",@"drive",@"window",@"seat",@"seatfabrics",@"GPS",@"sound",@"airbag_windows"];
     
     [collectionCell.coImageView setImage:[UIImage imageNamed:iiiArr[indexPath.item]]];
     collectionCell.coLabel.text = self.item.configArray[indexPath.item];

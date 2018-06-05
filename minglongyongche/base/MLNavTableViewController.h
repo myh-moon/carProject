@@ -7,7 +7,7 @@
 //
 
 #import "NetworkViewController.h"
-
+//无导航栏
 @interface MLNavTableViewController : NetworkViewController<RETableViewManagerDelegate>
 
 @property (nonatomic,strong) RETableViewManager *navManager;

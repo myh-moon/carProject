@@ -14,12 +14,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-//        CALayer *layer = [CALayer layer];
-//        layer.frame = CGRectMake(0, 0, MLWindowWidth, 0.4);
-//        layer.backgroundColor =  [UIColor colorWithRed:0.9647 green:0.9647 blue:0.9647 alpha:1].CGColor;
-//        [self.layer addSublayer:layer];
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, 0, MLWindowWidth, 0.4);
+        layer.backgroundColor = MLSeperateColor.CGColor;
+//        [UIColor colorWithRed:0.9647 green:0.9647 blue:0.9647 alpha:1].CGColor;
+        [self.layer addSublayer:layer];
         
-        self.backgroundColor = MLBackGroundColor;
+        self.layer.shadowOffset = CGSizeMake(10, 10);
+//        self.layer.shadowColor = MLRedColor.CGColor;
+        self.layer.shadowOpacity = 0.7;
+//        button.shadowOffset = CGSizeMake(10, 10);
+//        button.shadowOpacity = 0.7
+        
+        
+        self.backgroundColor = MLWhiteColor;
         
         [self addSubview:self.collectionButton];
         [self addSubview:self.orderButton];

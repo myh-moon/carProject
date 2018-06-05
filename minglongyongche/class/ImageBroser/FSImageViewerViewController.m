@@ -24,6 +24,7 @@
 
 #import "FSImageViewerViewController.h"
 #import "FSImageTitleView.h"
+#import "UIImage+Color.h"
 //#import "TSMessage.h"
 
 @interface FSImageViewerViewController ()
@@ -49,11 +50,11 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleBarsNotification:) name:kFSImageViewerToogleBarsNotificationKey object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageViewDidFinishLoading:) name:kFSImageViewerDidFinishedLoadingNotificationKey object:nil];
 
-        self.hidesBottomBarWhenPushed = YES;
-        self.wantsFullScreenLayout = YES;
+//        self.hidesBottomBarWhenPushed = YES;
+//        self.wantsFullScreenLayout = YES;
         
         self.backgroundColorHidden = [UIColor blackColor];
-        self.backgroundColorVisible = [UIColor whiteColor];
+        self.backgroundColorVisible = [UIColor blackColor];
 
         _imageSource = aImageSource;
         pageIndex = imageIndex;
@@ -61,7 +62,13 @@
         
         self.sharingDisabled = NO;
         self.showNumberOfItemsInTitle = YES;
+        
+        
+        
+//        self.showNumberOfItemsInTitle = NO;
+        
     }
+    
     return self;
 }
 
@@ -86,6 +93,7 @@
 	}
 
     self.view.backgroundColor = self.backgroundColorHidden;
+//    self.view.backgroundColor = MLRedColor;
 
     if (!_scrollView) {
         self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
@@ -103,6 +111,7 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.backgroundColor = self.view.backgroundColor;
+        
         [self.view addSubview:_scrollView];
     }
 
@@ -137,15 +146,34 @@
 //    shareButton = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(share:)];
 //    shareButton.enabled = YES;
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB1(0xffffff, 0)] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
-    if (self.presentingViewController && (self.modalPresentationStyle == UIModalPresentationFullScreen)) {
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:[self localizedStringForKey:@"返回" withDefault:@"返回"] style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
-        self.navigationItem.leftBarButtonItem = doneButton;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+     if (self.presentingViewController && (self.modalPresentationStyle == UIModalPresentationFullScreen)) {
+        
+         //返回键
+         UIButton *slslButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 44)];
+         MLWeakSelf;
+         [slslButton setImage:[UIImage imageNamed:@"return_white"] forState:0];
+         [slslButton addAction:^(UIButton *btn) {
+             [weakself done:@"0"];
+         }];
+         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:slslButton];
+         
+         //title
+         [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:MLWhiteColor,NSFontAttributeName:MLFont7}];
+         
+         
+//        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:[self localizedStringForKey:@"返回" withDefault:@"返回"] style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
+//         doneButton.image = [UIImage imageNamed:@"return_white"];
+//        self.navigationItem.leftBarButtonItem = doneButton;
+         
         if (!_sharingDisabled) {
             self.navigationItem.rightBarButtonItem = shareButton;
         }
-    }
-    else {
+    }else {
         if (!_sharingDisabled) {
             self.navigationItem.rightBarButtonItem = shareButton;
         }
@@ -282,7 +310,13 @@
 }
 
 - (void)toggleBarsNotification:(NSNotification *)notification {
-    [self setBarsHidden:!barsHidden animated:YES];
+//    done
+    
+    [self done:@"0"];
+    
+//    [self setBarsHidden:!barsHidden animated:YES];
+    
+    
 }
 
 #pragma mark - Image View

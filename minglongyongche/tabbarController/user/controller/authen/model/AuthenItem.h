@@ -13,6 +13,8 @@
 @property (nonatomic,copy) NSString *namess;
 @property (nonatomic,copy) NSString *placeholder;
 
+@property (nonatomic,assign) BOOL showSeperates;  //显示分割线
+
 @property (nonatomic,strong) void (^didEndEditingText)(NSString *text);
 
 - (instancetype) initWithLeftName:(NSString *)name placeholder:(NSString *)placeHoleder;

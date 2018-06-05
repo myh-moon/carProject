@@ -14,6 +14,7 @@
 @property (nonatomic,copy) NSString *oid;
 @property (nonatomic,copy) NSString *money;  //金额
 @property (nonatomic,copy) NSString *pic;
+@property (nonatomic,copy) NSString *img; //小图片4:3
 @property (nonatomic,copy) NSString *site; //座位数目
 @property (nonatomic,copy) NSString *is_auto; //手动
 @property (nonatomic,copy) NSString *belong;  //车牌

@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.remindImageButton];
+//    [self.view addSubview:self.remindImageButton];
     [self.view addSubview:self.tableView];
     
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView];
@@ -28,10 +28,8 @@
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:100];
-        [self.remindImageButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
         
-//        [self.tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        
         [self.tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
         [self.tableView autoPinToTopLayoutGuideOfViewController:self withInset:0];
         

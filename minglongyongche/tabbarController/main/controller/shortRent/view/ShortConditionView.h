@@ -19,6 +19,8 @@
 @property (nonatomic,strong) UIButton *brandBtn; //品牌选择
 
 @property (nonatomic,strong) void (^didSelectedBtn)(NSInteger tag);
+@property (nonatomic,strong) void (^didSelectBtn)(UIButton *sender);
+
 
 
 @end

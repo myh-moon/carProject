@@ -14,8 +14,9 @@
     self = [super init];
     if (self) {
         
-        NSArray *array = [model.pic componentsSeparatedByString:@","];
-        self.img = [NSString stringWithFormat:@"%@%@",MLBaseUrl,array[0]];  //汽车大图
+//        NSArray *array = [model.pic componentsSeparatedByString:@","];
+//        self.img = [NSString stringWithFormat:@"%@%@",MLBaseUrl,array[0]];  //汽车大图
+//        self.img = [NSString stringWithFormat:@"%@%@",MLBaseUrl,model.img];
         self.namess = model.name;
         self.feature1 = [NSString stringWithFormat:@"%@档",model.is_auto];
         self.feature2 = [NSString stringWithFormat:@"%@座",model.site];

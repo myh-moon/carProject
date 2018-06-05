@@ -29,7 +29,7 @@
 
 #import "UserInformationModel.h"
 
-@interface MineViewController ()
+@interface MineViewController ()<UINavigationControllerDelegate>
 
 @property (nonatomic,assign) BOOL isLoginr;  //判定是否登录
 
@@ -40,38 +40,53 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     [self setupMineTableView];
-    [self.tableView reloadData];
+    [self.navTableView reloadData];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"";
     
-    self.manager[@"UserItem"] = @"UserCell";
-    self.manager[@"BaseItem"] = @"BaseDoubleCell";  //我的订单
-    self.manager[@"SeperateItem"] = @"SeperateCell"; //
+    self.navigationController.delegate = self;
+    
+    self.navManager[@"UserItem"] = @"UserCell";
+    self.navManager[@"BaseItem"] = @"BaseDoubleCell";  //我的订单
+    self.navManager[@"SeperateItem"] = @"SeperateCell"; //
     
     [self setupMineTableView];
+}
+
+#pragma mark - UINavigationControllerDelegate
+// 将要显示控制器
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    // 判断要显示的控制器是否是自己
+    BOOL isShowHomePage = [viewController isKindOfClass:[self class]];
+    
+    [self.navigationController setNavigationBarHidden:isShowHomePage animated:YES];
 }
 
 #pragma mark - method
 - (void)setupMineTableView {
     
-    [self.manager removeAllSections];
+    [self.navManager removeAllSections];
     
     RETableViewSection *section = [RETableViewSection section];
     section.headerHeight = 0;
     section.footerHeight = 0;
-    [self.manager addSection:section];
+    [self.navManager addSection:section];
     
     MLWeakSelf;
     //用户信息
@@ -141,11 +156,14 @@
     item00.cellHeight = smallSpacing;
     [section addItem:item00];
     
-    BaseItem *item1 = [[BaseItem alloc] initWithTitle:@"    我的收藏" firstImage:@"mine_collection" secondText:@""];
+    BaseItem *item1 = [[BaseItem alloc] initWithTitle:@"    我的收藏" firstImage:@"collection_02" secondText:@""];
     item1.selectionStyle = UITableViewCellSelectionStyleNone;
     item1.displaySeparate = NO;
     item1.selectionHandler = ^(id item) {
-        [weakself judgeLoginStatesOfType:3];
+//        [weakself judgeLoginStatesOfType:3];
+        MyCollectionViewController *myCollectionVC = [[MyCollectionViewController alloc] init];
+        myCollectionVC.hidesBottomBarWhenPushed = YES;
+        [weakself.navigationController pushViewController:myCollectionVC animated:YES];
     };
     [section addItem:item1];
     
@@ -159,7 +177,10 @@
     item2.selectionStyle = UITableViewCellSelectionStyleNone;
     item2.displaySeparate = NO;
     item2.selectionHandler = ^(id item) {
-        [weakself judgeLoginStatesOfType:4];
+//        [weakself judgeLoginStatesOfType:4];
+        MyOrderViewController *myOrderVC = [[MyOrderViewController alloc] init];
+        myOrderVC.hidesBottomBarWhenPushed = YES;
+        [weakself.navigationController pushViewController:myOrderVC animated:YES];
     };
     [section addItem:item2];
     
@@ -190,10 +211,10 @@
     item4.selectionHandler = ^(id item) {
         UIAlertController *phoneAlertController = [UIAlertController alertControllerWithTitle:@"拨打客服电话?" message:@"021-62127903" preferredStyle:UIAlertControllerStyleAlert];
 
-        UIAlertAction *action0 = [UIAlertAction actionWithTitle:@"否" style:0 handler:nil];
+        UIAlertAction *action0 = [UIAlertAction actionWithTitle:@"取消" style:0 handler:nil];
         [phoneAlertController addAction:action0];
 
-        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"是" style:0 handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"继续" style:0 handler:^(UIAlertAction * _Nonnull action) {
             NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"021-62127903"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }];
@@ -203,6 +224,7 @@
     };
     
     SeperateItem *item44 = [[SeperateItem alloc] init];
+    item44.selectionStyle = UITableViewCellSelectionStyleNone;
     item44.cellHeight = smallSpacing;
     [section addItem:item44];
     
@@ -210,7 +232,10 @@
     item5.selectionStyle = UITableViewCellSelectionStyleNone;
     item5.displaySeparate = NO;
     item5.selectionHandler = ^(id item) {
-        [weakself judgeLoginStatesOfType:5];
+//        [weakself judgeLoginStatesOfType:5];
+        MyTicketViewController *myTicketVC = [[MyTicketViewController alloc] init];
+        myTicketVC.hidesBottomBarWhenPushed = YES;
+        [weakself.navigationController pushViewController:myTicketVC animated:YES];
     };
     [section addItem:item5];
 }

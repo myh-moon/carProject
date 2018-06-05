@@ -26,6 +26,17 @@
 
 @implementation LoginViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"登录";
@@ -79,6 +90,8 @@
     //协议
     LoginAgreeItem *item2 = [[LoginAgreeItem alloc] init];
     item2.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    @weakify(item2);
     [item2 setDidSelectedBtn:^(NSInteger tag) {
         if (tag == 23) {
         }else if (tag == 24){//具体协议
@@ -86,7 +99,12 @@
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:registerAgreemnetVC];
             [weakself presentViewController:nav animated:YES completion:nil];
         }else if (tag == 25){//立即登录
-            [weakself loginUser];
+            @strongify(item2);
+            if ([item2.isSelected integerValue] == 0) {
+                [weakself showHint:@"请先同意协议"];
+            }else{
+                [weakself loginUser];
+            }
         }else {//跳过登录
             [weakself dismissViewControllerAnimated:YES completion:nil];
         }
@@ -103,7 +121,6 @@
         
         LoginModel *model = [LoginModel mj_objectWithKeyValues:responseObject];
         [weakself showHint:model.info];
-        
         
         if ([model.status isEqualToString:@"200"] || [model.status isEqualToString:@"403"]) {
             //存储信息

@@ -65,4 +65,10 @@
     
 }
 
+- (void)showImages:(NSArray *)images currentIndex:(NSInteger)currentIndex {
+    
+}
+
+
+
 @end

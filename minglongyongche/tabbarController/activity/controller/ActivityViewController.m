@@ -44,8 +44,14 @@
     item0.selectionStyle = UITableViewCellSelectionStyleNone;
     item0.imageName = @"活动_01";
     item0.status = @"进行中";
-    item0.time = @"【活动时间】2018.05.22 00:00至2018.6.10 00:00";
+    item0.time = @"【活动时间】2018.05.22 00:00至2018.05.31 24:00";
     [section addItem:item0];
+//    MLWeakSelf;
+//    item0.selectionHandler = ^(id item) {
+//        ActivityDetailViewController *activityDetailVC = [[ActivityDetailViewController alloc] init];
+//        activityDetailVC.hidesBottomBarWhenPushed = YES;
+//        [weakself.navigationController pushViewController:activityDetailVC animated:YES];
+//    };
     
     ActivityItem *item1 = [[ActivityItem alloc] init];
     item1.selectionStyle = UITableViewCellSelectionStyleNone;

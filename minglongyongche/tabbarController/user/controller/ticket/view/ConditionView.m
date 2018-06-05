@@ -14,6 +14,8 @@
     self  = [super initWithFrame:frame];
     if (self) {
         
+        self.backgroundColor = MLWhiteColor;
+        
         CALayer *bottom = [CALayer layer];
         bottom.backgroundColor = MLBackGroundColor.CGColor;
         bottom.frame = CGRectMake(0, 49,[UIScreen mainScreen].bounds.size.width , 1);

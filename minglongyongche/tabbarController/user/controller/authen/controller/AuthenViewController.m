@@ -105,19 +105,35 @@
     [self.manager addSection:section];
     
     MLWeakSelf;
-    for (NSInteger i=0; i<2; i++) {
-        NSArray *dsisidi = @[@"姓  名：",@"身份证："];
-        NSArray *pla = @[@"请输入真实姓名",@"请填写你的身份证号"];
-        AuthenItem *item0 = [[AuthenItem alloc] initWithLeftName:dsisidi[i] placeholder:pla[i]];
-        item0.selectionStyle = UITableViewCellSelectionStyleNone;
-        [section addItem:item0];
-        
-        //参数
-        NSArray *paArr = @[@"realname",@"idcard"];
-        item0.didEndEditingText = ^(NSString *text) {
-        [weakself.authenDic setValue:text forKey:paArr[i]];
-        };
-    }
+    AuthenItem *item1 = [[AuthenItem alloc] initWithLeftName:@"姓  名：" placeholder:@"请输入真实姓名"];
+    item1.selectionStyle = UITableViewCellSelectionStyleNone;
+    item1.showSeperates = YES;
+    [section addItem:item1];
+    item1.didEndEditingText = ^(NSString *text) {
+        [weakself.authenDic setValue:text forKey:@"realname"];
+    };
+    
+    AuthenItem *item2 = [[AuthenItem alloc] initWithLeftName:@"身份证：" placeholder:@"请填写你的身份证号"];
+    item2.selectionStyle = UITableViewCellSelectionStyleNone;
+    item2.showSeperates = NO;
+    [section addItem:item2];
+    item2.didEndEditingText = ^(NSString *text) {
+        [weakself.authenDic setValue:text forKey:@"idcard"];
+    };
+    
+//    for (NSInteger i=0; i<2; i++) {
+//        NSArray *dsisidi = @[@"姓  名：",@"身份证："];
+//        NSArray *pla = @[@"请输入真实姓名",@"请填写你的身份证号"];
+//        AuthenItem *item0 = [[AuthenItem alloc] initWithLeftName:dsisidi[i] placeholder:pla[i]];
+//        item0.selectionStyle = UITableViewCellSelectionStyleNone;
+//        [section addItem:item0];
+//
+//        //参数
+//        NSArray *paArr = @[@"realname",@"idcard"];
+//        item0.didEndEditingText = ^(NSString *text) {
+//        [weakself.authenDic setValue:text forKey:paArr[i]];
+//        };
+//    }
     
     SeperateItem *item22 = [[SeperateItem alloc] init];
     item22.selectionStyle = UITableViewCellSelectionStyleNone;

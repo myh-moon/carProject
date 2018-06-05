@@ -88,7 +88,7 @@
         _backView.layer.cornerRadius = 15;
         
         CALayer *layer = [_backView layer];
-        layer.shadowColor = MLBlackColor.CGColor;
+        layer.shadowColor = MLGrayColor.CGColor;
         layer.shadowOffset = CGSizeMake(4, 6);
         layer.shadowOpacity = 0.6;
 
@@ -210,7 +210,7 @@
     NSArray *imhArr = @[@"chenggong",@"tishi",@"shibai",];
     NSArray *textArr1 = @[@"支付成功\n",@"未完成支付，请再试一次\n",@"已完成支付？\n"];
     NSArray *textArr2 = @[@"请在你的预约时段内取还车",@"姿势不对？换个试试",@"在你的预约时段内取还车"];
-    NSArray *resArr = @[@"订单详情",@"立即支付",@"订单详情"];
+    NSArray *resArr = @[@"订单详情  ",@"立即支付  ",@"订单详情  "];
     
     [self.resultImageView setImage:[UIImage imageNamed:imhArr [sele]]];
     [self.resultLabel setAttributedText:[NSString setFirstPart:textArr1[sele] firstFont:16 firstColor:MLBlackColor secondPart:textArr2[sele] secondFont:14 secongColor:MLLightGrayColor space:15 align:1]];

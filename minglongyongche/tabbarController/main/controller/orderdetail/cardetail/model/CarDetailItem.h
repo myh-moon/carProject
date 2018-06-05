@@ -19,6 +19,7 @@
 @property (nonatomic,copy,readwrite) NSString *address; //车所在地址
 @property (nonatomic,copy,readwrite) NSString *count;  //已租次数
 
+//@property (nonatomic,copy) NSString *gearshift;  //变速箱
 @property (nonatomic,copy) NSString *site;   //车座个数
 @property (nonatomic,copy) NSString *gate;   //车门数
 @property (nonatomic,copy) NSString *grade;   //燃油型号  l 油箱容量

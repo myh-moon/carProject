@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         self.status = status;
+        self.countDownTimeString = time;
     }
     return self;
 }

@@ -25,6 +25,8 @@
 
 - (void)requestDataGetWithString:(NSString *)string params:(NSDictionary *)params successBlock:(void (^)(id))successBlock andFailBlock:(void (^)(NSError *))failBlock {
     
+    [self showHudInView:self.view hint:@"请稍后"];
+    
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.responseSerializer = [AFHTTPResponseSerializer serializer];
     session.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -35,22 +37,24 @@
     session.requestSerializer.timeoutInterval = 5.f;
     [session.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
+    MLWeakSelf;
     [session GET:string parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [weakself hideHud];
         
         if (successBlock) {
             successBlock(responseObject);
         }
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        [weakself hideHud];
+        [weakself showHint:@"请检查网络"];
     }];
 }
 
 - (void)requestDataPostWithString:(NSString *)string params:(NSDictionary *)params successBlock:(void (^)(id responseObject))successBlock andFailBlock:(void (^)(NSError *error))failBlock
 {
-//    [self showHudInView:self.view hint:@"正在加载"];
+    [self showHudInView:self.view hint:@"请稍后"];
     
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -62,16 +66,19 @@
     session.requestSerializer.timeoutInterval = 5.f;
     [session.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-//    MLWeakSelf;
+    MLWeakSelf;
     [session POST:string parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [weakself hideHud];
+        
         if (successBlock) {
             successBlock(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (failBlock) {
-        }
+        [weakself hideHud];
+        [weakself showHint:@"请检查网络"];
     }];
 }
 

@@ -66,7 +66,7 @@
 - (UILabel *)carNameLabel {
     if (!_carNameLabel) {
         _carNameLabel  = [UILabel newAutoLayoutView];
-        _carNameLabel.textColor = MLBlackColor;
+        _carNameLabel.textColor = MLDrakGrayColor;
         _carNameLabel.font = MLFont9;
     }
     return _carNameLabel;
@@ -95,9 +95,6 @@
         _originalPriceLabel = [UILabel newAutoLayoutView];
         _originalPriceLabel.textColor = MLGGColor;
         _originalPriceLabel.font = MLFont3;
-        
-        
-        
     }
     return _originalPriceLabel;
 }
@@ -106,9 +103,17 @@
     if (!_carSignLabel) {
         _carSignLabel = [UILabel newAutoLayoutView];
         _carSignLabel.textColor = MLWhiteColor;
-        _carSignLabel.backgroundColor = MLOrangeColor;
         _carSignLabel.font = MLFont3;
         _carSignLabel.textAlignment = NSTextAlignmentCenter;
+        
+        CAGradientLayer *gradientLayer = [CAGradientLayer new];
+        gradientLayer.colors = @[(__bridge id)UIColorFromRGB(0xe65100).CGColor, (__bridge id)UIColorFromRGB(0xff9800).CGColor];
+
+        gradientLayer.locations = @[@0.2,@1.0];
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint = CGPointMake(1.0, 0);
+        gradientLayer.frame = CGRectMake(0, 0, 60, 20);
+        [_carSignLabel.layer addSublayer:gradientLayer];
     }
     return _carSignLabel;
 }
@@ -146,7 +151,7 @@
     self.carNameLabel.text = self.item.names;
     self.carBrandLabel.text = self.item.belong;
     [self.presentPriceLabel setAttributedText: [NSString setFirstPart:@"日租¥" firstFont:11  firstColor:MLOrangeColor secondPart:self.item.money secondFont:18 secongColor:MLOrangeColor thirdPart:@"/天起" thirdFont:11 thirdColor:MLOrangeColor]];
-    self.carSignLabel.text = @"精选优车";
+    self.carSignLabel.text = @"精选特惠";
     self.carUsedLabel.text = [NSString stringWithFormat:@"已租%@次",self.item.count];
     self.addressLabel.text = self.item.address;
 //    @"上海市静安区铜仁路";

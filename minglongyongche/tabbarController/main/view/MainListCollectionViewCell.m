@@ -28,7 +28,7 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         [self.carImageView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, smallSpacing, 0, 0) excludingEdge:ALEdgeBottom];
-        [self.carImageView autoSetDimension:ALDimensionHeight toSize:160];
+        [self.carImageView autoSetDimension:ALDimensionHeight toSize:140];
         
         [self.carSignLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.carImageView];
         [self.carSignLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.carImageView];

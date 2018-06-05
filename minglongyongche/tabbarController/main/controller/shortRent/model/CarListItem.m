@@ -16,10 +16,10 @@
     if (self) {
         
         NSArray *array = [model.pic componentsSeparatedByString:@","]; //从字符A中分隔成2个元素的数组
-        
         self.imgArray  = array;
         
-        self.imageName  = [NSString stringWithFormat:@"%@%@",MLBaseUrl,array[0]];  //汽车大图
+//        self.imageName  = [NSString stringWithFormat:@"%@%@",MLBaseUrl,array[0]];  //汽车大图
+        self.imageName = [NSString stringWithFormat:@"%@%@",MLBaseUrl,model.img];
         
         self.carName = model.name;  //车名
         

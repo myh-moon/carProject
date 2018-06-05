@@ -26,7 +26,8 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:view];
     HUD.labelText = hint;
     [view addSubview:HUD];
-    [HUD showAnimated:YES];
+//    [HUD showAnimated:YES];
+    [HUD show:YES];
     [self setHUD:HUD];
 }
 

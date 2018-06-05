@@ -47,14 +47,14 @@
 //    [section addItem:item1];
     
     
-//    SeperateItem *item11 = [[SeperateItem alloc] init];
-//    item11.selectionStyle = UITableViewCellSelectionStyleNone;
-//    item11.cellHeight = smallSpacing;
-//    [section addItem:item11];
+    SeperateItem *item11 = [[SeperateItem alloc] init];
+    item11.selectionStyle = UITableViewCellSelectionStyleNone;
+    item11.cellHeight = smallSpacing;
+    [section addItem:item11];
     
-    BaseItem *item2 = [[BaseItem alloc] initWithTitle:@"常见问题" firstImage:@"" secondText:@""];
-    item2.selectionStyle = UITableViewCellSelectionStyleNone;
-    [section addItem:item2];
+//    BaseItem *item2 = [[BaseItem alloc] initWithTitle:@"常见问题" firstImage:@"" secondText:@""];
+//    item2.selectionStyle = UITableViewCellSelectionStyleNone;
+//    [section addItem:item2];
     
     BaseItem *item3 = [[BaseItem alloc] initWithTitle:@"鸣垄名车用户协议" firstImage:@"" secondText:@""];
     item3.selectionStyle = UITableViewCellSelectionStyleNone;

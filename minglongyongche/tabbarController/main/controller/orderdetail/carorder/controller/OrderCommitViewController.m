@@ -99,7 +99,8 @@
 - (ConfirmBottomView *)payBottomView {
     if (!_payBottomView) {
         _payBottomView = [ConfirmBottomView newAutoLayoutView];
-//        [_payBottomView.leftButton setTitle:@"实收款" forState:0];
+        [_payBottomView.leftButton setAttributedTitle:[NSString setFirstPart:@"还需付款：" firstFont:13 firstColor:MLDrakGrayColor secondPart:@"0.00" secondFont:16 secongColor:MLOrangeColor] forState:0];
+
         
         MLWeakSelf;
         [_payBottomView.rightButton addAction:^(UIButton *btn) {
@@ -235,28 +236,29 @@
         item8.secondTextString = @"无可用优惠券 ";
     }
     item8.selectionStyle = UITableViewCellSelectionStyleNone;
-
     @weakify(item8);
     item8.selectionHandler = ^(id item) {
-        
-        if ([item2.duration integerValue] > 0) {
-            OrderTicketViewController *orderTicketVC = [[OrderTicketViewController alloc] init];
-            orderTicketVC.starttime = weakself.startMoment;
-            orderTicketVC.endtime = weakself.endMoment;
-            orderTicketVC.didSelectedTicket = ^(TicketModel *model) {
-                @strongify(item8);
+        OrderTicketViewController *orderTicketVC = [[OrderTicketViewController alloc] init];
+//        orderTicketVC.starttime = weakself.startMoment;
+//        orderTicketVC.endtime = weakself.endMoment;
+        orderTicketVC.didSelectedTicket = ^(TicketModel *model) {
+            @strongify(item8);
+            
+            if ([model.tid isEqualToString:@"0"]) {//未选择优惠券
                 //1.文字改变
-                item8.secondTextString = [NSString stringWithFormat:@"¥%@",model.money];
-                item8.tid = model.tid;
+                item8.secondTextString = @"不使用优惠券";
+
+            }else{//已选择优惠券
                 
-                //2.参数改变
-                [weakself.orderDic setValue:model.tid forKey:@"tid"];
-            };
-            [weakself.navigationController pushViewController:orderTicketVC animated:YES];
-        }else {
-            [weakself showHint:@"请先选择租期"];
-        }
-        
+                item8.secondTextString = [NSString stringWithFormat:@"¥%@",model.money];
+            }
+            
+            item8.tid = model.tid;
+            
+            //2.参数改变
+            [weakself.orderDic setValue:model.tid forKey:@"tid"];
+        };
+        [weakself.navigationController pushViewController:orderTicketVC animated:YES];
     };
     [section addItem:item8];
     
@@ -268,7 +270,7 @@
     
     
 //优惠券的选择，天数的改变，，都会引起总价的变化
-    RACSignal *ticketSignal = [RACSignal combineLatest:@[RACObserve(item8, secondTextString),RACObserve(item8, tid),RACObserve(item2, duration)] reduce:^id(NSString *money,NSString *tid,NSString *duration){
+    RACSignal *ticketSignal = [RACSignal combineLatest:@[RACObserve(item8, secondTextString),RACObserve(item8, tid),RACObserve(item2, duration)]  reduce:^id(NSString *money,NSString *tid,NSString *duration){
         
         if ([duration integerValue] > 0) {
             double zulin = [self.carModel.money floatValue]*[duration integerValue];

@@ -70,19 +70,19 @@
 - (UIButton *)agreeBtn {
     if (!_agreeBtn) {
         _agreeBtn = [UIButton newAutoLayoutView];
-        [_agreeBtn setTitle:@"  已阅读并同意" forState:0];
+        [_agreeBtn setTitle:@" 已阅读并同意" forState:0];
         [_agreeBtn setTitleColor:MLWhiteColor forState:0];
         _agreeBtn.titleLabel.font = MLFont8;
-        [_agreeBtn setImage:[UIImage imageNamed:@"checkboxed"] forState:0];
-//        [_agreeBtn setImage:[UIImage imageNamed:@"uncheckboxed"] forState:UIControlStateSelected];
-        _agreeBtn.tag = 23;
+        [_agreeBtn setImage:[UIImage imageNamed:@"uncheckboxed"] forState:0];
+        [_agreeBtn setImage:[UIImage imageNamed:@"checkboxed"] forState:UIControlStateSelected];
+//        _agreeBtn.tag = 23;
         
         MLWeakSelf;
         [_agreeBtn addAction:^(UIButton *btn) {
-            btn.selected = !btn.selected;
             if (weakself.item.didSelectedBtn) {
                 weakself.item.didSelectedBtn(23);
             }
+            btn.selected = !btn.selected;
         }];
     }
     return _agreeBtn;
@@ -91,7 +91,7 @@
 - (UIButton *)contentBtn {
     if (!_contentBtn) {
         _contentBtn = [UIButton newAutoLayoutView];
-        _contentBtn.tag = 24;
+//        _contentBtn.tag = 24;
         
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"《鸣垄名车使用许可及服务协议》"];
         [str addAttributes:@{NSUnderlineColorAttributeName:MLOrangeColor,NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle],NSForegroundColorAttributeName:MLOrangeColor,NSFontAttributeName:MLFont8} range:NSMakeRange(0, str.length)];
@@ -115,7 +115,7 @@
         _loginBtn.backgroundColor = MLOrangeColor;
         _loginBtn.titleLabel.font = MLFont4;
         _loginBtn.layer.cornerRadius = MLRadius;
-        _loginBtn.tag = 25;
+//        _loginBtn.tag = 25;
         
         MLWeakSelf;
         [_loginBtn addAction:^(UIButton *btn) {
@@ -152,7 +152,7 @@
         [_registerBtn setTitle:@"现在不想注册，跳过登录" forState:0];
         [_registerBtn setTitleColor:MLWhiteColor forState:0];
         _registerBtn.titleLabel.font = MLFont5;
-        _registerBtn.tag = 26;
+//        _registerBtn.tag = 26;
         
         MLWeakSelf;
         [_registerBtn addAction:^(UIButton *btn) {
@@ -176,10 +176,10 @@
 - (void)cellWillAppear {
     [super cellWillAppear];
     
-//    MLWeakSelf;
-//    [RACObserve(self.agreeBtn, selected) subscribeNext:^(id x) {
-//        weakself.item.isSelected = [NSString stringWithFormat:@"%@",x];
-//    }];
+    MLWeakSelf;
+    [[RACObserve(self.agreeBtn, selected) takeUntil:[self rac_prepareForReuseSignal]] subscribeNext:^(id x) {
+        weakself.item.isSelected = x;
+    }];
 }
 
 - (void)awakeFromNib {

@@ -10,10 +10,13 @@
 #import "OrderCommitViewController.h"
 #import "LoginViewController.h" //登录
 #import "AuthenViewController.h" //认证
+#import "CheckImageViewController.h"  //查看大图片
+
 #import <UMShare/UMShare.h>
 #import <UShareUI/UShareUI.h>
 #import "UIImage+Color.h"
 #import "UIViewController+ImageBrowser.h"
+
 
  //footer
 #import "DetailOrderView.h"
@@ -53,31 +56,40 @@
     [super viewWillAppear:animated];
     
     //1.导航栏
-    CGFloat alphaa = _offY/250;
+    float offSets = MLWindowWidth*10/16-64;
+    CGFloat alphaa = _offY/offSets;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB1(0xffffff,alphaa)] forBarMetrics:UIBarMetricsDefault];
     
     //2.title
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB1(0x000000, alphaa)}];
     
     //3.分享和返回按钮
-    if (_offY < 125) {
+    if (_offY < 61) {//125-64
         [self.leftNavBtn setImage:[UIImage imageNamed:@"return_white"] forState:0];
-        self.leftNavBtn.alpha = 1 - _offY/125;
+        self.leftNavBtn.alpha = 1 - _offY/6;
         [self.rightNavBtn setImage:[UIImage imageNamed:@"share"] forState:0];
-        self.rightNavBtn.alpha = 1 - _offY/125;
+        self.rightNavBtn.alpha = 1 - _offY/61;
         [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    }else if(_offY >= 125 &&  _offY < 250){
+        
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        
+    }else if(_offY >= 61 &&  _offY < offSets){
         [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
-        self.leftNavBtn.alpha = _offY/125 - 1;
+        self.leftNavBtn.alpha = _offY/61 - 1;
         [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
-        self.rightNavBtn.alpha = _offY/125 - 1;
+        self.rightNavBtn.alpha = _offY/61 - 1;
         [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+        
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
     }else{
         [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
         [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
         [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
+        
+        //状态栏
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -87,32 +99,32 @@
 
     [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@""]];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:MLWhiteColor] forBarMetrics:UIBarMetricsDefault];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftNavBtn];
-    [self.leftNavBtn setImage:[UIImage imageNamed:@"return_white"] forState:0];
     MLWeakSelf;
+    //返回
     [self.leftNavBtn addAction:^(UIButton *btn) {
         [weakself.navigationController popViewControllerAnimated:YES];
     }];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightNavBtn];
-    [self.rightNavBtn setImage:[UIImage imageNamed:@"share"] forState:0];
-    
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forBarMetrics:UIBarMetricsDefault];
     
     [self.rightNavBtn addAction:^(UIButton *btn) {
-        //显示分享面板
-        [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_WechatFavorite),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)]];
-        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-            // 根据获取的platformType确定所选平台进行下一步操作
-            [weakself shareWebPageToPlatformType:platformType];
-        }];
+        
+        if (weakself.detailArray.count > 0) {
+            //显示分享面板
+            [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_WechatFavorite),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)]];
+            [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+                // 根据获取的platformType确定所选平台进行下一步操作
+                [weakself shareWebPageToPlatformType:platformType];
+            }];
+        }
     }];
     
     [self.view addSubview:self.carDetailTableView];
@@ -136,12 +148,20 @@
 - (void)updateViewConstraints {
     if (!self.didSetupConstraints) {
        
-        [self.carDetailTableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge: ALEdgeBottom];
+        NSString *systemVers = [[UIDevice currentDevice] systemVersion];
+       
+        NSArray *vers = [systemVers componentsSeparatedByString:@"."];
+        
+        if ([vers[0] integerValue] > 10) {
+            [self.carDetailTableView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:-64];
+        }else{
+            [self.carDetailTableView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+        }
+        
+        [self.carDetailTableView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+        [self.carDetailTableView autoPinEdgeToSuperviewEdge:ALEdgeRight];
         [self.carDetailTableView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.orderBottomView];
         
-//        [self.carDetailTableView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
-//        [self.carDetailTableView autoPinEdgeToSuperviewEdge:ALEdgeRight];
-//        [self.carDetailTableView autoPinToTopLayoutGuideOfViewController:self withInset:0];
         
         [self.orderBottomView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
         [self.orderBottomView autoSetDimension:ALDimensionHeight toSize:60];
@@ -157,6 +177,7 @@
         _carDetailTableView  = [UITableView newAutoLayoutView];
         _carDetailTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, bigSpacing)];
         _carDetailTableView.showsVerticalScrollIndicator = NO;
+        _carDetailTableView.backgroundColor = MLBackGroundColor;
     }
     return _carDetailTableView;
 }
@@ -216,7 +237,6 @@
 
 #pragma mark - method
 - (void) setupCarDetailTableView {
-    
     RETableViewSection *detailSection = [RETableViewSection section];
     detailSection.headerHeight = 0;
     detailSection.footerHeight = 0;
@@ -232,6 +252,10 @@
     MLWeakSelf;
     item0.didSelectedBtn = ^(NSInteger tag) {
         [weakself showImages:arr currentIndex:tag-10];
+        
+//        CheckImageViewController *checkImageVC = [[CheckImageViewController alloc] init];
+//        [weakself presentViewController:checkImageVC animated:YES completion:nil];
+        
     };
     [detailSection addItem:item0];
     
@@ -346,13 +370,12 @@
     NSString *ppp = [NSString stringWithFormat:@"日租¥%@元/天起",model.money];
     
     //创建网页内容对象
-    NSArray *pppp = [model.pic componentsSeparatedByString:@","];
-    
-    NSString* thumbURL =  [NSString stringWithFormat:@"%@%@",MLBaseUrl,pppp[0]];
+    NSString* thumbURL =  [NSString stringWithFormat:@"%@%@",MLBaseUrl,model.img];
     
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:model.name descr:ppp thumImage:thumbURL];
     //设置网页地址
-    shareObject.webpageUrl = @"http://www.mlong88.vip";
+//    shareObject.webpageUrl = @"http://www.mlong88.vip";
+    shareObject.webpageUrl = @"https://itunes.apple.com/cn/app/%E9%B8%A3%E5%9E%84%E5%90%8D%E8%BD%A6/id1382145658?mt=8";
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
@@ -381,34 +404,41 @@
 {
     CGFloat yy = scrollView.contentOffset.y;
     
-    CGFloat alphaa = yy/250;
+    CGFloat alphaa = yy/(MLWindowWidth*10/16 -64);
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB1(0xffffff,alphaa)] forBarMetrics:UIBarMetricsDefault];
     
-    CarModel *model = self.detailArray[0];
-    self.title = model.name;
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB1(0x000000, alphaa)}];
-    
-    if (yy < 125) {
-        [self.leftNavBtn setImage:[UIImage imageNamed:@"return_white"] forState:0];
-        self.leftNavBtn.alpha = 1 - yy/125;
-        [self.rightNavBtn setImage:[UIImage imageNamed:@"share"] forState:0];
-        self.rightNavBtn.alpha = 1 - yy/125;
-        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    }else if (yy >= 125 && yy < 250){
-        [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
-        self.leftNavBtn.alpha = yy/125 - 1;
-        [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
-        self.rightNavBtn.alpha = yy/125 - 1;
-        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    }else{
-        [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
-        [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
-        [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
+    if (self.detailArray.count > 0) {
+        CarModel *model = self.detailArray[0];
+        self.title = model.name;
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB1(0x000000, alphaa)}];
+//        125-64
+        float offSet = MLWindowWidth * 10/16-64;
+        if (yy < 61) {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+            
+            [self.leftNavBtn setImage:[UIImage imageNamed:@"return_white"] forState:0];
+            self.leftNavBtn.alpha = 1 - yy/61;
+            [self.rightNavBtn setImage:[UIImage imageNamed:@"share"] forState:0];
+            self.rightNavBtn.alpha = 1 - yy/61;
+            [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+        }else if (yy >= 61 && yy < offSet){//260-64
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+            
+            [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
+            self.leftNavBtn.alpha = yy/61 - 1;
+            [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
+            self.rightNavBtn.alpha = yy/61 - 1;
+            [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+        }else{
+            
+            [self.leftNavBtn setImage:[UIImage imageNamed:@"back_1"] forState:0];
+            [self.rightNavBtn setImage:[UIImage imageNamed:@"share_black"] forState:0];
+            [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
+        }
     }
     
     _offY = yy;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

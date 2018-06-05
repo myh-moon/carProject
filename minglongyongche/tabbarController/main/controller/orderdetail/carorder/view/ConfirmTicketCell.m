@@ -71,7 +71,7 @@
     
 //    [self.ticketButton setTitle:self.item.secondTextString forState:0];
     
-    [RACObserve(self.item, secondTextString) subscribeNext:^(id x) {
+    [[RACObserve(self.item, secondTextString) takeUntil:[self rac_prepareForReuseSignal]] subscribeNext:^(id x) {
         [self.ticketButton setTitle:x forState:0];
     }];
     

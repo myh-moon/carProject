@@ -34,8 +34,11 @@
 }
 
 - (void)back {
-//    [self.navigationController popViewControllerAnimated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.category isEqualToString:@"用户协议"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)updateViewConstraints {

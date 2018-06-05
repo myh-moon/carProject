@@ -7,7 +7,7 @@
 //
 
 #import "MainBannerCell.h"
-#define HH 250
+#define HH MLWindowWidth*2/3
 
 @implementation MainBannerCell
 
@@ -21,6 +21,7 @@
     [super cellDidLoad];
     
     self.separatorInset = MLSeparatorInset;
+    self.backgroundColor = MLBackGroundColor;
     
     [self.contentView addSubview:self.bannerScrollView];
     [self.contentView addSubview:self.bannerPage];
@@ -60,7 +61,7 @@
         MLWeakSelf;
         for (NSInteger i=0; i<1; i++) {
             UIButton *imgButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MLWindowWidth, HH)];
-//            imgButton.backgroundColor = sdsd[i];
+            imgButton.userInteractionEnabled = NO;
             [imgButton setBackgroundImage:[UIImage imageNamed:@"banner_01"] forState:0];
             imgButton.frame = CGRectMake(MLWindowWidth*i, 0, MLWindowWidth, HH);
             [weakself.bannerScrollView addSubview:imgButton];

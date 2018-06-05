@@ -47,7 +47,7 @@
 - (UIButton *)comprehensiveBtn {
     if (!_comprehensiveBtn) {
         _comprehensiveBtn = [UIButton newAutoLayoutView];
-        [_comprehensiveBtn setTitle:@"综合排序^" forState:0];
+        [_comprehensiveBtn setTitle:@"区域" forState:0];
         [_comprehensiveBtn setTitleColor:[UIColor grayColor] forState:0];
         _comprehensiveBtn.titleLabel.font = MLFont;
 //        _comprehensiveBtn.backgroundColor = [UIColor redColor];

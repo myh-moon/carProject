@@ -58,7 +58,7 @@
     [self.dateButton setTitle:self.item.dateString forState:0];
     [self.dateButton setContentHorizontalAlignment:1];
     
-    [RACObserve(self.item, dateString) subscribeNext:^(id x) {
+    [[RACObserve(self.item, dateString) takeUntil:[self rac_prepareForReuseSignal]] subscribeNext:^(id x) {
         [self.dateButton setTitle:x forState:0];
     }];
 }

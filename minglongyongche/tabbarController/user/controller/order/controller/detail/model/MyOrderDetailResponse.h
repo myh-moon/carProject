@@ -14,7 +14,8 @@
 @property (nonatomic,copy) NSString *belong;
 @property (nonatomic,copy) NSString *is_auto;
 @property (nonatomic,copy) NSString *name;
-@property (nonatomic,copy) NSString *pic;
+@property (nonatomic,copy) NSString *pic; //大图片
+@property (nonatomic,copy) NSString *img; //小图片
 @property (nonatomic,copy) NSString *site;
 @property (nonatomic,strong) CarModel *order;
 

@@ -12,7 +12,6 @@
 @interface PayMessageCell : BaseCell
 
 @property (nonatomic,strong) UIImageView *orderImage;
-
 @property (nonatomic,strong) UILabel *nameLabel;
 @property (nonatomic,strong) UILabel *licenseLabel;
 @property (nonatomic,strong) UILabel *featureLabel1;

@@ -53,8 +53,8 @@
         self.configArray = [NSMutableArray array];
         
         //变速箱AT
-//        NSString *grase = [NSString stringWithFormat:@"%@号%@",model.grade,model.type];
-//        [self.configArray addObject:@"变速箱AT"];
+        NSString *shift = [NSString stringWithFormat:@"%@档",model.is_auto];
+        [self.configArray addObject:shift];
         
         //汽油
         NSString *grase = [NSString stringWithFormat:@"%@号%@",model.grade,model.type];
@@ -96,12 +96,12 @@
         NSString *sites = [NSString stringWithFormat:@"%@个座位",model.site];
         [self.configArray addObject:sites];
         
+        //座椅面料
+        [self.configArray addObject: model.seat];
+        
         //GPS
         NSString *gpss = [NSString stringWithFormat:@"%@GPS导航",model.GPS];
         [self.configArray addObject:gpss];
-        
-        //座椅面料
-        [self.configArray addObject: model.seat];
         
         //音箱数
         NSString *boxs = [NSString stringWithFormat:@"%@个音箱",model.box];

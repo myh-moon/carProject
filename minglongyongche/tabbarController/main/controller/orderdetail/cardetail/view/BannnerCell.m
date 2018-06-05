@@ -8,18 +8,20 @@
 
 #import "BannnerCell.h"
 
-#define HHH 250
+#define HHH MLWindowWidth * 10/16
 
 @implementation BannnerCell
 
 @dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return HHH+1;
+    return HHH + 0.5;
 }
 
 - (void)cellDidLoad {
     [super cellDidLoad];
+    
+    self.separatorInset = MLSeparatorInset;
     
     [self.contentView addSubview:self.bannerScrollView];
     [self.contentView addSubview:self.bannerPage];
@@ -76,8 +78,8 @@
         UIButton *imgButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MLWindowWidth, HHH)];
         imgButton.tag = i+10;
         NSString *aoaoa = [NSString stringWithFormat:@"%@/%@",MLBaseUrl,self.item.imgArray[i]];
-        
-        [imgButton sd_setBackgroundImageWithURL:[NSURL URLWithString:aoaoa] forState:0];
+//        [imgButton sd_setBackgroundImageWithURL:[NSURL URLWithString:aoaoa] forState:0];
+        [imgButton sd_setImageWithURL:[NSURL URLWithString:aoaoa] forState:0 placeholderImage:[UIImage imageNamed:@"defaultsa"]];
         
         imgButton.frame = CGRectMake(MLWindowWidth*i, 0, MLWindowWidth, HHH);
         [weakself.bannerScrollView addSubview:imgButton];

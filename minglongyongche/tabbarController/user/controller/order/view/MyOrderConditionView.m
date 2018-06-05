@@ -14,10 +14,11 @@
     self  = [super initWithFrame:frame];
     if (self) {
         
-        CALayer *bottom = [CALayer layer];
-        bottom.backgroundColor = MLLightGrayColor.CGColor;
-        bottom.frame = CGRectMake(0, 49,[UIScreen mainScreen].bounds.size.width , 1);
+        self.backgroundColor = MLWhiteColor;
         
+        CALayer *bottom = [CALayer layer];
+        bottom.backgroundColor = MLBackGroundColor.CGColor;
+        bottom.frame = CGRectMake(0, 49,[UIScreen mainScreen].bounds.size.width , 1);
         [self.layer addSublayer:bottom];
         
         [self addSubview:self.firstButton];

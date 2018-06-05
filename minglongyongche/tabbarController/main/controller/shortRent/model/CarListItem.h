@@ -14,6 +14,7 @@
 //短租列表
 @property (nonatomic,strong) NSArray *imgArray;  //图片数组
 
+
 @property (nonatomic,copy,readwrite) NSString *imageName;
 @property (nonatomic,copy,readwrite) NSString *carName;
 @property (nonatomic,copy,readwrite) NSString *carLicense;

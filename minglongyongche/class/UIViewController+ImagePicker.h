@@ -14,6 +14,10 @@ typedef void (^SelectedImageHandler)(UIImage *img);
 
 @property (nonatomic,strong) SelectedImageHandler imageHandler;
 
+//拍照
 - (void)showAlertOfImageChoiceWith:(SelectedImageHandler)handler;
+
+//查看大图片
+- (void) showImages:(NSArray *)images currentIndex:(NSInteger)currentIndex;
 
 @end

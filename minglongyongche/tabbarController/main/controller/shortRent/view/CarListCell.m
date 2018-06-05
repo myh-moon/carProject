@@ -12,10 +12,10 @@
 @implementation CarListCell
 @dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    if (MLWindowWidth == 320) {
+//    if (MLWindowWidth == 320) {
         return 130;
-    }
-    return 150;
+//    }
+//    return 150;
 }
 
 - (void)cellDidLoad {
@@ -44,31 +44,27 @@
 //        [self.carImageView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(20, 24, 20, 0) excludingEdge:ALEdgeRight];
 //        [self.carImageView autoMatchDimension:ALDimensionHeight toDimension:ALDimensionWidth ofView:self.carImageView];
         [self.carImageView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.backView withOffset:smallSpacing];
-        [self.carImageView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.backView withOffset:smallSpacing];
+        [self.carImageView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.backView withOffset:5];
         [self.carImageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.backView withOffset:-smallSpacing];
-        if (MLWindowWidth == 320) {
-            [self.carImageView autoSetDimension:ALDimensionWidth toSize:110];
-        }else{
-            [self.carImageView autoSetDimension:ALDimensionWidth toSize:150];
-        }
+        [self.carImageView autoSetDimension:ALDimensionWidth toSize:135];
         
-        [self.carNameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.carImageView withOffset:middleSpacing];
-        [self.carNameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.carImageView withOffset:4];
+        [self.carNameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.carImageView withOffset:smallSpacing];
+        [self.carNameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.carImageView];
         [self.carNameLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.backView withOffset:-5];
         
         [self.carLicenseLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.carNameLabel];
         [self.carLicenseLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.carNameLabel withOffset:5];
-        
         
         [self.qualityButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.carLicenseLabel];
         [self.qualityButton autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.carLicenseLabel withOffset:smallSpacing];
         [self.qualityButton autoSetDimensionsToSize:CGSizeMake(60, 20)];
         
         [self.carPriceLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.carNameLabel];
-        [self.carPriceLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.carImageView withOffset:-4];
+        [self.carPriceLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.carImageView];
         
         [self.carUsedLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.carNameLabel];
-        [self.carUsedLabel autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.carPriceLabel];
+//        [self.carUsedLabel autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.carPriceLabel];
+        [self.carUsedLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.carPriceLabel];
         
         self.didSetupConstraints = YES;
     }
@@ -87,8 +83,8 @@
 - (UIImageView *)carImageView {
     if (!_carImageView) {
         _carImageView = [UIImageView newAutoLayoutView];
-        _carImageView.layer.borderColor = MLBackGroundColor.CGColor;
-        _carImageView.layer.borderWidth = 1;
+        _carImageView.layer.borderColor = UIColorFromRGB(0xefefef).CGColor;
+        _carImageView.layer.borderWidth = 0.5;
     }
     return _carImageView;
 }
@@ -96,7 +92,7 @@
 - (UILabel *)carNameLabel {
     if (!_carNameLabel) {
         _carNameLabel = [UILabel newAutoLayoutView];
-        _carNameLabel.textColor = MLBlackColor;
+        _carNameLabel.textColor = MLDrakGrayColor;
         _carNameLabel.font = MLFont4;
     }
     return _carNameLabel;
@@ -146,11 +142,12 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
-    [self.carImageView sd_setImageWithURL:[NSURL URLWithString:self.item.imageName]];
+    [self.carImageView sd_setImageWithURL:[NSURL URLWithString:self.item.imageName] placeholderImage:[UIImage imageNamed:@"defaultsb"]];
+
     
     self.carNameLabel.text = self.item.carName;
     self.carLicenseLabel.text = self.item.carLicense;
-    [self.qualityButton setTitle:@"  精选优车  " forState:0];
+    [self.qualityButton setTitle:@"  精选特惠  " forState:0];
     self.carUsedLabel.text = self.item.carUsedDay;
     [self.carPriceLabel setAttributedText:[NSString setFirstPart:@"日租¥" firstFont:11 firstColor:MLOrangeColor secondPart:self.item.carPrice secondFont:18 secongColor:MLOrangeColor thirdPart:@"/天" thirdFont:11 thirdColor:MLOrangeColor]];
 }

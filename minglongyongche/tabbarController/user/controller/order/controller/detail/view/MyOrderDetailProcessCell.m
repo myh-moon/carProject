@@ -49,12 +49,9 @@
         NSArray *views1 = @[self.processImageButton1,self.processImageButton2,self.processImageButton3,self.processImageButton4];
         [views1 autoMatchViewsDimension:ALDimensionWidth];
         [views1 autoMatchViewsDimension:ALDimensionHeight];
-        [views1 autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSize:MLWindowWidth/4];
-//        [views1 autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSize:bigSpacing insetSpacing:YES];
+        [views1 autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSize:MLWindowWidth/4];        
         
-        
-//        [[views1 firstObject] autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:35];
-        [[views1 firstObject] autoSetDimensionsToSize:CGSizeMake(bigSpacing, bigSpacing)];
+        [[views1 firstObject] autoSetDimensionsToSize:CGSizeMake(22, 22)];
         [[views1 firstObject] autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.carStatusLabel withOffset:bigSpacing];
         
 //        [[views1 lastObject] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:35];
@@ -191,7 +188,7 @@
     NSInteger sssss = [self.item.status integerValue];
     
     switch (sssss) {
-        case 0:{
+        case 0:{//未付款
             [self.processImageButton1 setImage:[UIImage imageNamed:@"order_current"] forState:0];
             self.processLabel1.text = @"订单未付款";
             self.processLabel1.textColor = MLLightGrayColor;
@@ -213,7 +210,7 @@
             [self.lineImageView3 setImage:[UIImage imageNamed:@"xuxian_02"]];
         }
             break;
-        case 1:{
+        case 1:{//已付款
             [self.processImageButton1 setImage:[UIImage imageNamed:@"order_complete"] forState:0];
             self.processLabel1.text = @"订单已付款";
             self.processLabel1.textColor = MLOrangeColor;
@@ -236,7 +233,7 @@
         }
             
             break;
-        case 2:{
+        case 2:{//已取车
             [self.processImageButton1 setImage:[UIImage imageNamed:@"order_complete"] forState:0];
             self.processLabel1.text = @"订单已付款";
             self.processLabel1.textColor = MLOrangeColor;
@@ -258,7 +255,7 @@
             [self.lineImageView3 setImage:[UIImage imageNamed:@"xuxian_01"]];
         }
             break;
-        case 3:{
+        case 3:{//已还车
             [self.processImageButton1 setImage:[UIImage imageNamed:@"order_complete"] forState:0];
             self.processLabel1.text = @"订单已付款";
             self.processLabel1.textColor = MLOrangeColor;
@@ -273,17 +270,20 @@
             
             [self.processImageButton4 setImage:[UIImage imageNamed:@"order_complete"] forState:0];
             self.processLabel4.text = @"订单已完成";
-            self.processLabel4.textColor = MLLightGrayColor;
+            self.processLabel4.textColor = MLOrangeColor;
             
             [self.lineImageView1 setImage:[UIImage imageNamed:@"shixian"]];
             [self.lineImageView2 setImage:[UIImage imageNamed:@"shixian"]];
             [self.lineImageView3 setImage:[UIImage imageNamed:@"shixian"]];
         }
             break;
-        case 4:{//已取消
+        case 4://已取消
+        case 5://已删除
+        case 6: {//异常
             [self.processImageButton1 setImage:[UIImage imageNamed:@"order_will"] forState:0];
-            self.processLabel1.text = @"订单已取消";
             self.processLabel1.textColor = MLLightGrayColor;
+            NSArray *ppppp = @[@"订单已取消",@"订单已删除",@"订单异常"];
+            self.processLabel1.text = ppppp[sssss-4];
             
             [self.processImageButton2 setImage:[UIImage imageNamed:@"order_will"] forState:0];
             self.processLabel2.text = @"待取车";

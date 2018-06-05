@@ -72,7 +72,8 @@
     
     self.nameLabel.text = self.item.namess;
     self.messageTextField.placeholder = self.item.placeholder;
-    
+
+    self.separatorInset = self.item.showSeperates?UIEdgeInsetsMake(0, middleSpacing, 0, 0):MLSeparatorInset;
 }
 
 @end

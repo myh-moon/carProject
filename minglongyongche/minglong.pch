@@ -56,6 +56,7 @@
 #define MLBackGroundColor  [UIColor colorWithRed:0.9647 green:0.9647 blue:0.9647 alpha:1]
 
 
+
 //font
 #define MLFont [UIFont systemFontOfSize:14]
 #define MLFont1 [UIFont systemFontOfSize:10]
@@ -83,9 +84,13 @@
 #define MLCellHeight 50 //单元格普遍高度
 
 #define MLWindowWidth [UIScreen mainScreen].bounds.size.width
+#define MLWindowHeight [UIScreen mainScreen].bounds.size.height
+
 
 //单元格无分割线
 #define MLSeparatorInset UIEdgeInsetsMake(0, MLWindowWidth, 0, 0)
+//分割线的颜色
+#define MLSeperateColor UIColorFromRGB(0xd0d0d0)
 
 //友盟
 #define appkey @"5ac3472df29d983a910000b5"  //
@@ -139,7 +144,6 @@
 
 
 #define MLMyInformationOfSesameCredit @"leaseapi/alipay"  //蚂蚁积分
-
 
 //UMShare
 #define UMAlipayOfAppKey @"2018041102535930"

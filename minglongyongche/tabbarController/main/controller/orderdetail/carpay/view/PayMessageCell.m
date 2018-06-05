@@ -11,7 +11,7 @@
 @implementation PayMessageCell
 @dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 130;
+    return 105;
 }
 
 - (void)cellDidLoad {
@@ -23,7 +23,6 @@
     [self.contentView addSubview:self.nameLabel];
     [self.contentView addSubview:self.licenseLabel];
     [self.contentView addSubview:self.featureLabel1];
-    [self.contentView addSubview:self.featureLabel2];
 
     [self setNeedsUpdateConstraints];
 }
@@ -45,9 +44,6 @@
         [self.featureLabel1 autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.licenseLabel];
         [self.featureLabel1 autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.orderImage];
         
-        [self.featureLabel2 autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.featureLabel1];
-        [self.featureLabel2 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.featureLabel1 withOffset:middleSpacing];
-        
         self.didSetupConstraints = YES;
     }
     [super updateConstraints];
@@ -56,8 +52,8 @@
 - (UIImageView *)orderImage {
     if (!_orderImage) {
         _orderImage = [UIImageView newAutoLayoutView];
-        _orderImage.layer.borderColor = [UIColor colorWithRed:0.9647 green:0.9647 blue:0.9647 alpha:1].CGColor;
-        _orderImage.layer.borderWidth = 1;
+        _orderImage.layer.borderColor = UIColorFromRGB(0xefefef).CGColor;
+        _orderImage.layer.borderWidth = 0.5;
     }
     return _orderImage;
 }
@@ -89,23 +85,13 @@
     return _featureLabel1;
 }
 
-- (UILabel *)featureLabel2 {
-    if (!_featureLabel2) {
-        _featureLabel2 = [UILabel newAutoLayoutView];
-        _featureLabel2.textColor = MLLightGrayColor;
-        _featureLabel2.font = MLFont3;
-    }
-    return _featureLabel2;
-}
-
 - (void)cellWillAppear {
     [super cellWillAppear];
     
-    [self.orderImage sd_setImageWithURL:[NSURL URLWithString:self.item.img]];
+    [self.orderImage sd_setImageWithURL:[NSURL URLWithString:self.item.img] placeholderImage:[UIImage imageNamed:@"defaultsb"]];
     self.nameLabel.text = self.item.namess;
     self.licenseLabel.text  = self.item.license;
     self.featureLabel1.text = self.item.feature1;
-    self.featureLabel2.text = self.item.feature2;
 }
 
 - (void)awakeFromNib {

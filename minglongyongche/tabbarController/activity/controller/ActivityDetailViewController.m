@@ -10,6 +10,8 @@
 
 @interface ActivityDetailViewController ()
 
+@property (nonatomic,strong) UIWebView *activityWebView;
+
 @end
 
 @implementation ActivityDetailViewController
@@ -19,9 +21,34 @@
     
     self.title = @"平台活动";
     self.navigationItem.leftBarButtonItem = self.leftBarItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightNavBtn];
-    [self.rightNavBtn setTitle:@"分享" forState:0];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightNavBtn];
+//    [self.rightNavBtn setTitle:@"分享" forState:0];
+
+    [self.view addSubview:self.activityWebView];
     
+    [self setNeedsFocusUpdate];
+}
+
+- (void)updateViewConstraints {
+    if (!self.didSetupConstraints) {
+        
+        [self.activityWebView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+        [self.activityWebView autoPinToTopLayoutGuideOfViewController:self withInset:0];
+        
+        self.didSetupConstraints = YES;
+    }
+    [super updateViewConstraints];
+}
+
+- (UIWebView *)activityWebView {
+    if (!_activityWebView) {
+        _activityWebView = [UIWebView newAutoLayoutView];        
+        NSString *wwewe = @"https://d.xiumi.us/board/v5/2i2MU/90440653";
+        NSURL *erere = [NSURL URLWithString:wwewe];
+        [_activityWebView loadRequest:[NSURLRequest requestWithURL:erere]];
+        
+    }
+    return _activityWebView;
 }
 
 - (void)didReceiveMemoryWarning {

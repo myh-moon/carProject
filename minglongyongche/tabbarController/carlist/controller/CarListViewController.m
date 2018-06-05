@@ -25,11 +25,11 @@
     
     self.tableView.backgroundColor = MLWhiteColor;
     
-    [self.remindImageButton.remindImageView setImage:[UIImage imageNamed:@"comeing_soon"]];
-    self.remindImageButton.remindLabel.attributedText =  [NSString setFirstPart:@"\n功能开发中，敬请期待!\n" firstFont:17 firstColor:MLGrayColor secondPart:@"请你耐心等待，我们很快就能见面" secondFont:12 secongColor:MLLightGrayColor space:10 align:1];
-    
-    [self showRemindImage];
-    
+//    [self.remindImageButton.remindImageView setImage:[UIImage imageNamed:@"comeing_soon"]];
+//    self.remindImageButton.remindLabel.attributedText =  [NSString setFirstPart:@"\n功能开发中，敬请期待!\n" firstFont:17 firstColor:MLGrayColor secondPart:@"请你耐心等待，我们很快就能见面" secondFont:12 secongColor:MLLightGrayColor space:10 align:1];
+//    
+//    [self showRemindImage];
+//    
 //    [self configOldCarTableView];
 }
 

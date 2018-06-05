@@ -72,7 +72,8 @@
         _imageView = imageView;
 
         activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityView.frame = CGRectMake((CGRectGetWidth(self.frame) / 2) - 11.0f, CGRectGetHeight(self.frame) / 2, 22.0f, 22.0f);
+//        activityView.frame = CGRectMake((CGRectGetWidth(self.frame) / 2) - 11.0f, CGRectGetHeight(self.frame) / 2, 22.0f, 22.0f);
+        
         activityView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
         [self addSubview:activityView];
 
@@ -412,7 +413,6 @@
 }
 
 #pragma mark - RotateGesture
-
 - (void)rotate:(UIRotationGestureRecognizer *)gesture {
 
     if (gesture.state == UIGestureRecognizerStateBegan) {
@@ -422,6 +422,7 @@
 
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
+        
         self.layer.transform = CATransform3DMakeRotation((beginRadians + gesture.rotation), 0.0f, 0.0f, 1.0f);
     }
     else {

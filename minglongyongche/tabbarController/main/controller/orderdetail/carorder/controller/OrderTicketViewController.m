@@ -7,8 +7,13 @@
 //
 
 #import "OrderTicketViewController.h"
+
+//#import "OrderTicketView.h"  //不使用优惠券
+
 #import "TicketItem.h"
 #import "SeperateItem.h"
+#import "BaseRemindItem.h"
+
 
 #import "TicketResponse.h"
 #import "TicketModel.h"
@@ -30,14 +35,26 @@
     
     self.navigationItem.leftBarButtonItem = self.leftBarItem;
     
-    [self setRemindImageView:@"nocoupons" remindLabel:@"暂无内容哦～" remindAction:@"" actionBackGroubdColor:MLBackGroundColor actionTextColor:MLBackGroundColor actionCorner:0];
-
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightNavBtn];
+    [self.rightNavBtn setTitle:@"不使用" forState:0];
+    MLWeakSelf;
+    [self.rightNavBtn addAction:^(UIButton *btn) {
+        if (weakself.didSelectedTicket) {
+            
+            NSDictionary *sdsds = @{@"money" : @"0",@"tid" : @"0"};
+            TicketModel *model = [TicketModel mj_objectWithKeyValues:sdsds];
+            weakself.didSelectedTicket(model);
+            [weakself.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    
+    
     self.manager[@"TicketItem"] = @"TicketCell";
     self.manager[@"SeperateItem"] = @"SeperateCell";
+    self.manager[@"BaseRemindItem"] = @"BaseRemindCell";
     
     self.pageIndex = 1;
     
-    MLWeakSelf;
     self.pullToRefreshHandler = ^{
         weakself.pageIndex = 1;
         [weakself getOrderTicketWithPage:@"1"];
@@ -60,19 +77,30 @@
     section.footerHeight = 0;
     [self.manager addSection:section];
     
-    for (NSInteger i=0; i<self.validArray.count; i++) {
+    if (self.validArray.count > 0) {
+        for (NSInteger i=0; i<self.validArray.count; i++) {
+            
+            TicketModel *model = self.validArray[i];
+            
+            MLWeakSelf;
+            TicketItem *item = [[TicketItem alloc] initWithTicketModel:model];
+            item.selectionHandler = ^(id item) {
+                if (weakself.didSelectedTicket) {
+                    weakself.didSelectedTicket(model);
+                    [weakself.navigationController popViewControllerAnimated:YES];
+                }
+            };
+            [section addItem:item];
+        }
         
-        TicketModel *model = self.validArray[i];
-        
-        MLWeakSelf;
-        TicketItem *item = [[TicketItem alloc] initWithTicketModel:model];
-        item.selectionHandler = ^(id item) {
-            if (weakself.didSelectedTicket) {
-                weakself.didSelectedTicket(model);
-                [weakself.navigationController popViewControllerAnimated:YES];
-            }
-        };
-        [section addItem:item];
+    }else{
+        BaseRemindItem *item1234 = [[BaseRemindItem alloc] init];
+        item1234.remindImage = @"nocoupons";
+        item1234.remindText = @"暂无内容哦～";
+        item1234.remindAction = @"";
+        item1234.selectionStyle = UITableViewCellSelectionStyleNone;
+        item1234.cellHeight = 300;
+        [section addItem:item1234];
     }
 }
 
@@ -88,12 +116,6 @@
 
         for (TicketModel *model in response.tickets) {
             [weakself.validArray addObject:model];
-        }
-        
-        if (weakself.validArray.count == 0) {
-            [weakself showRemindImage];
-        }else{
-            [weakself hiddenRemindImage];
         }
         
         [weakself setupOrderTicketTableView];

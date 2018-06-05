@@ -11,11 +11,10 @@
 #import "PreOrderModel.h"
 @interface ConfirmMessageItem : BaseItem
 
-@property (nonatomic,copy) NSString *img;
+@property (nonatomic,copy) NSString *img;  //小图片
 @property (nonatomic,copy) NSString *namess;
 @property (nonatomic,copy) NSString *license;
 @property (nonatomic,copy) NSString *feature1;
-@property (nonatomic,copy) NSString *feature2;
 
 - (instancetype) initWithModel:(CarModel *)model;
 

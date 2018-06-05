@@ -18,7 +18,7 @@
     
     if (!tagView) {
         tagView  = [UIView newAutoLayoutView];
-        tagView.backgroundColor = [UIColor colorWithRed:0.2510 green:0.2510 blue:0.2510 alpha:0.5];
+        tagView.backgroundColor = UIColorFromRGB1(0x000, 0.8);
         tagView.tag = 999;
         
         if (!view) {
@@ -36,6 +36,14 @@
         [pullTableView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:tagView];
         [pullTableView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:tagView];
         [pullTableView autoSetDimension:ALDimensionHeight toSize:titleArray.count * 40];
+        
+//        [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+//
+//        } completion:^(BOOL finished) {
+//
+//        }];
+        
+        
         
         [pullTableView loadAllData:titleArray];
     }
@@ -64,7 +72,7 @@
     
     if (!tagView) {
         tagView  = [UIView newAutoLayoutView];
-        tagView.backgroundColor = [UIColor colorWithRed:0.2510 green:0.2510 blue:0.2510 alpha:0.5];
+        tagView.backgroundColor = UIColorFromRGB1(0x000, 0.8);
         tagView.tag = 999;
         
         if (!view) {
@@ -81,7 +89,7 @@
         [pullTableView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:tagView];
         [pullTableView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:tagView];
         [pullTableView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:tagView];
-        [pullTableView autoSetDimension:ALDimensionHeight toSize:titleArray.count * 40];
+        self.heightConstraints = [pullTableView autoSetDimension:ALDimensionHeight toSize:titleArray.count * 40];
         
         [pullTableView loadAllData:titleArray];
     }
@@ -104,9 +112,9 @@
     }
 }
 
-- (void)showBlurViewWithArray:(NSArray *)titleArray top:(CGFloat)height {
-    
-}
+//- (void)showBlurViewWithArray:(NSArray *)titleArray top:(CGFloat)height {
+//
+//}
 
 - (void)hiddenBlurView {
     UIView *tagView = [self.view viewWithTag:999];
@@ -123,7 +131,7 @@
     
     if (!tagView) {
         tagView  = [UIView newAutoLayoutView];
-        tagView.backgroundColor = [UIColor colorWithRed:0.2510 green:0.2510 blue:0.2510 alpha:0.5];
+        tagView.backgroundColor = UIColorFromRGB1(0x000, 0.8);
         tagView.tag = 999;
         
         if (!view) {
@@ -169,7 +177,7 @@
     
         if (!tagView) {
             tagView  = [UIView newAutoLayoutView];
-            tagView.backgroundColor = [UIColor colorWithRed:0.2510 green:0.2510 blue:0.2510 alpha:0.5];
+            tagView.backgroundColor = UIColorFromRGB1(0x000, 0.8);
             tagView.tag = 999;
             
             if (!view) {
@@ -215,7 +223,7 @@
     
     if (!tagView) {
         tagView  = [UIView newAutoLayoutView];
-        tagView.backgroundColor = [UIColor colorWithRed:0.2510 green:0.2510 blue:0.2510 alpha:0.5];
+        tagView.backgroundColor = UIColorFromRGB1(0x000, 0.8);
         tagView.tag = 999;
         
         if (!view) {
@@ -317,8 +325,6 @@
     [toAuthenButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:backButton withOffset:middleSpacing];
     [toAuthenButton autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:backButton withOffset:-middleSpacing];
     [toAuthenButton autoSetDimension:ALDimensionHeight toSize:40];
-
 }
-
 
 @end

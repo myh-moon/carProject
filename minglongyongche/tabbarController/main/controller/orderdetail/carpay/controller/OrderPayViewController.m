@@ -30,7 +30,9 @@
     self.title = @"订单支付";
     
     self.navigationItem.leftBarButtonItem = self.leftBarItem;
-        
+    
+//    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
     self.manager[@"SeperateItem"] = @"SeperateCell";
     self.manager[@"ConfirmMessageItem"] = @"PayMessageCell";
     self.manager[@"PayMoneyItem"] = @"PayMoneyCell";
@@ -46,6 +48,17 @@
         //监听通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderPayResult:) name:@"WXPay" object:nil];
     }
+}
+
+//右滑返回
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return NO;
+}
+
+- (void)back {
+    UINavigationController *navvv = self.navigationController;
+    [navvv popViewControllerAnimated:NO];
+    [navvv popViewControllerAnimated:NO];
 }
 
 - (void)setupTableView {

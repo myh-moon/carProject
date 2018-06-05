@@ -11,13 +11,7 @@
 @implementation CollectionCell
 @dynamic item;
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-   
-//    return [UIScreen mainScreen].bounds.size.width;
-    
-//    if (MLWindowWidth == 320) {
-//        return 85;
-//    }
-    return 120;
+    return 105;
 }
 
 - (void)cellDidLoad {
@@ -35,8 +29,6 @@
     [self.contentView addSubview:self.priceLabel];
     
     [self.contentView addSubview:self.countLabel];
-
-//    [self.contentView addSubview:self.cancelButton];
     
     [self setNeedsUpdateConstraints];
 }
@@ -49,12 +41,8 @@
         [self.carImageView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.coBackView withOffset:7.5];
         [self.carImageView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.coBackView withOffset:7.5];
         [self.carImageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.coBackView withOffset:-7.5];
-        if (MLWindowWidth == 320) {
-            [self.carImageView autoSetDimension:ALDimensionWidth toSize:120];
-        }else{
-            [self.carImageView autoSetDimension:ALDimensionWidth toSize:140];
-        }
-        
+        [self.carImageView autoSetDimension:ALDimensionWidth toSize:120];
+
         [self.nameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.carImageView withOffset:4];
         [self.nameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.carImageView withOffset:middleSpacing];
         [self.nameLabel autoPinEdgeToSuperviewEdge:ALEdgeRight  withInset:middleSpacing];
@@ -93,8 +81,8 @@
 - (UIImageView *)carImageView {
     if (!_carImageView) {
         _carImageView = [UIImageView newAutoLayoutView];
-        _carImageView.layer.borderColor = MLBackGroundColor.CGColor;
-        _carImageView.layer.borderWidth = 1;
+        _carImageView.layer.borderColor = UIColorFromRGB(0xefefef).CGColor;
+        _carImageView.layer.borderWidth = 0.5;
     }
     return _carImageView;
 }
@@ -102,7 +90,6 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [UILabel newAutoLayoutView];
-//        _nameLabel.text = @"车车车车";
         _nameLabel.textColor = MLBlackColor;
         _nameLabel.font = MLFont;
     }
@@ -150,7 +137,7 @@
 - (void)cellWillAppear {
     [super cellWillAppear];
     
-    [self.carImageView sd_setImageWithURL:[NSURL URLWithString:self.item.imageName]];
+    [self.carImageView sd_setImageWithURL:[NSURL URLWithString:self.item.imageName] placeholderImage:[UIImage imageNamed:@"defaultsb"]];
     self.nameLabel.text = self.item.carName;
     self.lisenceLabel.text = self.item.carLicense;
     self.qualityLabel.text = [NSString stringWithFormat:@"%@  ",self.item.collocation];

@@ -81,7 +81,7 @@
     [self.lineImageView setHidden:self.item.isHidden];
     
     
-    [RACObserve(self.item, leftTitle) subscribeNext:^(id x) {
+    [[RACObserve(self.item, leftTitle) takeUntil:[self rac_prepareForReuseSignal]] subscribeNext:^(id x) {
         [self.leftButton setTitle:x forState:0];
     }];
 }

@@ -8,7 +8,7 @@
 
 #import "MainListCell.h"
 #define BW  230
-#define BH 200
+#define BH 180
 
 @implementation MainListCell
 
@@ -114,7 +114,7 @@
     
     NSArray *array = [model.pic componentsSeparatedByString:@","]; //从字符A中分隔成2个元素的数组
     NSString *immm  = [NSString stringWithFormat:@"%@%@",MLBaseUrl,array[0]];  //汽车大图
-    [collectionCell.carImageView sd_setImageWithURL:[NSURL URLWithString:immm]];
+    [collectionCell.carImageView sd_setImageWithURL:[NSURL URLWithString:immm] placeholderImage:[UIImage imageNamed:@"defaultsa"]];
     collectionCell.carSignLabel.text = model.name;
 
     return collectionCell;

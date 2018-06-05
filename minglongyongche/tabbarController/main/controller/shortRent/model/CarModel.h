@@ -28,6 +28,7 @@
 @property (nonatomic,copy) NSString *counts; //用车次数
 @property (nonatomic,copy) NSString *belong; //牌照
 @property (nonatomic,copy) NSString *address;  //地址
+@property (nonatomic,copy) NSString *img;  //展示小图片
 
 //详情用到的字段
 @property (nonatomic,copy) NSString *mname;

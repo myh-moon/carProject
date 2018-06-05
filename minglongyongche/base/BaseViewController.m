@@ -34,6 +34,7 @@
     
     //右滑返回
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
 }
 
 //返回键
@@ -58,11 +59,14 @@
         _leftNavBtn = [UIButton buttonWithType:0];
         _leftNavBtn.frame = CGRectMake(0, 0, 40, 44);
         [_leftNavBtn setTitleColor:MLLightGrayColor forState:0];
+        
+        [_leftNavBtn setContentHorizontalAlignment:1];
+        [_leftNavBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        
         _leftNavBtn.titleLabel.font = MLFont;
     }
     return _leftNavBtn;
 }
-
 
 - (UIButton *)rightNavBtn {
     if (!_rightNavBtn) {
@@ -71,47 +75,17 @@
         [_rightNavBtn setTitleColor:MLLightGrayColor forState:0];
         _rightNavBtn.titleLabel.font = MLFont;
         
+        [_rightNavBtn setContentHorizontalAlignment:2];
+        [_rightNavBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        [_rightNavBtn setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
     return _rightNavBtn;
 }
-
-- (BaseRemindView *)remindImageButton {
-    if (!_remindImageButton) {
-        _remindImageButton = [BaseRemindView newAutoLayoutView];
-        
-        MLWeakSelf;
-        [_remindImageButton.remindButton addAction:^(UIButton *btn) {
-            if (weakself.didSelectedRemindBtn) {
-                weakself.didSelectedRemindBtn(@"逛逛");
-            }
-        }];
-    }
-    return _remindImageButton;
-}
-
 
 #pragma mark - method
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)showRemindImage {
-    [self.view bringSubviewToFront:self.remindImageButton];
-}
-
-- (void)hiddenRemindImage {
-    [self.view sendSubviewToBack:self.remindImageButton];
-}
-
-- (void)setRemindImageView:(NSString *)imgName remindLabel:(NSString *)remindStr remindAction:(NSString *)action actionBackGroubdColor:(UIColor *)backColor actionTextColor:(UIColor *)textColor actionCorner:(CGFloat)corners {
-    [self.remindImageButton.remindImageView setImage:[UIImage imageNamed:imgName]];
-    self.remindImageButton.remindLabel.text = remindStr;
-    [self.remindImageButton.remindButton setTitle:action forState:0];
-    self.remindImageButton.remindButton.backgroundColor = backColor;
-    [self.remindImageButton.remindButton setTitleColor:textColor forState:0];
-    self.remindImageButton.remindButton.layer.cornerRadius = corners;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

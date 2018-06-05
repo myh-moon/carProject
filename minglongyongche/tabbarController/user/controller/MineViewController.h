@@ -6,8 +6,8 @@
 //  Copyright © 2018年 minglongkeji. All rights reserved.
 //
 
-#import "MLTableViewController.h"
+#import "MLNavTableViewController.h"
 
-@interface MineViewController : MLTableViewController
+@interface MineViewController : MLNavTableViewController
 
 @end

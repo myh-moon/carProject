@@ -14,6 +14,8 @@
 
 #import "OrderItem.h"
 #import "SeperateItem.h"
+#import "BaseRemindItem.h"
+#import "BaseBottomItem.h"
 
 #import "MyOrderResponse.h"
 #import "CarModel.h"
@@ -31,40 +33,27 @@
 
 @implementation MyOrderViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的订单";
     self.navigationItem.leftBarButtonItem = self.leftBarItem;
     
-    [self.view addSubview:self.remindImageButton];
     [self.view addSubview:self.conditionView];
     [self.view addSubview:self.myOrderTableView];
-    
-    [self setRemindImageView:@"noorder" remindLabel:@"暂无相关订单" remindAction:@"去逛逛" actionBackGroubdColor:MLOrangeColor actionTextColor:MLWhiteColor actionCorner:17.5];
-    MLWeakSelf;
-    [self setDidSelectedRemindBtn:^(NSString *remind) {
-        UINavigationController *nav = weakself.navigationController;
-        [nav popViewControllerAnimated:NO];
-        
-        ShortRentViewController *shortRentVC = [[ShortRentViewController alloc] init];
-        shortRentVC.hidesBottomBarWhenPushed = YES;
-        [nav pushViewController:shortRentVC animated:NO];
-    }];
     
     [self.view setNeedsUpdateConstraints];
     
     self.manager = [[RETableViewManager alloc] initWithTableView:self.myOrderTableView];
     self.manager[@"OrderItem"] = @"MyNewOrderCell";
     self.manager[@"SeperateItem"] = @"SeperateCell";
+    self.manager[@"BaseRemindItem"] = @"BaseRemindCell";
+    self.manager[@"BaseBottomItem"] = @"BaseBottomCell";
 
     self.orderType = @"-1";
 }
 
 //配置
+#pragma mark - config
 - (void) configMyOrderList {
     [self.manager removeAllSections];
     
@@ -73,36 +62,62 @@
     section.footerHeight = 0;
     [_manager addSection:section];
     
+    
     MLWeakSelf;
-    for (NSInteger i=0; i<self.myOrderList.count; i++) {
+    if (self.myOrderList.count > 0) {
+        for (NSInteger i=0; i<self.myOrderList.count; i++) {
+            
+            SeperateItem *item00 = [[SeperateItem alloc] init];
+            item00.cellHeight = middleSpacing;
+            item00.selectionStyle = UITableViewCellSelectionStyleNone;
+            [section addItem:item00];
+            
+            CarModel *orderModel = self.myOrderList[i];
+            OrderItem *item = [[OrderItem alloc] initWithOrderModel:orderModel];
+            item.selectionStyle = UITableViewCellSelectionStyleNone;
+            item.selectionHandler = ^(id item) {
+                MyOrderDetailViewController *myOrderDetailVC = [[MyOrderDetailViewController alloc] init];
+                myOrderDetailVC.oid = orderModel.oid;
+                [myOrderDetailVC setDidRefreshMessages:^(NSString *message) {
+                    if ([message isEqualToString:@"refresh"]) {
+                        [weakself headerRefreshOfMyOrderList];
+                    }
+                }];
+                [weakself.navigationController pushViewController:myOrderDetailVC animated:YES];
+            };
+            [section addItem:item];
+        }
         
-        SeperateItem *item00 = [[SeperateItem alloc] init];
-        item00.cellHeight = middleSpacing;
-        item00.selectionStyle = UITableViewCellSelectionStyleNone;
-        [section addItem:item00];
-        
-        CarModel *orderModel = self.myOrderList[i];
-        OrderItem *item = [[OrderItem alloc] initWithOrderModel:orderModel];
-        item.selectionStyle = UITableViewCellSelectionStyleNone;
-        item.selectionHandler = ^(id item) {
-            MyOrderDetailViewController *myOrderDetailVC = [[MyOrderDetailViewController alloc] init];
-            myOrderDetailVC.oid = orderModel.oid;
-            [myOrderDetailVC setDidRefreshMessages:^(NSString *message) {
-                if ([message isEqualToString:@"refresh"]) {
-                    [weakself headerRefreshOfMyOrderList];
-                }
-            }];
-            [weakself.navigationController pushViewController:myOrderDetailVC animated:YES];
+        if (self.showBottom) {
+            BaseBottomItem *item999 = [[BaseBottomItem alloc] init];
+            item999.selectionStyle = UITableViewCellSelectionStyleNone;
+            [section addItem:item999];
+            
+            self.myOrderTableView.mj_footer = nil;
+        }else {
+            self.myOrderTableView.mj_footer = [MJRefreshBackGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfMyOrderList)];
+        }
+    }else{
+        BaseRemindItem *item1234 = [[BaseRemindItem alloc] init];
+        item1234.remindImage = @"noorder";
+        item1234.remindText = @"暂无相关订单";
+        item1234.remindAction = @"去逛逛";
+        item1234.selectionStyle = UITableViewCellSelectionStyleNone;
+        item1234.cellHeight = 400;
+        [section addItem:item1234];
+        item1234.didSelectedAction = ^(NSString *action) {
+            UINavigationController *nav = weakself.navigationController;
+            [nav popViewControllerAnimated:NO];
+    
+            ShortRentViewController *shortRentVC = [[ShortRentViewController alloc] init];
+            shortRentVC.hidesBottomBarWhenPushed = YES;
+            [nav pushViewController:shortRentVC animated:NO];
         };
-        [section addItem:item];
     }
 }
 
 - (void)updateViewConstraints{
     if (!self.didSetupConstraints) {
-        
-        [self.remindImageButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
-        [self.remindImageButton autoPinToTopLayoutGuideOfViewController:self withInset:150];
         
         [self.conditionView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
         [self.conditionView autoPinEdgeToSuperviewEdge:ALEdgeRight];
@@ -137,13 +152,13 @@
 - (UITableView *)myOrderTableView {
     if (!_myOrderTableView) {
         _myOrderTableView = [UITableView newAutoLayoutView];
-        _myOrderTableView.tableFooterView = [UIView new];
+        _myOrderTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MLWindowWidth, bigSpacing)];
         _myOrderTableView.backgroundColor = MLBackGroundColor;
         
         _myOrderTableView.mj_header = [MJRefreshStateHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshOfMyOrderList)];
         [_myOrderTableView.mj_header beginRefreshing];
         
-        _myOrderTableView.mj_footer = [MJRefreshBackGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfMyOrderList)];
+        _myOrderTableView.mj_footer = [MJRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefreshOfMyOrderList)];
         [_myOrderTableView.mj_footer beginRefreshing];
         
     }
@@ -172,10 +187,11 @@
 
 - (void) getListOfMyOrderWithPage:(NSString *)page {
     NSString *orderListStr;
+    NSString *tokenn = TOKEN?TOKEN:@"";
     if ([self.orderType isEqualToString:@"-1"]) {
-        orderListStr = [NSString stringWithFormat:@"%@%@%@/%@",MLBaseUrl,MLOrderOfList,TOKEN,page];
+        orderListStr = [NSString stringWithFormat:@"%@%@%@/%@",MLBaseUrl,MLOrderOfList,tokenn,page];
     }else{
-        orderListStr = [NSString stringWithFormat:@"%@%@%@/%@/%@",MLBaseUrl,MLOrderOfList,TOKEN,page,self.orderType];
+        orderListStr = [NSString stringWithFormat:@"%@%@%@/%@/%@",MLBaseUrl,MLOrderOfList,tokenn,page,self.orderType];
     }
     
     MLWeakSelf;
@@ -187,14 +203,16 @@
         
         MyOrderResponse *response = [MyOrderResponse mj_objectWithKeyValues:responseObject];
         
+        [weakself showHint:response.info];
+        
         for (CarModel *orderModel in response.order) {
             [weakself.myOrderList addObject:orderModel];
         }
         
-        if (weakself.myOrderList.count == 0) {
-            [weakself showRemindImage];
+        if (response.order.count < 8 && response.order.count > 0) {
+            weakself.showBottom = YES;
         }else{
-            [weakself hiddenRemindImage];
+            weakself.showBottom = NO;
         }
         
         [weakself configMyOrderList];

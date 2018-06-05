@@ -12,7 +12,7 @@
 @interface UserCell : BaseCell
 
 @property (nonatomic,strong) UIButton *settingButton;  //设置按钮
-@property (nonatomic,strong) UIImageView *userImageView;
+@property (nonatomic,strong) UIButton *userImageButton;
 @property (nonatomic,strong) UIButton *userNameButton;
 @property (nonatomic,strong) UIButton *userAuthenBtn;
 

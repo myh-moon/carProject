@@ -14,6 +14,8 @@
 
 @interface UIViewController (Blur)<RETableViewManagerDelegate>
 
+@property (nonatomic,strong) NSLayoutConstraint *heightConstraints;
+
 //短租列表条件选择
 - (void) showBlurViewInView:(UIView *)view array:(NSArray *)titleArray top:(CGFloat)top finishBlock:(void(^)(NSString *name,NSString *cid))finishBlock;
 
