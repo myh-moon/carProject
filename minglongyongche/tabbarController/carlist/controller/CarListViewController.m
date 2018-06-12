@@ -31,6 +31,24 @@
 //    [self showRemindImage];
 //    
 //    [self configOldCarTableView];
+    
+    float y;
+    float t = 0.0;
+    float w = 0.0;
+    float x = 0.0;
+    
+    if (t >= 0 && t <= 2 * M_PI) {
+        y = 2 * t * cos(w * t + x);
+    }else if (t >= 2 * M_PI  && t <= 4 * M_PI){
+        
+        y = 2 * t * sin(w * t + x);
+    }
+    
+    NSLog(@"yyyyyy is %i",y);
+    NSLog(@"ttt is %i",t);
+    NSLog(@"wwww is %i",w);
+    NSLog(@"xxxxx is %i",x);
+    
 }
 
 /*

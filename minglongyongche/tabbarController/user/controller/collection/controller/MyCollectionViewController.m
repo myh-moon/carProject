@@ -158,7 +158,7 @@
         
         CollectionResponse *response = [CollectionResponse mj_objectWithKeyValues:responseObject];
         
-        [weakself showHint:response.info];
+//        [weakself showHint:response.info];
         
         for (CarModel *model in response.collect) {
             [weakself.collectionList addObject:model];

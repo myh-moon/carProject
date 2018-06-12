@@ -13,7 +13,7 @@
 @dynamic item;
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 220;
+    return 220+15;
 }
 
 - (void)cellDidLoad {
@@ -33,7 +33,7 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         
-        [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:25];
+        [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:40];
         [self.settingButton autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
         [self.settingButton autoSetDimensionsToSize:CGSizeMake(40, 40)];
         

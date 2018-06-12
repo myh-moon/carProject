@@ -3924,7 +3924,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3951,9 +3951,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = myAppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = myLaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = FZC6S954D9;
+				DEVELOPMENT_TEAM = 6Q68G7AK9Y;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3971,10 +3972,10 @@
 					"$(PROJECT_DIR)/minglongyongche/wechat",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = com.minglongkeji.minglongyongch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.heyu.heyuzuche;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6aa3338e-abb0-4ac1-bed5-9838e1d04d7e";
-				PROVISIONING_PROFILE_SPECIFIER = development;
+				PROVISIONING_PROFILE = "25f5042d-a8ad-48e4-b8fd-ae243ffe8acc";
+				PROVISIONING_PROFILE_SPECIFIER = devPP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3985,10 +3986,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = myAppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = myLaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = FZC6S954D9;
+				DEVELOPMENT_TEAM = 6Q68G7AK9Y;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4006,10 +4007,10 @@
 					"$(PROJECT_DIR)/minglongyongche/wechat",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = com.minglongkeji.minglongyongch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.heyu.heyuzuche;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a4192f81-f928-4360-b3ab-b7265058a3fc";
-				PROVISIONING_PROFILE_SPECIFIER = distribution;
+				PROVISIONING_PROFILE = "0218b0d5-191b-4922-8836-dfcab2b4b361";
+				PROVISIONING_PROFILE_SPECIFIER = disPP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

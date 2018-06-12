@@ -36,6 +36,8 @@
 - (void)cellDidLoad {
     [super cellDidLoad];
     
+    self.separatorInset = UIEdgeInsetsMake(0, middleSpacing, 0, middleSpacing);
+    
     [self.contentView addSubview:self.leftbutton];
     [self.contentView addSubview:self.rightButton];
     

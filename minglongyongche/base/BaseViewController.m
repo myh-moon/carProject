@@ -28,7 +28,7 @@
 //    self.navigationController.navigationBar.translucent = NO;
     
     //设置导航栏颜色
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:MLGrayColor] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:MLWhiteColor] forBarMetrics:UIBarMetricsDefault];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     

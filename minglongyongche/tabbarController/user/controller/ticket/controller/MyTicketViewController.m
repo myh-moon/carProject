@@ -118,7 +118,7 @@
     }else{
         BaseRemindItem *item1234 = [[BaseRemindItem alloc] init];
         item1234.remindImage = @"nocoupons";
-        item1234.remindText = @"暂无内容哦～";
+        item1234.remindText = @"    暂无内容哦～";
         item1234.remindAction = @"";
         item1234.selectionStyle = UITableViewCellSelectionStyleNone;
         item1234.cellHeight = 300;
@@ -194,7 +194,7 @@
         
         TicketResponse *response = [TicketResponse mj_objectWithKeyValues:responseObject];
         
-        [weakself showHint:response.info];
+//        [weakself showHint:response.info];
         
         for (TicketModel *model in response.tickets) {
             [weakself.ticketList addObject:model];

@@ -28,7 +28,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-
     
 //    NSString *guide = [[NSUserDefaults standardUserDefaults] objectForKey:@"guide"];
 //    if ([guide isEqualToString:@"5"]) {

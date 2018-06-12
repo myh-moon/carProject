@@ -203,7 +203,7 @@
         
         MyOrderResponse *response = [MyOrderResponse mj_objectWithKeyValues:responseObject];
         
-        [weakself showHint:response.info];
+//        [weakself showHint:response.info];
         
         for (CarModel *orderModel in response.order) {
             [weakself.myOrderList addObject:orderModel];

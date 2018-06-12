@@ -19,6 +19,8 @@
 - (void)cellDidLoad {
     [super cellDidLoad];
     
+    self.separatorInset = UIEdgeInsetsMake(0, middleSpacing, 0, middleSpacing);
+    
     [self.contentView addSubview:self.numberLabel1];
     [self.contentView addSubview:self.numberLabel2];
     
