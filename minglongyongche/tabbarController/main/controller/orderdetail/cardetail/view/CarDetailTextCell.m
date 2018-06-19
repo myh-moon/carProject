@@ -164,11 +164,13 @@
     
     
     NSString *mmmm = self.item.originalMoney;
-//    [NSString stringWithFormat:@"¥%@",self.item.originalMoney];
     self.originalPriceLabel.text = [NSString stringWithFormat:@"原价%@",self.item.originalMoney];
-//    @"原价¥500";
+    
+    //中划线
     NSMutableAttributedString *originPrice = [[NSMutableAttributedString alloc] initWithString:self.originalPriceLabel.text];
-    [originPrice addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(2, mmmm.length)];
+//    [originPrice addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlineStyleSingle | NSUnderlinePatternSolid) range:NSMakeRange(2, mmmm.length)];
+    [originPrice setAttributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:NSMakeRange(2, mmmm.length)];
+    
     self.originalPriceLabel.attributedText = originPrice;
 }
 

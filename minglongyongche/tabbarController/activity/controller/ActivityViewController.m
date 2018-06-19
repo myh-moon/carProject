@@ -32,6 +32,7 @@
     section.footerHeight = 0;
     [self.manager addSection:section];
     
+    
     ActivityItem *item0 = [[ActivityItem alloc] init];
     item0.selectionStyle = UITableViewCellSelectionStyleNone;
     item0.imageName = @"活动_01";

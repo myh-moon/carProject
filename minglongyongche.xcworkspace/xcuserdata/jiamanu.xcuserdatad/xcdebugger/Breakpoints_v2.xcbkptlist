@@ -74,12 +74,12 @@
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jiamanu/carProject/minglongyongche/GuideViewController.m"
-                  timestampString = "550459895.022253"
+                  timestampString = "551088483.423793"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "67"
                   endingLineNumber = "67"
-                  offsetFromSymbolStart = "1524">
+                  offsetFromSymbolStart = "1951">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -89,12 +89,12 @@
                   moduleName = "minglongyongche"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jiamanu/carProject/minglongyongche/GuideViewController.m"
-                  timestampString = "550459895.023827"
+                  timestampString = "551088483.425952"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "68"
                   endingLineNumber = "68"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -15,7 +15,7 @@
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
 //    return 215;
-    float hhhh = (MLWindowWidth-middleSpacing*2) * 465/1036 + 45;
+    float hhhh = (MLWindowWidth-middleSpacing*2) * 465/1036 + 45 + 15;
     return hhhh;
 }
 
