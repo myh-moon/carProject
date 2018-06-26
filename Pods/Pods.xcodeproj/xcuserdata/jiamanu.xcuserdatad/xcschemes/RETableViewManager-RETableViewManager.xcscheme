@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D16E63B882BE7D6446E4FE944E69A602"
+               BlueprintIdentifier = "14EC6FF7FA7D27F54CFF2BFA8FAA56A3"
                BuildableName = "RETableViewManager.bundle"
                BlueprintName = "RETableViewManager-RETableViewManager"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D16E63B882BE7D6446E4FE944E69A602"
+            BlueprintIdentifier = "14EC6FF7FA7D27F54CFF2BFA8FAA56A3"
             BuildableName = "RETableViewManager.bundle"
             BlueprintName = "RETableViewManager-RETableViewManager"
             ReferencedContainer = "container:Pods.xcodeproj">

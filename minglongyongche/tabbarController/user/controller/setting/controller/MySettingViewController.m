@@ -47,6 +47,41 @@
 //    [section addItem:item1];
     
     
+    NSUInteger ssss = [SDImageCache sharedImageCache].getSize;
+    float displaySize = ssss/1000/1000 + ssss/1000%1000*0.001;
+    NSString *huancun = [NSString stringWithFormat:@"缓存%.2fM",displaySize];
+
+    BaseItem *item2 = [[BaseItem alloc] initWithTitle:huancun firstImage:@"" secondText:@""];
+    item2.selectionStyle = UITableViewCellSelectionStyleNone;
+    [section addItem:item2];
+    
+    MLWeakSelf;
+    
+    item2.selectionHandler = ^(id item) {
+        [[SDImageCache sharedImageCache] clearMemory];
+        [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+            
+            [weakself showHint:@"清除完成"];
+//            item2.firstTitleString = @"缓存0.00M";
+            
+            [weakself.manager removeAllSections];
+            
+            [weakself setupMySettingTableView];
+            [weakself.tableView reloadData];
+        }];
+        
+//        [weakself.tableView reloadData];
+//        [weakself setupMySettingTableView];
+        
+//
+//        NSUInteger ssss = [SDImageCache sharedImageCache].getSize;
+//        double displaySize = ssss/1000/1000;
+//
+//        NSString *huancun = [NSString stringWithFormat:@"缓存%.1fM",displaySize];
+//        NSLog(@"清理缓存 %f",displaySize);
+    };
+    
+    
     SeperateItem *item11 = [[SeperateItem alloc] init];
     item11.selectionStyle = UITableViewCellSelectionStyleNone;
     item11.cellHeight = smallSpacing;
@@ -58,7 +93,6 @@
     
     BaseItem *item3 = [[BaseItem alloc] initWithTitle:@"鸣垄名车用户协议" firstImage:@"" secondText:@""];
     item3.selectionStyle = UITableViewCellSelectionStyleNone;
-    MLWeakSelf;
     item3.selectionHandler = ^(id item) {
         RegisterAgreementViewController *registerAgreementVC = [[RegisterAgreementViewController alloc] init];
         registerAgreementVC.category = @"用户协议";

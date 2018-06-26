@@ -27,6 +27,8 @@ pod 'JKCountDownButton', '~> 1.2.0'
 
 pod 'WeChat_SDK', '~> 1.8.1'
 
+pod 'EATheme', '~> 1.1.3'
+
 
 
 

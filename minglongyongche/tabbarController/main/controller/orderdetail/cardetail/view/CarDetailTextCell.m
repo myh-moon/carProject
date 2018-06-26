@@ -41,6 +41,7 @@
         
         [self.carBrandLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.carNameLabel withOffset:smallSpacing];
         [self.carBrandLabel autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.carNameLabel];
+        [self.carBrandLabel autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
         
         [self.presentPriceLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.carNameLabel];
         [self.presentPriceLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.carNameLabel withOffset:middleSpacing];
@@ -168,8 +169,7 @@
     
     //中划线
     NSMutableAttributedString *originPrice = [[NSMutableAttributedString alloc] initWithString:self.originalPriceLabel.text];
-//    [originPrice addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlineStyleSingle | NSUnderlinePatternSolid) range:NSMakeRange(2, mmmm.length)];
-    [originPrice setAttributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:NSMakeRange(2, mmmm.length)];
+    [originPrice setAttributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:NSMakeRange(2, mmmm.length)];
     
     self.originalPriceLabel.attributedText = originPrice;
 }

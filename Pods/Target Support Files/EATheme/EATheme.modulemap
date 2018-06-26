@@ -1,0 +1,6 @@
+framework module EATheme {
+  umbrella header "EATheme-umbrella.h"
+
+  export *
+  module * { export * }
+}

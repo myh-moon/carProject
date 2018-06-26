@@ -22,8 +22,6 @@
     //设置导航条的字体颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:MLBlackColor,NSFontAttributeName:MLFont7}];
     
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:MLRedColor,NSFontAttributeName:MLFont}];
-    
     //去除系统效果
 //    self.navigationController.navigationBar.translucent = NO;
     

@@ -66,6 +66,7 @@
         
         [self.nameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.carImage withOffset:smallSpacing];
         [self.nameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.bottomBackView withOffset:smallSpacing];
+        [self.nameLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.bottomBackView withOffset:-smallSpacing];
         
         [self.feature1 autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.nameLabel];
         [self.feature1 autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.carImage];

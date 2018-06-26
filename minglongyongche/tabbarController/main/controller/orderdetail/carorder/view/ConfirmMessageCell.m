@@ -38,6 +38,7 @@
         
         [self.nameLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.orderImage withOffset:middleSpacing];
         [self.nameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.orderImage];
+        [self.nameLabel autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:middleSpacing];
         
         [self.licenseLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.nameLabel];
         [self.licenseLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.nameLabel withOffset:smallSpacing];
